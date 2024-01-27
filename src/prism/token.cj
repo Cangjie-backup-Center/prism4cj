@@ -40,6 +40,6 @@ public class TokenImpl <: Token {
     }
 
     public override func toString(): String {
-        return ""
+        return PrismToString.toString(this)
     }
 }

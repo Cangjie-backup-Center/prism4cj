@@ -64,6 +64,6 @@ public class PatternImpl <: Pattern {
     }
 
     public override func toString(): String {
-        return ""
+        return PrismToString.toString(this)
     }
 }

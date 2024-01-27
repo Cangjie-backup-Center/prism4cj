@@ -4,6 +4,7 @@
 
 package prism4cj
 
+from prism4cj import languages.*
 from prism4cj import prism.*
 from std import collection.ArrayList
 from std import collection.HashMap
@@ -52,8 +53,17 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
         return out
     }
 
-    protected func obtainGrammar(_: Prism, _: String): ?Grammar {
-        return None
+    protected func obtainGrammar(prism: Prism, name: String): ?Grammar {
+        var grammar: ?Grammar = None
+        match (name) {
+            case "brainfuck" => grammar = PrismBrainfuck.create()
+            case "c" => grammar = PrismC.create(prism)
+            case "clike" => grammar = PrismClike.create()
+            case "clojure" => grammar = PrismClojure.create()
+            case "cpp" => grammar = PrismCpp.create(prism)
+            case _ => grammar = None
+        }
+        return grammar
     }
 
     protected func triggerModify(prism: Prism, name: String): Unit {
