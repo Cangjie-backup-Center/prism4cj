@@ -1,0 +1,98 @@
+/*
+ * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2023. All rights reserved.
+ */
+
+package prism4cj
+
+from prism4cj import prism.*
+from std import collection.ArrayList
+from std import collection.HashMap
+from std import collection.HashSet
+
+public class GrammarLocatorGrammarUtils <: GrammarLocator {
+    let cache: HashMap<String, Grammar> = HashMap<String, Grammar>(4)
+    let NULL = GrammarImpl("this is a null value", ArrayList<Token>())
+    public init() {
+    }
+
+    public func register(name: String, grammar: Grammar): Unit {
+        this.cache.put(name, grammar)
+    }
+
+    public func grammar(prism: Prism, language: String): ?Grammar {
+        let name: String = this.realLanguageName(language)
+        var grammar: ?Grammar = this.cache.get(name)
+        match (grammar) {
+            case Some(v: GrammarImpl) where refEq(v, NULL) => return None
+            case Some(v) => return v
+            case None =>
+                grammar = this.obtainGrammar(prism, name)
+                if (grammar.isNone()) {
+                    this.cache.put(name, NULL)
+                } else {
+                    this.cache.put(name, grammar.getOrThrow())
+                }
+                this.triggerModify(prism, name)
+                return grammar
+        }
+    }
+
+    protected func realLanguageName(name: String): String {
+        var out: String = ""
+        match (name) {
+            case "js" => out = "javascript"
+            case "xml" => ()
+            case "html" => ()
+            case "mathml" => ()
+            case "svg" => out = "markup"
+            case "dotnet" => out = "csharp"
+            case "jsonp" => out = "json"
+            case _ => out = name
+        }
+        return out
+    }
+
+    protected func obtainGrammar(_: Prism, _: String): ?Grammar {
+        return None
+    }
+
+    protected func triggerModify(prism: Prism, name: String): Unit {
+        match (name) {
+            case "markup" =>
+                prism.grammar("css")
+                prism.grammar("javascript")
+            case "css" => prism.grammar("css-extras")
+            case _ => ()
+        }
+    }
+
+    public func languages(): HashSet<String> {
+        var set: HashSet<String> = HashSet<String>(25)
+        set.put("brainfuck")
+        set.put("c")
+        set.put("clike")
+        set.put("clojure")
+        set.put("cpp")
+        set.put("csharp")
+        set.put("css")
+        set.put("css-extras")
+        set.put("dart")
+        set.put("git")
+        set.put("go")
+        set.put("groovy")
+        set.put("java")
+        set.put("javascript")
+        set.put("json")
+        set.put("kotlin")
+        set.put("latex")
+        set.put("makefile")
+        set.put("markdown")
+        set.put("markup")
+        set.put("python")
+        set.put("scala")
+        set.put("sql")
+        set.put("swift")
+        set.put("yaml")
+        return set
+    }
+}
