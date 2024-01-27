@@ -1,5 +1,5 @@
 /*
- * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2023. All rights reserved.
+ * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
 package prism4cj
@@ -61,6 +61,16 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
             case "clike" => grammar = PrismClike.create()
             case "clojure" => grammar = PrismClojure.create()
             case "cpp" => grammar = PrismCpp.create(prism)
+            case "csharp" => grammar = PrismCsharp.create(prism)
+            case "css" => grammar = PrismCss.create()
+            case "css-extras" => grammar = PrismCssExtras.create()
+            case "dart" => grammar = PrismDart.create(prism)
+            case "git" => grammar = PrismGit.create()
+            case "go" => grammar = PrismGo.create(prism)
+            case "groovy" => grammar = PrismGroovy.create(prism)
+            case "java" => grammar = PrismJava.create(prism)
+            case "javascript" => grammar = PrismJavascript.create(prism)
+            case "json" => grammar = PrismJson.create()
             case _ => grammar = None
         }
         return grammar
