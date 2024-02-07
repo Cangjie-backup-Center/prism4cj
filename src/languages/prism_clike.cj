@@ -12,6 +12,8 @@ from prism4cj import prism.GrammarImpl
 from prism4cj import prism.Prism
 from prism4cj import prism.Token
 from prism4cj import prism.Pattern
+from prism4cj import prism.GrammarUtils
+from prism4cj import prism.TokenFilter
 
 public abstract class PrismClike {
     public static func create(): Grammar {

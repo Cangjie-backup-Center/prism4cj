@@ -105,9 +105,9 @@ public class SyntaxImpl <: Syntax {
     }
 
     public override func toString(): String {
-        return "SyntaxImpl{" + "type=" + sType + ", children=" + syntaxChildren.toString() + ", alias='" +
-            syntaxAlias.getOrThrow() + ", matchedString='" + syntaxMatchedString + ", greedy=" + syntaxGreedy.toString() +
-            ", tokenized=" + syntaxTokenized.toString() + "}"
+        return "SyntaxImpl{" + "type=" + sType + ", children=" + syntaxChildren.toString() + ", alias='" + syntaxAlias.getOrThrow() +
+            ", matchedString='" + syntaxMatchedString + ", greedy=" + syntaxGreedy.toString() + ", tokenized=" +
+            syntaxTokenized.toString() + "}"
     }
 }
 

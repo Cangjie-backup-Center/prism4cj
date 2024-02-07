@@ -45,6 +45,6 @@ public class GrammarImpl <: Grammar {
     }
 
     public override func toString(): String {
-        return ""
+        return PrismToString.toString(this)
     }
 }
