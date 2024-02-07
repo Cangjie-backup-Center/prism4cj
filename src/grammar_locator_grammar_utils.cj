@@ -71,6 +71,16 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
             case "java" => grammar = PrismJava.create(prism)
             case "javascript" => grammar = PrismJavascript.create(prism)
             case "json" => grammar = PrismJson.create()
+            case "kotlin" => grammar = PrismKotlin.create(prism)
+            case "latex" => grammar = PrismLatex.create()
+            case "makefile" => grammar = PrismMakefile.create()
+            case "markdown" => grammar = PrismMarkdown.create(prism)
+            case "markup" => grammar = PrismMarkup.create()
+            case "python" => grammar = PrismPython.create()
+            case "scala" => grammar = PrismScala.create(prism)
+            case "sql" => grammar = PrismSql.create()
+            case "swift" => grammar = PrismSwift.create(prism)
+            case "yaml" => grammar = PrismYaml.create()
             case _ => grammar = None
         }
         return grammar
