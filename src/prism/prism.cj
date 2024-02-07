@@ -89,6 +89,7 @@ public class Prism {
                     }
                     let node: ?Node = entries.get(i)
                     if (node.isSome() && isSyntaxNode(node.getOrThrow())) {
+                        i++
                         continue
                     }
                     var str: String = ""
@@ -130,6 +131,7 @@ public class Prism {
                             k++
                         }
                         if (entries.get(i).isSome() && isSyntaxNode(entries[i])) {
+                            i++
                             continue
                         }
                         deleteCount = k - i
@@ -146,6 +148,7 @@ public class Prism {
                         if (oneShot) {
                             break
                         }
+                        i++
                         continue
                     }
                     let matchRealData2: MatchData = matchData2.getOrThrow()
