@@ -9,6 +9,7 @@ from std import collection.HashMap
 from std import collection.HashSet
 from std import regex.Matcher
 from std import regex.Regex
+from std import regex.RegexException
 from std import regex.MatchData
 
 public class Prism {
@@ -100,20 +101,23 @@ public class Prism {
                     var deleteCount: Int64
                     var greedyMatch: Bool
                     var greedyAdd: Int64 = 0
+                    var matchData: ?MatchData = None
                     if (greedy && i != entries.size - 1) {
                         matcher = regex.matcher(text)
                         // limit search to the position (?)
                         matcher.setRegion(position, textLength)
-                        let matchData1: ?MatchData = matcher.find()
-                        if (matchData1.isNone()) {
+                        matchData = matcher.find()
+                        if (matchData.isNone()) {
                             break
                         }
-                        let matchRealData1: MatchData = matchData1.getOrThrow()
-                        var begin: Int64 = matchRealData1.matchPosition().start
+                        var matchRealData: MatchData = matchData.getOrThrow()
+                        var begin: Int64 = matchRealData.matchPosition().start
                         if (lookbehind) {
-                            begin += matchRealData1.matchStr(1).size
+                            try {
+                                begin += matchRealData.matchStr(1).size
+                            } catch (e: RegexException) {}
                         }
-                        let to: Int64 = matchRealData1.matchPosition().start + matchRealData1.matchStr(0).size
+                        let to: Int64 = matchRealData.matchPosition().start + matchRealData.matchStr(0).size
                         var k = i
                         var p = position
                         let len: Int64 = entries.size
@@ -143,17 +147,22 @@ public class Prism {
                         deleteCount = 1
                         greedyMatch = false
                     }
-                    let matchData2: ?MatchData = matcher.find()
-                    if (!greedyMatch && matchData2.isNone()) {
-                        if (oneShot) {
-                            break
+                    if (!greedyMatch) {
+                        matchData = matcher.find()
+                        if (matchData.isNone()) {
+                            if (oneShot) {
+                                break
+                            }
+                            i++
+                            continue
                         }
-                        i++
-                        continue
                     }
-                    let matchRealData2: MatchData = matchData2.getOrThrow()
+                    let matchRealData2 = matchData.getOrThrow()
                     if (lookbehind) {
-                        let group: String = matchRealData2.matchStr(1)
+                        var group: String = ""
+                        try {
+                            group = matchRealData2.matchStr(1)
+                        } catch (e: RegexException) {}
                         lookbehindLength = group.size
                     }
                     let begin02: Int64 = matchRealData2.matchPosition().start + greedyAdd + lookbehindLength

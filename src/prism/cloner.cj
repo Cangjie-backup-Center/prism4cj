@@ -94,15 +94,24 @@ class ContextImpl <: Context {
     private let cache: HashMap<Int64, Any> = HashMap<Int64, Any>(3)
 
     public func grammar(origin: Grammar): ?Grammar {
-        return (cache.get(origin.hashCode()) as Grammar).getOrThrow()
+        return match (cache.get(origin.hashCode())) {
+            case Some(v) => (v as Grammar).getOrThrow()
+            case None => None
+        }
     }
 
     public func token(origin: Token): ?Token {
-        return (cache.get(origin.hashCode()) as Token).getOrThrow()
+        return match (cache.get(origin.hashCode())) {
+            case Some(v) => (v as Token).getOrThrow()
+            case None => None
+        }
     }
 
     public func pattern(origin: Pattern): ?Pattern {
-        return (cache.get(origin.hashCode()) as Pattern).getOrThrow()
+        return match (cache.get(origin.hashCode())) {
+            case Some(v) => (v as Pattern).getOrThrow()
+            case None => None
+        }
     }
 
     public func save(origin: MyHashKey<Grammar>, clone: ?Grammar): Unit {
