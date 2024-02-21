@@ -1011,6 +1011,47 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
 }
 ```
 
+#### 1.3 示例
+
+```cangjie
+from std import unittest.*
+from std import unittest.testmacro.*
+from std import fs.*
+from std import collection.*
+from prism4cj import prism.*
+from prism4cj import prism4cj.GrammarLocatorGrammarUtils
+
+main(): Int64 {
+    var test = TestCangjie()
+    test.execute()
+    test.printResult()
+    return 0
+}
+
+@Test
+public class TestCangjie {
+
+    @TestCase
+    public func test01(): Unit {
+        let fileArr: Collection<File> = TestUtils.testFiles("cangjie")
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var c: Case
+        for (file in fileArr) {
+            c = TestUtils.readCase(file)
+            match (prism.grammar("cangjie")) {
+                case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                case None => ()
+            }
+        }
+    }
+}
+```
+
+执行结果如下：
+```shell
+[ PASSED ] CASE: test01
+```
+
 ### 2 预定义语法
 
 前置条件：NA
@@ -1365,6 +1406,20 @@ public class PrismYaml {
 
     /**
     * 创建 Yaml 预定义语法类
+    *
+    * @return 返回 grammar 类对象
+    */
+    public static func create(): ?Grammar
+}
+```
+
+PrismCangjie 类
+
+```cangjie
+public class PrismCangjie {
+
+    /**
+    * 创建 Cangjie 预定义语法类
     *
     * @return 返回 grammar 类对象
     */

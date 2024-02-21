@@ -53,8 +53,8 @@ prism4cj 为以后的处理提供任意语法的标记化策略。
         ├── prism_sql.cj             sql 类语言规则
         ├── prism_swift.cj           swift 类语言规则
         ├── prism_yaml.cj            yaml 类语言规则
+        ├── prism_cangjie.cj         cangjie 类语言规则
     ├── prism                        主函数包
-
         ├── cloner.cj                cloner 克隆类
         ├── grammar_locator.cj       语法加载器类
         ├── grammar_utils.cj         语法工具类
