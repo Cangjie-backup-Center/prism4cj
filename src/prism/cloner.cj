@@ -127,12 +127,12 @@ class ContextImpl <: Context {
     }
 }
 
-class MyHashKey<T> <: Hashable & Equatable<MyHashKey<T>> where T <: Hashable & Equatable<T> {
+public class MyHashKey<T> <: Hashable & Equatable<MyHashKey<T>> where T <: Hashable & Equatable<T> {
     let realKey: T
-    init(realKey: T) {
+    public init(realKey: T) {
         this.realKey = realKey
     }
-    public func hashCode(): Int {
+    public func hashCode(): Int64 {
         realKey.hashCode()
     }
     public operator func ==(a: MyHashKey<T>): Bool {

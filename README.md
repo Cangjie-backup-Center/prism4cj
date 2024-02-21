@@ -6,7 +6,7 @@
 <img alt="" src="https://img.shields.io/badge/release-v0.0.1-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjc-v0.48.2-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjcov-0%25-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjcov-85.6%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
 
@@ -25,10 +25,47 @@ prism4cj 为以后的处理提供任意语法的标记化策略。
 ### 源码目录
 
 ```shell
-.
-
 ├── doc
 ├── src
+    ├── languages                    语言包
+        ├── prism_brainfuck.cj       brainfuck 语言规则
+        ├── prism_c.cj               c 语言规则
+        ├── prism_clike.cj           clike 类语言规则
+        ├── prism_clojure.cj         clojure 类语言规则
+        ├── prism_cpp.cj             cpp 类语言规则
+        ├── prism_csharp.cj          csharp 语言规则
+        ├── prism_css_extras.cj      css_extras 语言规则
+        ├── prism_css.cj             css 类语言规则
+        ├── prism_dart.cj            dart 类语言规则
+        ├── prism_git.cj             git 类语言规则
+        ├── prism_go.cj              go 语言规则
+        ├── prism_groovy.cj          groovy 语言规则
+        ├── prism_java.cj            java 类语言规则
+        ├── prism_javascript.cj      javascript 类语言规则
+        ├── prism_json.cj            json 类语言规则
+        ├── prism_kotlin.cj          kotlin 语言规则
+        ├── prism_latex.cj           latex 语言规则
+        ├── prism_makefile.cj        makefile 类语言规则
+        ├── prism_markdown.cj        markdown 类语言规则
+        ├── prism_markup.cj          markup 类语言规则
+        ├── prism_python.cj          python 类语言规则
+        ├── prism_scala.cj           scala 语言规则
+        ├── prism_sql.cj             sql 类语言规则
+        ├── prism_swift.cj           swift 类语言规则
+        ├── prism_yaml.cj            yaml 类语言规则
+    ├── prism                        主函数包
+
+        ├── cloner.cj                cloner 克隆类
+        ├── grammar_locator.cj       语法加载器类
+        ├── grammar_utils.cj         语法工具类
+        ├── grammar.cj               语法类
+        ├── node.cj                  节点类
+        ├── pattern.cj               模式类
+        ├── prism_tostring.cj        自定义 toString 工具类
+        ├── prism.cj                 核心类
+        ├── token.cj                 令牌类
+        ├── visitor.cj               visitor 类
+    ├── grammar_locator_grammar_utils.cj grammar加载器工具类
 └── test
     ├── DOC                          文档示例
     ├── HLT                          HLT用例
@@ -119,6 +156,49 @@ cd test/tmp
 ```
 
 ### 功能示例
+
+#### c 语言关键词标记示例
+
+```cangjie
+from std import unittest.*
+from std import unittest.testmacro.*
+from std import fs.*
+from std import collection.*
+from prism4cj import prism.*
+from prism4cj import prism4cj.GrammarLocatorGrammarUtils
+
+main(): Int64 {
+    var test = TestCReadme()
+    test.execute()
+    test.printResult()
+    return 0
+}
+
+@Test
+public class TestCReadme {
+
+    @TestCase
+    public func test01(): Unit {
+        let fileArr: Collection<File> = TestUtils.testFiles("c")
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var c: Case
+        for (file in fileArr) {
+            c = TestUtils.readCase(file)
+            match (prism.grammar("c")) {
+                case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                case None => ()
+            }
+            
+        }
+    }
+
+}
+```
+
+执行结果如下：
+```shell
+[ PASSED ] CASE: test01
+```
 
 ## 开源协议
 
