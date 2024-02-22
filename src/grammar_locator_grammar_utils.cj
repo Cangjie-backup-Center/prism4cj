@@ -48,6 +48,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
             case "svg" => out = "markup"
             case "dotnet" => out = "csharp"
             case "jsonp" => out = "json"
+            case "cj" => out = "cangjie"
             case _ => out = name
         }
         return out
@@ -81,6 +82,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
             case "sql" => grammar = PrismSql.create()
             case "swift" => grammar = PrismSwift.create(prism)
             case "yaml" => grammar = PrismYaml.create()
+            case "cangjie" => grammar = PrismCangjie.create(prism)
             case _ => grammar = None
         }
         return grammar
@@ -97,7 +99,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
     }
 
     public func languages(): HashSet<String> {
-        var set: HashSet<String> = HashSet<String>(25)
+        var set: HashSet<String> = HashSet<String>(26)
         set.put("brainfuck")
         set.put("c")
         set.put("clike")
@@ -123,6 +125,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
         set.put("sql")
         set.put("swift")
         set.put("yaml")
+        set.put("cangjie")
         return set
     }
 }
