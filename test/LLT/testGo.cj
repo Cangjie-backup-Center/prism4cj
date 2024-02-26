@@ -13,6 +13,9 @@ main(): Int64 {
     var test = TestGo()
     test.test01()
     test.test02()
+    test.test03()
+    test.test04()
+    test.test05()
     return 0
 }
 
@@ -51,4 +54,57 @@ public class TestGo {
         }
     }
 
+    @TestCase
+    public func test03(): Unit {
+        try {
+            let fileArr: Collection<File> = TestUtils.testFiles("")
+                var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+            var c: Case
+            for (file in fileArr) {
+                c = TestUtils.readCase(file)
+                match (prism.grammar("go")) {
+                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                    case None => ()
+                }    
+            }
+        } catch (e: FSException) {
+            println("测试文件读取有误...")   
+        }
+    }
+
+    @TestCase
+    public func test04(): Unit {
+        try {
+            let fileArr: Collection<File> = TestUtils.testFiles("go")
+            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+            var c: Case
+            for (file in fileArr) {
+                c = TestUtils.readCase(file)
+                match (prism.grammar("")) {
+                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                    case None => ()
+                }    
+            }
+        } catch (e: FSException) {
+            println("测试文件读取有误...")   
+        }
+    }
+
+    @TestCase
+    public func test05(): Unit {
+        try {
+            let fileArr: Collection<File> = TestUtils.testFiles("gogogo")
+            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+            var c: Case
+            for (file in fileArr) {
+                c = TestUtils.readCase(file)
+                match (prism.grammar("")) {
+                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                    case None => ()
+                }    
+            }
+        } catch (e: FSException) {
+            println("测试文件读取有误...")   
+        }
+    }
 }

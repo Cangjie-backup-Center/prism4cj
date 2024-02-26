@@ -13,6 +13,9 @@ main(): Int64 {
     var test = TestBrainfuck()
     test.test01()
     test.test02()
+    test.test03()
+    test.test04()
+    test.test05()
     return 0
 }
 
@@ -51,4 +54,57 @@ public class TestBrainfuck {
         }
     }
 
+    @TestCase
+    public func test03(): Unit {
+        try {
+            let fileArr: Collection<File> = TestUtils.testFiles("")
+                var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+            var c: Case
+            for (file in fileArr) {
+                c = TestUtils.readCase(file)
+                match (prism.grammar("brainfuck")) {
+                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                    case None => ()
+                }    
+            }
+        } catch (e: FSException) {
+            println("测试文件读取有误...")   
+        }
+    }
+
+    @TestCase
+    public func test04(): Unit {
+        try {
+            let fileArr: Collection<File> = TestUtils.testFiles("brainfuck")
+            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+            var c: Case
+            for (file in fileArr) {
+                c = TestUtils.readCase(file)
+                match (prism.grammar("")) {
+                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                    case None => ()
+                }    
+            }
+        } catch (e: FSException) {
+            println("测试文件读取有误...")   
+        }
+    }
+
+    @TestCase
+    public func test05(): Unit {
+        try {
+            let fileArr: Collection<File> = TestUtils.testFiles("Brainfuck")
+            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+            var c: Case
+            for (file in fileArr) {
+                c = TestUtils.readCase(file)
+                match (prism.grammar("")) {
+                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                    case None => ()
+                }    
+            }
+        } catch (e: FSException) {
+            println("测试文件读取有误...")   
+        }
+    }
 }
