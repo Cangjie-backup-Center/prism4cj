@@ -60,7 +60,7 @@ public class PatternImpl <: Pattern {
     }
 
     public override func hashCode(): Int64 {
-        return 31 * patternRegex.string().hashCode() + 31 * patternAlias.hashCode() + 31 * patternInside.hashCode()
+        return 31 * patternRegex.string().hashCode()
     }
 
     public override func toString(): String {

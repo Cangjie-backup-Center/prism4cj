@@ -102,11 +102,11 @@ public abstract class GrammarUtils {
         return CLONER.clone(grammar)
     }
 
-    public static func clone(token: Token) {
+    public static func clone(token: Token): Token {
         return CLONER.clone(token)
     }
 
-    public static func clone(pattern: Pattern) {
+    public static func clone(pattern: Pattern): Pattern {
         return CLONER.clone(pattern)
     }
 

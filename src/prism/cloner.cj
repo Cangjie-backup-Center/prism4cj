@@ -37,7 +37,7 @@ class ClonerImpl <: Cloner {
         let tokens: ArrayList<Token> = grammar.tokens()
         var out: ArrayList<Token> = ArrayList<Token>(tokens.size)
         contextGrammar = GrammarImpl(grammar.name(), out)
-        context.save(MyHashKey<Grammar>(grammar), contextGrammar)
+        context.save(MyHashKey<Grammar>(grammar), contextGrammar.getOrThrow())
         for (i in 0..tokens.size) {
             out.append(clone(context, tokens[i]))
         }
@@ -52,7 +52,7 @@ class ClonerImpl <: Cloner {
         var patterns: ArrayList<Pattern> = token.patterns()
         var out: ArrayList<Pattern> = ArrayList<Pattern>(patterns.size)
         contextToken = TokenImpl(token.name(), out)
-        context.save(MyHashKey<Token>(token), contextToken)
+        context.save(MyHashKey<Token>(token), contextToken.getOrThrow())
         for (i in 0..patterns.size) {
             out.append(clone(context, patterns[i]))
         }
@@ -71,7 +71,7 @@ class ClonerImpl <: Cloner {
         } else {
             contextPattern = PatternImpl(pattern.regex(), pattern.lookbehind(), pattern.greedy(), pattern.alias(), None)
         }
-        context.save(MyHashKey<Pattern>(pattern), contextPattern)
+        context.save(MyHashKey<Pattern>(pattern), contextPattern.getOrThrow())
         return contextPattern.getOrThrow()
     }
 }
@@ -83,37 +83,46 @@ interface Context {
 
     func pattern(origin: Pattern): ?Pattern
 
-    func save(origin: MyHashKey<Grammar>, clone: ?Grammar): Unit
+    func save(origin: MyHashKey<Grammar>, clone: Grammar): Unit
 
-    func save(origin: MyHashKey<Token>, clone: ?Token): Unit
+    func save(origin: MyHashKey<Token>, clone: Token): Unit
 
-    func save(origin: MyHashKey<Pattern>, clone: ?Pattern): Unit
+    func save(origin: MyHashKey<Pattern>, clone: Pattern): Unit
 }
 
 class ContextImpl <: Context {
     private let cache: HashMap<Int64, Any> = HashMap<Int64, Any>(3)
 
     public func grammar(origin: Grammar): ?Grammar {
-        return cache.get(origin.hashCode()) as Grammar
+        return match (cache.get(origin.hashCode())) {
+            case Some(v) => v as Grammar
+            case None => None
+        }
     }
 
     public func token(origin: Token): ?Token {
-        return cache.get(origin.hashCode()) as Token
+        return match (cache.get(origin.hashCode())) {
+            case Some(v) => v as Token
+            case None => None
+        }
     }
 
     public func pattern(origin: Pattern): ?Pattern {
-        return cache.get(origin.hashCode()) as Pattern
+        return match (cache.get(origin.hashCode())) {
+            case Some(v) => v as Pattern
+            case None => None
+        }
     }
 
-    public func save(origin: MyHashKey<Grammar>, clone: ?Grammar): Unit {
+    public func save(origin: MyHashKey<Grammar>, clone: Grammar): Unit {
         cache.put(origin.hashCode(), clone)
     }
 
-    public func save(origin: MyHashKey<Token>, clone: ?Token): Unit {
+    public func save(origin: MyHashKey<Token>, clone: Token): Unit {
         cache.put(origin.hashCode(), clone)
     }
 
-    public func save(origin: MyHashKey<Pattern>, clone: ?Pattern): Unit {
+    public func save(origin: MyHashKey<Pattern>, clone: Pattern): Unit {
         cache.put(origin.hashCode(), clone)
     }
 }

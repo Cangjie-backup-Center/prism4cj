@@ -145,7 +145,7 @@ public abstract class GrammarUtils {
     * 
     * @return 返回 token 标记对象
     */
-    public static func clone(token: Token)
+    public static func clone(token: Token): Token
 
     /**
     * 根据传入的 pattern 对象，返回克隆后的 pattern 对象
@@ -154,7 +154,7 @@ public abstract class GrammarUtils {
     * 
     * @return 返回 pattern 模式对象
     */
-    public static func clone(pattern: Pattern)
+    public static func clone(pattern: Pattern): pattern
 
 }
 ```
