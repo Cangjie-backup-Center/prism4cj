@@ -12,7 +12,7 @@ from prism4cj import prism4cj.GrammarLocatorGrammarUtils
 main(): Int64 {
     var test = TestSwift()
     test.test01()
-    // test.test02()
+    test.test02()
     test.test03()
     test.test04()
     test.test05()

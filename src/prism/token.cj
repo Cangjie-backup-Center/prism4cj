@@ -36,7 +36,11 @@ public class TokenImpl <: Token {
     }
 
     public override func hashCode(): Int64 {
-        return 31 * tokenName.hashCode() + 31 * tokenPatterns.toString().hashCode()
+        var has: Int64 = 31 * tokenName.hashCode()
+        for (i in 0..tokenPatterns.size) {
+            has += tokenPatterns[i].hashCode()
+        }
+        return has
     }
 
     public override func toString(): String {
