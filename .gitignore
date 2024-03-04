@@ -21,3 +21,5 @@ tmp
 node_modules
 package-lock.json
 *.bchir
+target/
+cjpm.*
