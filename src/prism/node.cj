@@ -105,9 +105,24 @@ public class SyntaxImpl <: Syntax {
     }
 
     public override func toString(): String {
-        return "SyntaxImpl{" + "type=" + sType + ", children=" + syntaxChildren.toString() + ", alias='" + syntaxAlias.getOrThrow() +
-            ", matchedString='" + syntaxMatchedString + ", greedy=" + syntaxGreedy.toString() + ", tokenized=" +
-            syntaxTokenized.toString() + "}"
+        if (let Some(v) <- syntaxAlias) {
+            return "SyntaxImpl{" + 
+                "type='" + sType + "\'" +
+                ", children=" + syntaxChildren.toString() + 
+                ", alias='" + v + "\'" +
+                ", matchedString='" + syntaxMatchedString + "\'" +
+                ", greedy=" + syntaxGreedy.toString() + 
+                ", tokenized=" + syntaxTokenized.toString() + 
+                "}"
+        }
+        return "SyntaxImpl{" + 
+            "type='" + sType + "\'" +
+            ", children=" + syntaxChildren.toString() + 
+            ", alias='" + "None" + "\'" +
+            ", matchedString='" + syntaxMatchedString + "\'" +
+            ", greedy=" + syntaxGreedy.toString() + 
+            ", tokenized=" + syntaxTokenized.toString() + 
+            "}"
     }
 }
 

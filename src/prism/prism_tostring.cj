@@ -90,10 +90,15 @@ abstract class PrismToString {
             if (pattern.greedy()) {
                 builder.append(",greedy=true")
             }
-            if (pattern.alias().isSome()) {
-                builder.append(",alias=\"")
-                builder.append(pattern.alias())
-                builder.append('\"')
+            match (pattern.alias()) {
+                case Some(v) => 
+                    builder.append(",alias=\"")
+                    builder.append(v)
+                    builder.append('\"')
+                case None =>
+                    builder.append(",alias=\"")
+                    builder.append("None")
+                    builder.append('\"')
             }
             let inside: ?Grammar = pattern.inside()
             if (let Some(v) <- inside) {
