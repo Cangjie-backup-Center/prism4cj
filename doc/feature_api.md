@@ -3,6 +3,7 @@
 ### 介绍
 本项目基于开源库 https://github.com/noties/Prism4j
 prism4cj 为以后的处理提供任意语法的标记化策略。
+(ps: 请注意！本库在实现 grammar_locator 语法加载器时默认将本库支持的所有语法对象都 create 建好，参考的 java 库实现逻辑是即用即创，所以在测试某语法时，传入的语法要一一对应，否则可能会出现 None 值及例如 OOM 异常的情况！)
 
 ### 1 语法解析及标记
 
@@ -160,67 +161,6 @@ public abstract class GrammarUtils {
 ```
 
 #### 1.2 其它接口
-
-Context 上下文接口
-
-```cangjie
-interface Context {
-
-    /**
-    * 根据传入的 grammar 对象，与 Context 对象中 cache 成员变量中的 grammar 属性对比 hash 值，若相等，则返回缓存中的 grammar 对象；否则返回 None
-    *
-    * @param origin - 传入一个语法对象
-    * 
-    * @return 返回 Option 类型，若 Context 对象中 cache 成员变量中的 grammar 属性对比 hash 值，若相等，则返回缓存中的 grammar 对象；否则返回 None
-    */
-    func grammar(origin: Grammar): ?Grammar
-
-    /**
-    * 根据传入的 Token 对象，与 Context 对象中 cache 成员变量中的 Token 属性对比 hash 值，若相等，则返回缓存中的 Token 对象；否则返回 None
-    *
-    * @param origin - 传入一个 Token 对象
-    * 
-    * @return 返回 Option 类型，若 Context 对象中 cache 成员变量中的 Token 属性对比 hash 值，若相等，则返回缓存中的 Token 对象；否则返回 None
-    */
-    func token(origin: Token): ?Token
-
-    /**
-    * 根据传入的 Pattern 对象，与 Context 对象中 cache 成员变量中的 Pattern 属性对比 hash 值，若相等，则返回缓存中的 Pattern 对象；否则返回 None
-    *
-    * @param origin - 传入一个 Pattern 对象
-    * 
-    * @return 返回 Option 类型，若 Context 对象中 cache 成员变量中的 Pattern 属性对比 hash 值，若相等，则返回缓存中的 Pattern 对象；否则返回 None
-    */
-    func pattern(origin: Pattern): ?Pattern
-
-    /**
-    * 根据 MyHashKey<Grammar> 类对象的 hash 值，向该位置 存储 clone 对象
-    *
-    * @param origin - MyHashKey<Grammar> 类
-    * @param clone - Option 类对象
-    * 
-    */
-    func save(origin: MyHashKey<Grammar>, clone: ?Grammar): Unit
-
-    /**
-    * 根据 MyHashKey<Token> 类对象的 hash 值，向该位置 存储 clone 对象
-    *
-    * @param origin - MyHashKey<Token> 类
-    * @param clone - Option 类对象
-    * 
-    */
-    func save(origin: MyHashKey<Token>, clone: ?Token): Unit
-
-    /**
-    * 根据 MyHashKey<Pattern> 类对象的 hash 值，向该位置 存储 clone 对象
-    *
-    * @param origin - MyHashKey<Pattern> 类
-    * @param clone - Option 类对象
-    * 
-    */
-    func save(origin: MyHashKey<Pattern>, clone: ?Pattern): Unit
-}
-```
 
 MyHashKey 自定义 HashKey 类
 
@@ -803,61 +743,6 @@ public class PatternImpl <: Pattern {
      * @return 返回 String 类型
      */
     public override func toString(): String
-}
-```
-
-Cache 缓存接口
-
-```cangjie
-interface Cache {
-
-    /**
-     * 访问缓存对象，并判断缓存中是否有语法对象，若有，则与传入的语法对象 hash 值作对比，相等则返回 true；反之返回 false
-     *
-     * @param grammar - 传入的语法对象
-     *
-     * @return 返回 Bool 类型
-     */
-    func visitedGrammar(grammar: Grammar): Bool
-
-    /**
-     * 向缓存对象中存储传入的语法对象
-     *
-     * @param grammar - 传入的语法对象
-     */
-    func markVisitedGrammar(grammar: Grammar): Unit
-
-    /**
-     * 访问缓存对象，并判断缓存中是否有标记对象，若有，则与传入的标记对象 hash 值作对比，相等则返回 true；反之返回 false
-     *
-     * @param grammar - 传入的标记对象
-     *
-     * @return 返回 Bool 类型
-     */
-    func visitedToken(token: Token): Bool
-
-    /**
-     * 向缓存对象中存储传入的标记对象
-     *
-     * @param grammar - 传入的标记对象
-     */
-    func markVisitedToken(token: Token): Unit
-
-    /**
-     * 访问缓存对象，并判断缓存中是否有模式对象，若有，则与传入的模式对象 hash 值作对比，相等则返回 true；反之返回 false
-     *
-     * @param grammar - 传入的模式对象
-     *
-     * @return 返回 Bool 类型
-     */
-    func visitedPattern(pattern: Pattern): Bool
-
-    /**
-     * 向缓存对象中存储传入的模式对象
-     *
-     * @param grammar - 传入的模式对象
-     */
-    func markVisitedPattern(pattern: Pattern): Unit
 }
 ```
 
