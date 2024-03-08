@@ -297,10 +297,10 @@ public interface GrammarLocator {
 public abstract class GrammarUtils {
 
     /**
-    * 根据 path 路径查找语法中的标记对象
+    * 根据 grammar 对象已有的 token 列表为基础，查找传入的 path 路径中是否有 Token，若有，返回这个 Token，反之，返回 None。
     *
     * @param grammar - 传入的语法对象
-    * @param path - String 路径
+    * @param path - String 类型路径 (a1/a2)
     *
     * @return 返回 Option 类型
     * 
@@ -311,7 +311,7 @@ public abstract class GrammarUtils {
     * 根据 path 路径向语法对象中插入 tokens 标记集合
     *
     * @param grammar - 传入的语法对象
-    * @param path - String 路径
+    * @param path - String 路径 (a1/a2)
     * @param tokens - ArrayList<Token> 集合
     * 
     */
@@ -332,7 +332,7 @@ public abstract class GrammarUtils {
     *
     * @param grammar - 传入的语法对象
     * @name String - 父类预定义语法字符串，如 clike
-    * @tokens ?ArrayList<Token> - Options 类型
+    * @tokens ?ArrayList<Token> - Options 类型，如果要向 grammar 对象中额外增加新的 token，则此集合中的 token 的名字需要是 grammar 对象中已有的才会被成功添加并覆盖原有的 token，否则，添加是无效的
     *
     * @return 返回语法对象
     * 
@@ -345,7 +345,7 @@ public abstract class GrammarUtils {
     * @param grammar - 传入的语法对象
     * @name String - 父类预定义语法字符串，如 clike
     * @filter filter - 标记过滤器
-    * @tokens ?ArrayList<Token> - Options 类型
+    * @tokens ?ArrayList<Token> - Options 类型，如果要向 grammar 对象中额外增加新的 token，则此集合中的 token 的名字需要是 grammar 对象中已有的才会被成功添加并覆盖原有的 token，否则，添加是无效的
     *
     * @return 返回语法对象
     * 
