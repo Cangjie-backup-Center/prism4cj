@@ -1,0 +1,17 @@
+[cross-compile-configuration]
+  aarch64-linux-ohos = ""
+
+[dependencies]
+
+[package]
+  cjc-version = "0.49.2"
+  compile-option = "-O2"
+  description = "nothing here"
+  link-option = ""
+  name = "prism4cj"
+  output-type = "dynamic"
+  src-dir = "src"
+  target-dir = ""
+  version = "0.0.1"
+  package-configuration = {}
+  scripts = {}

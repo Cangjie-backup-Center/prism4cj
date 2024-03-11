@@ -15,15 +15,10 @@ public class PrismCangjie {
                     "keyword",
                     Prism.pattern(
                         Regex(
-                            "(^|[^.])\\b(?:abstract|as|break|catch|class|const|constructor|continue|data|do|dynamic|else|enum|external|finally|for|fun|get|if|import|in|init|interface|is|null|object|open|operator|override|package|protected|public|return|set|super|this|throw|to|try|var|when|where|while)\\b"
+                            "(^|[^.])\\b(?:abstract|break|case|catch|class|const|continue|do|else|enum|extends|finally|for|if|implements|import|interface|package|private|protected|public|static|super|synchronized|this|throw|try|while|return|when|func|type|init|is|as|in|match|from|where|spawn|macro|quote|foreign|prop|mut|unsafe|struct|operator|overide|redef|open|sealed)\\b"
                         ),
                         true
                     )
-                ),
-                Prism.token(
-                    "function",
-                    Prism.pattern(Regex("\\w+(?=\\s*\\()")),
-                    Prism.pattern(Regex("(\\.)\\w+(?=\\s*\\{)"), true)
                 ),
                 Prism.token(
                     "number",
@@ -33,10 +28,43 @@ public class PrismCangjie {
                     ))
                 ),
                 Prism.token(
+                    "type",
+                    Prism.pattern(
+                        Regex(
+                        "\\b(?:let|var|Bool|Char|Int8|Int16|Int32|Int64|UInt8|UInt16|UInt32|UInt64|Float16|Float32|Float64|String|IntNative|UIntNative|Nothing|Unit|Varray|InOut|true|false)\\b"
+                    ))
+                ),
+                Prism.token(
                     "operator",
                     Prism.pattern(
                         Regex(
-                        "\\+[+=]?|-[-=>]?|==?=?|!(?:!|==?)?|[\\/*%<>]=?|[?:]:?|\\.\\.|&&|\\|\\||\\b(?:and|inv|or|shl|shr|ushr|xor)\\b"
+                        "==?=?|!(?:!|==?)?|\\|\\||\\+[+=>]?|-[-=>]?|<[<=>]?|>[>=>]?|&[&=>]?|*[*=>]?|[\\/]=?|[\\|]=?|[\\|\\|]=?|[\\^]=?|[%]=?|\\(|\\)|\\}|\\[|\\]|\\,|\\.[\\.=]?|\\~[?:]:?|\\$[\\{]?|\\;|@|?[?]|?|~>|{"
+                    ))
+                ),
+                Prism.token(
+                    "quoted_string",
+                    Prism.pattern(
+                        Regex(
+                        "(^|[^.])\\b(?:WS|\"|b\"|jQuoteOpen|\"\"\"|b'|'|lineStringContent_token1|multilineRawStringLiteral|multiLineStringContent|lineStringContent)\\b"
+                    ))
+                ),
+                Prism.token(
+                    "function",
+                    Prism.pattern(
+                        Regex(
+                        "(^|[^.])\\b(?:main|println|print|func)\\b"
+                    ))
+                ),
+                Prism.token(
+                    "comment",
+                    Prism.pattern(Regex("(^|[^\\\\])\\/\\*[\\s\\S]*?(?:\\*\\/|$)"), true),
+                    Prism.pattern(Regex("(^|[^\\\\:])\\/\\/.*"), true, true)
+                ),
+                Prism.token(
+                    "escape_seq",
+                    Prism.pattern(
+                        Regex(
+                        "(^|[^.])\\b(?:escapeSeq)\\b"
                     ))
                 )
             )

@@ -1,0 +1,65 @@
+a == b
+        a != b
+        a || b
+        a++
+        a--
+        a < b
+        a << b
+        a <= b
+        a <<= b
+        a > b
+        a >> b
+        a >= b
+        a >>= b
+        a & b
+        a && b
+        a += b
+        a -= b
+        a *= b
+        a **= b
+        a /= b
+        a &= b
+        a |= b
+        a ||= b
+        a ^= b
+        a %= b
+        (
+        )
+        }
+        []
+        ,
+        .
+        a = b
+        ~
+        :
+        a + b
+        a - b
+        a * b
+        a / b
+        a | b
+        a ^ b
+        a # b
+        a -> b
+        a $ b
+        ${
+        ;
+        @
+        a ** b
+        a ? b
+        a ?? b
+        |>
+        a~>b
+        ..
+        ..=
+        ...
+        {}
+        \\
+        main() {}
+        func a(): UInt64 {}
+        println("aaa")
+        print("bbb")
+        //
+        /*
+        */
+        /**
+        **/
