@@ -32,11 +32,9 @@ public class PrismMakefile {
                         false,
                         false,
                         None,
-                        GrammarImpl(
-                            "inside",
+                        GrammarImpl("inside",
                             ArrayList<Token>(
-                                Prism.token("variable", Prism.pattern(Regex("\\$+(?:[^(){}:#=\\s]+|(?=[({]))"))))
-                        )
+                            Prism.token("variable", Prism.pattern(Regex("\\$+(?:[^(){}:#=\\s]+|(?=[({]))")))))
                     )
                 ),
                 Prism.token("variable", Prism.pattern(Regex("\\$+(?:[^(){}:#=\\s]+|\\([@*%<^+?][DF]\\)|(?=[({]))"))),

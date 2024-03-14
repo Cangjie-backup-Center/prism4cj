@@ -138,14 +138,14 @@ public class Prism {
                             i++
                             continue
                         }
-                        deleteCount = k - i
-                        str = text[position..p]
                         greedyMatch = true
+                        deleteCount = k - i
                         greedyAdd = -position
+                        str = text[position..p]
                     } else {
+                        greedyMatch = false
                         matcher = regex.matcher(str)
                         deleteCount = 1
-                        greedyMatch = false
                     }
                     if (!greedyMatch) {
                         matchData = matcher.find()

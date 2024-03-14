@@ -33,16 +33,10 @@ public abstract class PrismClike {
                     "class-name",
                     Prism.pattern(
                         Regex(
-                            "((?:\\b(?:class|interface|extends|implements|trait|instanceof|new)\\s+)|(?:catch\\s+\\())[\\w.\\\\]+"
-                        ),
-                        true,
-                        false,
-                        None,
-                        GrammarImpl(
-                            "inside",
-                            ArrayList<Token>(Prism.token("punctuation", Prism.pattern(Regex("[.\\\\]"))))
-                        )
-                    )
+                        "((?:\\b(?:class|interface|extends|implements|trait|instanceof|new)\\s+)|(?:catch\\s+\\())[\\w.\\\\]+"
+                    ), true, false, None,
+                        GrammarImpl("inside",
+                        ArrayList<Token>(Prism.token("punctuation", Prism.pattern(Regex("[.\\\\]"))))))
                 ),
                 Prism.token(
                     "keyword",
@@ -53,15 +47,7 @@ public abstract class PrismClike {
                 ),
                 Prism.token("boolean", Prism.pattern(Regex("\\b(?:true|false)\\b"))),
                 Prism.token("function", Prism.pattern(Regex("[a-z0-9_]+(?=\\()", RegexOption().ignoreCase()))),
-                Prism.token(
-                    "number",
-                    Prism.pattern(
-                        Regex(
-                            "\\b0x[\\da-f]+\\b|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e[+-]?\\d+)?",
-                            RegexOption().ignoreCase()
-                        )
-                    )
-                ),
+                Prism.token("number", Prism.pattern(Regex("\\b0x[\\da-f]+\\b|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e[+-]?\\d+)?",RegexOption().ignoreCase()))),
                 Prism.token(
                     "operator",
                     Prism.pattern(Regex("--?|\\+\\+?|!=?=?|<=?|>=?|==?=?|&&?|\\|\\|?|\\?|\\*|\\/|~|\\^|%"))
