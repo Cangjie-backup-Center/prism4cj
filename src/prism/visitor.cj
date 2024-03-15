@@ -12,7 +12,7 @@ public interface Visitor {
 }
 
 public abstract class AbsVisitor <: Visitor {
-    public override func visit(nodes: ArrayList<Node>): Unit {
+    public open override func visit(nodes: ArrayList<Node>): Unit {
         for (i in 0..nodes.size) {
             if (nodes[i].isSyntax()) {
                 visitSyntax((nodes[i] as Syntax).getOrThrow())
