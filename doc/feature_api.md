@@ -151,7 +151,7 @@ public abstract class GrammarUtils {
     /**
     * 根据传入的 pattern 对象，返回克隆后的 pattern 对象
     *
-    * @param token - 传入一个模式对象
+    * @param pattern - 传入一个模式对象
     * 
     * @return 返回 pattern 模式对象
     */
@@ -969,6 +969,7 @@ public class PrismC {
 
     /**
     * 创建 C 预定义语法类
+    * @param prism - 传入 Prism 对象
     *
     * @return 返回 grammar 类对象
     */
@@ -983,6 +984,7 @@ public class PrismClike {
 
     /**
     * 创建 Clike 预定义语法类
+    * @param prism - 传入 Prism 对象
     *
     * @return 返回 grammar 类对象
     */
@@ -997,6 +999,7 @@ public class PrismClojure {
 
     /**
     * 创建 Clojure 预定义语法类
+    * @param prism - 传入 Prism 对象
     *
     * @return 返回 grammar 类对象
     */
@@ -1011,6 +1014,7 @@ public class PrismCpp {
 
     /**
     * 创建 Cpp 预定义语法类
+    * @param prism - 传入 Prism 对象
     *
     * @return 返回 grammar 类对象
     */
@@ -1025,6 +1029,7 @@ public class PrismCsharp {
 
     /**
     * 创建 Csharp 预定义语法类
+    * @param prism - 传入 Prism 对象
     *
     * @return 返回 grammar 类对象
     */
@@ -1039,6 +1044,7 @@ public abstract class PrismCss {
 
     /**
     * 创建 Css 预定义语法类
+    * @param prism - 传入 Prism 对象
     *
     * @return 返回 grammar 类对象
     */
@@ -1054,7 +1060,7 @@ public class PrismCssExtras {
     /**
     * 创建 CssExtras 预定义语法类
     *
-    * @return 返回 grammar 类对象
+    * @return 返回 Option 类型
     */
     public static func create(): ?Grammar
 }
@@ -1070,7 +1076,7 @@ public class PrismDart {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1084,7 +1090,7 @@ public class PrismGit {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1098,7 +1104,7 @@ public class PrismGo {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1112,7 +1118,7 @@ public class PrismGroovy {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1126,7 +1132,7 @@ public class PrismJava {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1140,7 +1146,7 @@ public class PrismJavascript {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1154,7 +1160,7 @@ public class PrismJson {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1168,7 +1174,7 @@ public class PrismKotlin {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1182,7 +1188,7 @@ public class PrismLatex {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1196,7 +1202,7 @@ public class PrismMakefile {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1210,7 +1216,7 @@ public class PrismMarkdown {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1224,7 +1230,7 @@ public abstract class PrismMarkup {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1238,7 +1244,7 @@ public class PrismPython {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1252,7 +1258,7 @@ public class PrismScala {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1266,7 +1272,7 @@ public class PrismSql {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1280,7 +1286,7 @@ public class PrismSwift {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1294,7 +1300,7 @@ public class PrismYaml {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```
 
@@ -1308,6 +1314,6 @@ public class PrismCangjie {
     *
     * @return 返回 grammar 类对象
     */
-    public static func create(): ?Grammar
+    public static func create(): Grammar
 }
 ```

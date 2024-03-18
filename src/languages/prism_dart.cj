@@ -5,7 +5,7 @@
 package languages
 
 public class PrismDart {
-    public static func create(prism: Prism): ?Grammar {
+    public static func create(prism: Prism): Grammar {
         let dart: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "dart",

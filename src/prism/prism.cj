@@ -90,6 +90,7 @@ public class Prism {
                     }
                     let node: ?Node = entries.get(i)
                     if (node.isSome() && isSyntaxNode(node.getOrThrow())) {
+                        position += node.getOrThrow().textLength()
                         i++
                         continue
                     }
@@ -135,6 +136,7 @@ public class Prism {
                             k++
                         }
                         if (entries.get(i).isSome() && isSyntaxNode(entries[i])) {
+                            position += entries.get(i).getOrThrow().textLength()
                             i++
                             continue
                         }
@@ -153,6 +155,7 @@ public class Prism {
                             if (oneShot) {
                                 break
                             }
+                            position += entries.get(i).getOrThrow().textLength()
                             i++
                             continue
                         }
