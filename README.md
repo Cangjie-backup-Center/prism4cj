@@ -113,7 +113,7 @@ cjpm build
 ```shell
 cd test/
 mkdir tmp
-cjc -O2 --import-path xxxxx/build/release -L xxxxx/build/release/prism4cj -l prism4cj_prism4cj test/LLT/test01.cj -o test/tmp/test01.cj.out --test
+cjc -O2 --import-path xxxxx/target/release -L xxxxx/target/release/prism4cj -l -l prism4cj_prism -l prism4cj_languages -l prism4cj_prism4cj LLT/testC.cj LLT/testUtils.cj -o tmp/testC.cj.out --test
 ```
 
 ##### 1.1 具体说明
@@ -128,7 +128,7 @@ cjc -O2
 - 导入多个库,每个库都需要--import-path和 -L
 
 ```shell
---import-path xxxxx/build/release -L xxxxx/build/release/prism4cj -l prism4cj_prism4cj
+--import-path xxxxx/target/release -L xxxxx/target/release/prism4cj -l -l prism4cj_prism -l prism4cj_languages -l prism4cj_prism4cj
 ```
 - -l 要导入的具体的包, 用"库名_包名",一般库文件生成时是"lib库名_包名.后缀"的格式
 - 导入一个库中有多个包时,用多个 -l
@@ -137,11 +137,11 @@ cjc -O2
 - -o 用例编译后输出的位置和名称, .out结尾, 一般使用"用例名称.out"
 - --test 用例编译命令结尾
 ```shell
-test/LLT/test01.cj -o test/tmp/test01.cj.out --test
+LLT/testC.cj LLT/testUtils.cj -o tmp/testC.cj.out --test
 ```
 
 #### 2. 把编译好的文件复制到 .out 文件下(test/tmp/) 
-- 把build/release/prism4cj 目录中的文件都复制到 .out 文件位置(test/tmp/ 中)
+- target/release/prism4cj 目录中的文件都复制到 .out 文件位置(test/tmp/ 中)
 
 #### 3. 进入到.out文件位置，执行用例
 - 进入到.out文件位置执行用例
@@ -149,11 +149,7 @@ test/LLT/test01.cj -o test/tmp/test01.cj.out --test
 cd test/tmp
 ```
 - windows系统打开cmd,输入.out文件完整名称即可执行
-```shell
-```
 - Linux系统使用 ./.out文件完整名称
-```shell
-```
 
 ### 功能示例
 

@@ -852,7 +852,7 @@ public abstract class AbsVisitor <: Visitor {
      *
      * @param nodes - 节点集合
      */
-    public override func visit(nodes: ArrayList<Node>): Unit
+    public open override func visit(nodes: ArrayList<Node>): Unit
 }
 ```
 
