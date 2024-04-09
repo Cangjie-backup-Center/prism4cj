@@ -16,6 +16,7 @@ main(): Int64 {
     test.test03()
     test.test04()
     test.test05()
+    test.test06()
     return 0
 }
 
@@ -105,6 +106,23 @@ public class TestMarkdown {
             }
         } catch (e: FSException) {
             println("测试文件读取有误...")   
+        }
+    }
+
+    @TestCase
+    public func test06(): Unit {
+        let fileArr: Collection<File> = TestUtils.testFiles("markdown")
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var c: Case
+        for (file in fileArr) {
+            c = TestUtils.readCase(file)
+            match (prism.grammar("md")) {
+                case Some(v) => 
+                    let grammar: Grammar = GrammarUtils.clone(v)
+                    TestUtils.assertCase(c, prism.tokenize(c.input, grammar))
+                case None => ()
+            }
+            
         }
     }
 }

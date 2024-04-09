@@ -19,6 +19,8 @@ main(): Int64 {
     test.test05()
     test.test06()
     test.test07()
+    test.test08()
+    test.test09()
     return 0
 }
 
@@ -159,5 +161,39 @@ public class TestCsharp {
         @Assert(pattern_clone.alias().getOrThrow(),"PatternImpl")
         @Assert(pattern_clone.hashCode() , pattern6.hashCode())
         @Assert(pattern_clone != pattern6 ,true)
+    }
+
+    @TestCase
+    public func test08(): Unit {
+        let fileArr: Collection<File> = TestUtils.testFiles("csharp")
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var c: Case
+        for (file in fileArr) {
+            c = TestUtils.readCase(file)
+            match (prism.grammar("dotnet")) {
+                case Some(v) => 
+                    let grammar: Grammar = GrammarUtils.clone(v)
+                    TestUtils.assertCase(c, prism.tokenize(c.input, grammar))
+                case None => ()
+            }
+            
+        }
+    }
+
+    @TestCase
+    public func test09(): Unit {
+        let fileArr: Collection<File> = TestUtils.testFiles("csharp")
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var c: Case
+        for (file in fileArr) {
+            c = TestUtils.readCase(file)
+            match (prism.grammar("c#")) {
+                case Some(v) => 
+                    let grammar: Grammar = GrammarUtils.clone(v)
+                    TestUtils.assertCase(c, prism.tokenize(c.input, grammar))
+                case None => ()
+            }
+            
+        }
     }
 }

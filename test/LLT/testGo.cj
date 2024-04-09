@@ -16,6 +16,7 @@ main(): Int64 {
     test.test03()
     test.test04()
     test.test05()
+    test.test06()
     return 0
 }
 
@@ -99,6 +100,24 @@ public class TestGo {
             for (file in fileArr) {
                 c = TestUtils.readCase(file)
                 match (prism.grammar("")) {
+                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                    case None => ()
+                }    
+            }
+        } catch (e: FSException) {
+            println("测试文件读取有误...")   
+        }
+    }
+
+    @TestCase
+    public func test06(): Unit {
+        try {
+            let fileArr: Collection<File> = TestUtils.testFiles("go")
+            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+            var c: Case
+            for (file in fileArr) {
+                c = TestUtils.readCase(file)
+                match (prism.grammar("golang")) {
                     case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
                     case None => ()
                 }    

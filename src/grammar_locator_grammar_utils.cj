@@ -41,14 +41,19 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
     protected func realLanguageName(name: String): String {
         var out: String = ""
         match (name) {
-            case "js" => out = "javascript"
+            case "c++" => out = "cpp"
+            case "js" | "typescript" | "ts" => out = "javascript"
             case "xml" => ()
             case "html" => ()
             case "mathml" => ()
             case "svg" => out = "markup"
-            case "dotnet" => out = "csharp"
+            case "dotnet" | "c#" => out = "csharp"
+            case "golang" => out = "go"
             case "jsonp" => out = "json"
             case "cj" => out = "cangjie"
+            case "md" => out = "markdown"
+            case "python3" | "py" | "py3" | "python ml" | "pythonml" | "pandas" | "pythondata" => out = "python"
+            case "mysql" | "oracle" | "sqlserver" | "ms sql server" | "mssql" | "oraclesql" | "postgresql" | "pgsql" => out = "sql"
             case _ => out = name
         }
         return out
