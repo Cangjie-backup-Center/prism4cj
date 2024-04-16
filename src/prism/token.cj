@@ -35,6 +35,7 @@ public class TokenImpl <: Token {
         return !refEq(this, other)
     }
 
+    @OverflowWrapping
     public override func hashCode(): Int64 {
         var has: Int64 = 31 * tokenName.hashCode()
         for (i in 0..tokenPatterns.size) {
