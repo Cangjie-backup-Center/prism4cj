@@ -40,6 +40,7 @@ public class GrammarImpl <: Grammar {
         return !refEq(this, other)
     }
 
+    @OverflowWrapping
     public override func hashCode(): Int64 {
         var has: Int64 = 31 * GrammarName.hashCode()
         for (i in 0..GrammarTokens.size) {

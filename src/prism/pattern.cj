@@ -59,6 +59,7 @@ public class PatternImpl <: Pattern {
         return !refEq(this, other)
     }
 
+    @OverflowWrapping
     public override func hashCode(): Int64 {
         return 31 * patternRegex.string().hashCode()
     }
