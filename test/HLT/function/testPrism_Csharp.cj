@@ -117,7 +117,7 @@ public class TestCsharp {
         for (language in languages) {
             language_str += "${language}>"
         }
-        @Assert(languages.size,26)
-        @Assert(language_str,"brainfuck>c>clike>clojure>cpp>csharp>css>css-extras>dart>git>go>groovy>java>javascript>json>kotlin>latex>makefile>markdown>markup>python>scala>sql>swift>yaml>cangjie>")
+        @Assert(languages.size,27)
+        @Assert(language_str,"brainfuck>c>clike>clojure>cpp>csharp>css>css-extras>dart>git>go>groovy>java>javascript>json>kotlin>latex>makefile>markdown>markup>python>scala>sql>swift>yaml>cangjie>rust>")
     }
 }

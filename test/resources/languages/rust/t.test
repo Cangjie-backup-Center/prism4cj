@@ -1,0 +1,113 @@
+pub fn fast_factorial(n: usize) -> BigUint {
+    if n < 2 {
+        return BigUint::one();
+    }
+
+    // get list of primes that will be factors of n!
+    let primes = sieve_of_eratosthenes(n);
+
+    let mut p_indeces = BTreeMap::new();
+
+    // Map the primes with their index
+    primes.into_iter().for_each(|p| {
+        p_indeces.insert(p, index(p, n));
+    });
+
+    let max_bits = p_indeces.get(&2).unwrap().next_power_of_two().ilog2() + 1;
+
+    // Create a Vec of 1's
+    let mut a = Vec::with_capacity(max_bits as usize);
+    a.resize(max_bits as usize, BigUint::one());
+
+    // For every prime p, multiply a[i] by p if the ith bit of p's index is 1
+    for (p, i) in p_indeces.into_iter() {
+        let mut bit = 1usize;
+        while bit.ilog2() < max_bits {
+            if (bit & i) > 0 {
+                a[bit.ilog2() as usize] *= p;
+            }
+
+            bit <<= 1;
+        }
+    }
+
+    a.into_iter()
+        .enumerate()
+        .map(|(i, a_i)| a_i.pow(2u32.pow(i as u32))) // raise every a[i] to the 2^ith power
+        .product() // we get our answer by multiplying the result
+}
+
+// https://en.wikipedia.org/wiki/Run-length_encoding
+
+pub fn run_length_encode(text: &str) -> Vec<(char, i32)> {
+    let mut count = 1;
+    let mut encoded: Vec<(char, i32)> = vec![];
+
+    for (i, c) in text.chars().enumerate() {
+        if i + 1 < text.len() && c == text.chars().nth(i + 1).unwrap() {
+            count += 1;
+        } else {
+            encoded.push((c, count));
+            count = 1;
+        }
+    }
+
+    encoded
+}
+
+pub fn run_length_decode(encoded: &[(char, i32)]) -> String {
+    let res = encoded
+        .iter()
+        .map(|x| (x.0).to_string().repeat(x.1 as usize))
+        .collect::<String>();
+
+    res
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_run_length_decode() {
+        let res = run_length_decode(&[('A', 0)]);
+        assert_eq!(res, "");
+        let res = run_length_decode(&[('B', 1)]);
+        assert_eq!(res, "B");
+        let res = run_length_decode(&[('A', 5), ('z', 3), ('B', 1)]);
+        assert_eq!(res, "AAAAAzzzB");
+    }
+
+    #[test]
+    fn test_run_length_encode() {
+        let res = run_length_encode("");
+        assert_eq!(res, []);
+
+        let res = run_length_encode("A");
+        assert_eq!(res, [('A', 1)]);
+
+        let res = run_length_encode("AA");
+        assert_eq!(res, [('A', 2)]);
+
+        let res = run_length_encode("AAAABBBCCDAA");
+        assert_eq!(res, [('A', 4), ('B', 3), ('C', 2), ('D', 1), ('A', 2)]);
+
+        let res = run_length_encode("Rust-Trends");
+        assert_eq!(
+            res,
+            [
+                ('R', 1),
+                ('u', 1),
+                ('s', 1),
+                ('t', 1),
+                ('-', 1),
+                ('T', 1),
+                ('r', 1),
+                ('e', 1),
+                ('n', 1),
+                ('d', 1),
+                ('s', 1)
+            ]
+        );
+    }
+}
