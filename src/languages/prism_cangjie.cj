@@ -14,17 +14,17 @@ public class PrismCangjie {
                 Prism.token("keyword",
                     Prism.pattern(
                     Regex(
-                    "(^|[^.])\\b(?:abstract|break|case|catch|class|const|continue|do|else|enum|extends|finally|for|if|implements|import|interface|package|private|protected|public|static|super|synchronized|this|throw|try|while|return|when|func|type|init|is|as|in|match|from|where|spawn|macro|quote|foreign|prop|mut|unsafe|struct|operator|overide|redef|open|sealed)\\b"
+                    "(^|[^.])\\b(?:let|var|abstract|break|case|catch|class|const|continue|do|else|enum|extends|finally|for|if|implements|import|interface|package|private|protected|public|static|super|synchronized|this|throw|try|while|return|when|func|type|init|is|as|in|match|from|where|spawn|macro|quote|foreign|prop|mut|unsafe|struct|operator|overide|redef|open|sealed)\\b"
                 ), true)),
                 Prism.token("number",
                     Prism.pattern(
                     Regex(
                     "\\b(?:0[xX][\\da-fA-F]+(?:_[\\da-fA-F]+)*|0[bB][01]+(?:_[01]+)*|\\d+(?:_\\d+)*(?:\\.\\d+(?:_\\d+)*)?(?:[eE][+-]?\\d+(?:_\\d+)*)?[fFL]?)\\b"
                 ))),
-                Prism.token("type",
+                Prism.token("class-name",
                     Prism.pattern(
                     Regex(
-                    "\\b(?:let|var|Bool|Char|Int8|Int16|Int32|Int64|UInt8|UInt16|UInt32|UInt64|Float16|Float32|Float64|String|IntNative|UIntNative|Nothing|Unit|Varray|InOut|true|false)\\b"
+                    "\\b(?:Bool|Char|Int8|Int16|Int32|Int64|UInt8|UInt16|UInt32|UInt64|Float16|Float32|Float64|String|IntNative|UIntNative|Nothing|Unit|Varray|InOut|true|false)\\b"
                 ))),
                 Prism.token("operator",
                     Prism.pattern(
