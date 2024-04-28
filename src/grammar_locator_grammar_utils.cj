@@ -88,6 +88,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
             case "swift" => grammar = PrismSwift.create(prism)
             case "yaml" => grammar = PrismYaml.create()
             case "cangjie" => grammar = PrismCangjie.create(prism)
+            case "rust" => grammar = PrismRust.create()
             case _ => grammar = None
         }
         return grammar
@@ -104,7 +105,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
     }
 
     public func languages(): HashSet<String> {
-        var set: HashSet<String> = HashSet<String>(26)
+        var set: HashSet<String> = HashSet<String>(27)
         set.put("brainfuck")
         set.put("c")
         set.put("clike")
@@ -131,6 +132,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
         set.put("swift")
         set.put("yaml")
         set.put("cangjie")
+        set.put("rust")
         return set
     }
 }
