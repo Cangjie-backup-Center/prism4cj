@@ -9,7 +9,7 @@ public class PrismCangjie {
         let cangjie: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "cangjie",
-            TokenFilterKotlinImpl(),
+            TokenFilterCangjieImpl(),
             ArrayList<Token>(
                 Prism.token("keyword",
                     Prism.pattern(
