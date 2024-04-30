@@ -88,7 +88,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
             case "swift" => grammar = PrismSwift.create(prism)
             case "yaml" => grammar = PrismYaml.create()
             case "cangjie" => grammar = PrismCangjie.create(prism)
-            case "rust" => grammar = PrismRust.create()
+            case "rust" => grammar = PrismRust.create(prism)
             case _ => grammar = None
         }
         return grammar

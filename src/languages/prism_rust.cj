@@ -5,8 +5,9 @@
 package languages
 
 public class PrismRust {
-public static func create(): Grammar {
-        return GrammarImpl(
+    public static func create(prism: Prism): Grammar {
+        let rust: Grammar = GrammarUtils.extendGrammar(
+            GrammarUtils.require(prism, "cpp"),
             "rust",
             ArrayList<Token>(
                 Prism.token("number",
@@ -27,19 +28,24 @@ public static func create(): Grammar {
                         )
                     )
                 ),
-                Prism.token("comment", Prism.pattern(Regex("(^|[^\\\\])\\/\\*[\\s\\S]*?(?:\\*\\/|$)"), true), Prism.pattern(Regex("(^|[^\\\\:])\\/\\/.*"), true, true)),
+                Prism.token("class-name",
+                    Prism.pattern(
+                        Regex(
+                        "\\b(?:u8|i8|u16|i16|u32|i32|u64|i64|u128|i128|usize|isize|f32|f64)\\b"
+                        ),
+                    ),
+                    Prism.pattern(Regex("(?<=impl\\s)\\w+")),
+                    Prism.pattern(Regex("println!")),
+                    Prism.pattern(Regex("assert_eq!")),
+                ),
                 Prism.token("operator",
                     Prism.pattern(
                     Regex(
-                    "\\{|\\}|\\[|\\]|\\(|\\)|::|:|\\.\\.\\.|\\.\\.=|\\.\\.|\\.|==|!=|\\|=|[\\^]=?|\\|\\||\\||&&|&=|&|*=|*|\\/=|\\/|%=|%|!|=>|=|+=|+|-=|->|-|#|<<=|<=|<<|<|>>=|>=|>>|>|?[?]|?|\\~|@|\\$|\\;|\\,|\\'|_"
+                    "\\{|\\}|\\[|\\]|\\(|\\)|::|:|\\.\\.\\.|\\.\\.=|\\.\\.|\\.|==|!=|\\|=|[\\^]=?|\\|\\||\\||&&|&=|&|*=|*|\\/=|\\/|%=|!|%|=>|=|+=|+|-=|->|-|#|<<=|<=|<<|<|>>=|>=|>>|>|?[?]|?|\\~|@|\\$|\\;|\\,|\\|_'"
                 ))),
-                Prism.token("string", Prism.pattern(Regex("(\"\"\"|''')[\\s\\S]*?\\1"), false, false, "string")),
-                Prism.token("shebang", Prism.pattern(Regex("#![\\s]*[^\\[\\s]+"))),
-                Prism.token(
-                    "class-name",
-                    Prism.pattern(Regex("(class\\s+)\\w+", RegexOption().ignoreCase()), true)
-                )
+                Prism.token("shebang", Prism.pattern(Regex("#![\\s]*[^\\[\\s]+")))
             )
         )
+        return rust
     }
 }
