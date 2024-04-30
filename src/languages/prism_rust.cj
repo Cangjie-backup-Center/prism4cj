@@ -18,7 +18,7 @@ public class PrismRust {
                 Prism.token("keyword",
                     Prism.pattern(
                         Regex(
-                        "\\b(?:as|box|break|const|continue|create|dyn|else|enum|extern|fn|for|if|impl|in|let|loop|macro|match|mod|move|mut|pub|ref|return|Self|self|static|struct|super|trait|type|unsafe|use|where|while|yield|async|await|default|union|try)\\b"
+                        "\\b(?:as|box|break|const|continue|create|dyn|else|enum|extern|fn|for|if|impl|in|let|loop|macro|match|mod|move|mut|pub|ref|return|Self|self|static|struct|super|trait|type|unsafe|use|where|while|yield|async|await|default|union|try|u8|i8|u16|i16|u32|i32|u64|i64|u128|i128|usize|isize|f32|f64)\\b"
                     ))
                 ),
                 Prism.token("boolean",
@@ -29,11 +29,6 @@ public class PrismRust {
                     )
                 ),
                 Prism.token("class-name",
-                    Prism.pattern(
-                        Regex(
-                        "\\b(?:u8|i8|u16|i16|u32|i32|u64|i64|u128|i128|usize|isize|f32|f64)\\b"
-                        ),
-                    ),
                     Prism.pattern(Regex("(?<=impl\\s)\\w+")),
                     Prism.pattern(Regex("println!")),
                     Prism.pattern(Regex("assert_eq!")),
