@@ -29,11 +29,20 @@ public class PrismCangjie {
                 Prism.token("operator",
                     Prism.pattern(
                     Regex(
-                    "==?=?|!(?:!|==?)?|\\|\\||\\+[+=>]?|-[-=>]?|<<=|<=|<<|<|>>=|>=|>>|>|&[&=>]?|**=|*=|[\\/]=?|\\|\\|=|\\|=|[\\^]=?|[%]=?|\\(|\\)|\\}|\\[|\\]|\\,|\\.\\.\\.|\\.\\.=|\\.\\.|\\.|\\~>|\\~|:|#|*[*]?|\\$[\\{]?|\\;|@|?[?]|?|}|{"
+                    "==?=?|!(?:!|==?)?|\\|\\||\\+[+=>]?|-[-=>]?|<<=|<=|<<|<|>>=|>=|>>|>|&[&=>]?|**=|*=|[\\/]=?|\\|\\|=|\\|=|[\\^]=?|[%]=?|\\(|\\)|\\}|\\[|\\]|\\,|\\.\\.\\.|\\.\\.=|\\.\\.|\\.|\\~>|\\~|:|#|*[*]?|\\$|\\;|@|?[?]|?|}|{"
                 ))),
                 Prism.token("comment", Prism.pattern(Regex("(^|[^\\\\])\\/\\*[\\s\\S]*?(?:\\*\\/|$)"), true),
                     Prism.pattern(Regex("(^|[^\\\\:])\\/\\/.*"), true, true)),
-                Prism.token("escape_seq", Prism.pattern(Regex("(^|[^.])\\b(?:escapeSeq)\\b")))
+                Prism.token("escape_seq", Prism.pattern(Regex("(^|[^.])\\b(?:escapeSeq)\\b"))),
+                Prism.token(
+                    "builtin",
+                    Prism.pattern(Regex("(\$\\{[^}]*\\})"), false, true)
+                ),
+                Prism.token(
+                    "string",
+                    Prism.pattern(Regex("([\"']{1,3})(.*?)\\1"), false, true),
+                    Prism.pattern(Regex("#+(\")(.*?)\\1#+"), false, true)
+                ),
             )
         )
         return cangjie
