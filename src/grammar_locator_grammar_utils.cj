@@ -69,7 +69,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
             case "cpp" => grammar = PrismCpp.create(prism)
             case "csharp" => grammar = PrismCsharp.create(prism)
             case "css" => grammar = PrismCss.create()
-            case "css-extras" => grammar = PrismCssExtras.create()
+            case "css-extras" => grammar = PrismCssExtras.create(prism)
             case "dart" => grammar = PrismDart.create(prism)
             case "git" => grammar = PrismGit.create()
             case "go" => grammar = PrismGo.create(prism)

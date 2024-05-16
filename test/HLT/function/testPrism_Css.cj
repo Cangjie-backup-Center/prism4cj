@@ -142,7 +142,7 @@ public class TestCss {
         var c: Case
         for (file in fileArr) {
             c = TestUtils.readCase(file)
-            match (PrismCssExtras.create()) {
+            match (PrismCssExtras.create(prism)) {
                 case Some(v) => assertTag = TestUtils.assertCase(c, prism.tokenize(c.input, v))
                 case None => ()
             }

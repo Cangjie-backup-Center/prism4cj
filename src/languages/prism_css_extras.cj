@@ -5,8 +5,8 @@
 package languages
 
 public class PrismCssExtras {
-    public static func create(): ?Grammar {
-        let css: ?Grammar = GrammarImpl("css")
+    public static func create(prism: Prism): ?Grammar {
+        let css: ?Grammar = prism.grammar("css")
         if (let Some(v) <- css) {
             let selector: ?Token = GrammarUtils.findToken(v, "selector")
             if (let Some(m) <- selector) {
