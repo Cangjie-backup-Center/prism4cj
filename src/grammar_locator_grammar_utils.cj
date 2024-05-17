@@ -54,6 +54,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
             case "md" => out = "markdown"
             case "python3" | "py" | "py3" | "python ml" | "pythonml" | "pandas" | "pythondata" => out = "python"
             case "mysql" | "oracle" | "sqlserver" | "ms sql server" | "mssql" | "oraclesql" | "postgresql" | "pgsql" => out = "sql"
+            case "css_extras" | "css-extras" => out = "css"
             case _ => out = name
         }
         return out
