@@ -29,7 +29,7 @@ public class PrismC {
             "string",
             ArrayList<Token>(
                 Prism.token(
-                    "marcro",
+                    "macro",
                     Prism.pattern(
                         Regex("(^\\s*)#\\s*[a-z]+(?:[^\\r\\n\\\\]|\\\\(?:\\r\\n|[\\s\\S]))*", RegexOption().multiLine()),
                         true,
