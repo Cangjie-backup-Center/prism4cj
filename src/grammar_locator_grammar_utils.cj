@@ -4,11 +4,11 @@
 
 package prism4cj
 
-from prism4cj import languages.*
-from prism4cj import prism.*
-from std import collection.ArrayList
-from std import collection.HashMap
-from std import collection.HashSet
+internal import prism4cj.languages.*
+internal import prism4cj.prism.*
+internal import std.collection.ArrayList
+internal import std.collection.HashMap
+internal import std.collection.HashSet
 
 public class GrammarLocatorGrammarUtils <: GrammarLocator {
     let cache: HashMap<String, Grammar> = HashMap<String, Grammar>(4)

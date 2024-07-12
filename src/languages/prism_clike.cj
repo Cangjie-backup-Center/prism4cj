@@ -2,18 +2,18 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package languages
+package prism4cj.languages
 
-from std import collection.ArrayList
-from std import regex.Regex
-from std import regex.RegexOption
-from prism4cj import prism.Grammar
-from prism4cj import prism.GrammarImpl
-from prism4cj import prism.Prism
-from prism4cj import prism.Token
-from prism4cj import prism.Pattern
-from prism4cj import prism.GrammarUtils
-from prism4cj import prism.TokenFilter
+internal import std.collection.ArrayList
+internal import std.regex.Regex
+internal import std.regex.RegexOption
+internal import prism4cj.prism.Grammar
+internal import prism4cj.prism.GrammarImpl
+internal import prism4cj.prism.Prism
+internal import prism4cj.prism.Token
+internal import prism4cj.prism.Pattern
+internal import prism4cj.prism.GrammarUtils
+internal import prism4cj.prism.TokenFilter
 
 public abstract class PrismClike {
     public static func create(): Grammar {

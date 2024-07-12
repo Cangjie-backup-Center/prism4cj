@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism
+package prism4cj.prism
 
 public abstract class Token <: Hashable & Equatable<Token> & ToString {
     public func name(): String

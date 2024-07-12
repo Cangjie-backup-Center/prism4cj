@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package languages
+package prism4cj.languages
 
 public class PrismMakefile {
     public static func create(): Grammar {
