@@ -2,15 +2,15 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism
+package prism4cj.prism
 
-from std import collection.ArrayList
-from std import collection.HashMap
-from std import collection.HashSet
-from std import regex.Matcher
-from std import regex.Regex
-from std import regex.RegexException
-from std import regex.MatchData
+internal import std.collection.ArrayList
+internal import std.collection.HashMap
+internal import std.collection.HashSet
+internal import std.regex.Matcher
+internal import std.regex.Regex
+internal import std.regex.RegexException
+internal import std.regex.MatchData
 
 public class Prism {
     var grammarLocator: GrammarLocator
