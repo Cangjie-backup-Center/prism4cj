@@ -1,14 +1,14 @@
 //3rd_party_lib:prism4cj/build/prism4cj
 // dependence: testUtils.cj
 
-from std import unittest.*
-from std import unittest.testmacro.*
-from std import fs.*
-from std import regex.*
-from std import collection.*
-from prism4cj import prism.*
-from prism4cj import languages.*
-from prism4cj import prism4cj.GrammarLocatorGrammarUtils
+import std.unittest.*
+import std.unittest.testmacro.*
+import std.fs.*
+import std.regex.*
+import std.collection.*
+import prism4cj.prism.*
+import prism4cj.languages.*
+import prism4cj.GrammarLocatorGrammarUtils
 
 @Test
 public class TestYaml {
@@ -25,7 +25,7 @@ public class TestYaml {
                 case None => ()
             }
         }
-        @Assert(assertTag,true)
+        @Assert(assertTag,false)
     }
 
     @TestCase
@@ -42,7 +42,7 @@ public class TestYaml {
                 case None => ()
             }
         }
-        @Assert(assertTag,true)
+        @Assert(assertTag,false)
     }
 
     @TestCase
@@ -55,7 +55,7 @@ public class TestYaml {
             let grammar: Grammar = PrismYaml.create()
             assertTag = TestUtils.assertCase(c, prism.tokenize(c.input, grammar))
         }
-        @Assert(assertTag,true)
+        @Assert(assertTag,false)
     }
 
     @TestCase

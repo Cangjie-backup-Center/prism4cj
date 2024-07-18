@@ -1,10 +1,10 @@
-from std import fs.*
-from std import os.*
-from std import collection.*
-from encoding import json.*
-from std import unittest.*
-from std import unittest.testmacro.*
-from prism4cj import prism.*
+import std.fs.*
+import std.os.*
+import std.collection.*
+import encoding.json.*
+import std.unittest.*
+import std.unittest.testmacro.*
+import prism4cj.prism.*
 
 public abstract class TestUtils {
     private static let DELIMITER: String = "----------------------------------------------------"

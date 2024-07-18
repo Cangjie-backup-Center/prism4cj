@@ -2,18 +2,21 @@
 // EXEC: ./main
 // DEPENDENCE: testUtils.cj
 
-from std import unittest.*
-from std import unittest.testmacro.*
-from std import fs.*
-from std import collection.*
-from prism4cj import prism.*
-from prism4cj import prism4cj.GrammarLocatorGrammarUtils
+import std.unittest.*
+import std.unittest.testmacro.*
+import std.fs.*
+import std.collection.*
+import prism4cj.prism.*
+import prism4cj.GrammarLocatorGrammarUtils
 
 main(): Int64 {
     var test = TestCReadme()
-    test.execute()
-    test.printResult()
-    return 0
+    let res = test.asTestSuite().runTests()
+    let fail = res.failedCount + res.errorCount
+    if (fail == 0) {
+        return 0
+    }
+    return 1
 }
 
 @Test
