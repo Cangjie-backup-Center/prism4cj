@@ -899,18 +899,21 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
 #### 1.3 示例
 
 ```cangjie
-from std import unittest.*
-from std import unittest.testmacro.*
-from std import fs.*
-from std import collection.*
-from prism4cj import prism.*
-from prism4cj import prism4cj.GrammarLocatorGrammarUtils
+import std.unittest.*
+import std.unittest.testmacro.*
+import std.fs.*
+import std.collection.*
+import prism4cj.prism.*
+import prism4cj.prism4cj.GrammarLocatorGrammarUtils
 
 main(): Int64 {
     var test = TestCangjie()
-    test.execute()
-    test.printResult()
-    return 0
+    let res = test.asTestSuite().runTests()
+    let fail = res.failedCount + res.errorCount
+    if (fail == 0) {
+        return 0
+    }
+    return 1
 }
 
 @Test
@@ -934,7 +937,7 @@ public class TestCangjie {
 
 执行结果如下：
 ```shell
-[ PASSED ] CASE: test01
+0
 ```
 
 ### 2 预定义语法

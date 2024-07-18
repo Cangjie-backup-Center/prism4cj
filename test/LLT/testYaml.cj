@@ -2,12 +2,12 @@
 // EXEC: ./main
 // DEPENDENCE: testUtils.cj
 
-from std import unittest.*
-from std import unittest.testmacro.*
-from std import fs.*
-from std import collection.*
-from prism4cj import prism.*
-from prism4cj import prism4cj.GrammarLocatorGrammarUtils
+import std.unittest.*
+import std.unittest.testmacro.*
+import std.fs.*
+import std.collection.*
+import prism4cj.prism.*
+import prism4cj.GrammarLocatorGrammarUtils
 
 main(): Int64 {
     var test = TestYaml()
