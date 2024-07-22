@@ -12,8 +12,6 @@
 
 ## 介绍
 
-本项目基于开源库 https://github.com/noties/Prism4j
-
 prism4cj 为以后的处理提供任意语法的标记化策略。
 
 ### 特性

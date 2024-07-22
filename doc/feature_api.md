@@ -1,7 +1,6 @@
 ## prism4cj 库
 
 ### 介绍
-本项目基于开源库 https://github.com/noties/Prism4j
 prism4cj 为以后的处理提供任意语法的标记化策略。
 (ps: 请注意！本库在实现 grammar_locator 语法加载器时默认将本库支持的所有语法对象都 create 建好，参考的 java 库实现逻辑是即用即创，所以在测试某语法时，传入的语法要一一对应，否则可能会出现 None 值及例如 OOM 异常的情况！)
 
