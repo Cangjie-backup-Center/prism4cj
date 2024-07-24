@@ -25,7 +25,7 @@ public class TestYaml {
                 case None => ()
             }
         }
-        @Assert(assertTag,false)
+        @Assert(assertTag,true)
     }
 
     @TestCase
@@ -42,7 +42,7 @@ public class TestYaml {
                 case None => ()
             }
         }
-        @Assert(assertTag,false)
+        @Assert(assertTag,true)
     }
 
     @TestCase
@@ -55,7 +55,7 @@ public class TestYaml {
             let grammar: Grammar = PrismYaml.create()
             assertTag = TestUtils.assertCase(c, prism.tokenize(c.input, grammar))
         }
-        @Assert(assertTag,false)
+        @Assert(assertTag,true)
     }
 
     @TestCase

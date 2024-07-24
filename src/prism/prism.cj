@@ -116,9 +116,16 @@ public class Prism {
                         if (lookbehind) {
                             try {
                                 begin += matchRealData.matchStr(1).size
-                            } catch (e: RegexException) {}
+                            } catch (e: Exception) {
+                                break
+                            }
                         }
-                        let to: Int64 = matchRealData.matchPosition().start + matchRealData.matchStr(0).size
+                        var to: Int64 = 0
+                        try {
+                            to = matchRealData.matchPosition().start + matchRealData.matchStr(0).size
+                        } catch (e: Exception) {
+                            break
+                        }
                         var k = i
                         var p = position
                         let len: Int64 = entries.size
@@ -165,15 +172,25 @@ public class Prism {
                         var group: String = ""
                         try {
                             group = matchRealData2.matchStr(1)
-                        } catch (e: RegexException) {}
+                        } catch (e: Exception) {
+                            break
+                        }
                         lookbehindLength = group.size
                     }
                     let begin02: Int64 = matchRealData2.matchPosition().start + greedyAdd + lookbehindLength
                     var mat: String
                     if (lookbehindLength > 0) {
-                        mat = matchRealData2.matchStr()[lookbehindLength..]
+                        try {
+                            mat = matchRealData2.matchStr()[lookbehindLength..]
+                        } catch (e: Exception) {
+                            break
+                        }
                     } else {
-                        mat = matchRealData2.matchStr()
+                        try {
+                            mat = matchRealData2.matchStr()
+                        } catch (e: Exception) {
+                            break
+                        }
                     }
                     var to02: Int64 = begin02 + mat.size
                     for (_ in 0..deleteCount) {
@@ -181,7 +198,12 @@ public class Prism {
                     }
                     var i2: Int64 = i
                     if (begin02 != 0) {
-                        let before: String = str[..begin02]
+                        var before: String = ""
+                        try {
+                            before = str[..begin02]
+                        } catch (e: Exception) {
+                            break
+                        }
                         i += 1
                         position += before.size
                         entries.insert(i2, TextImpl(before))
@@ -205,7 +227,12 @@ public class Prism {
                     i2++
                     // important thing here (famous off-by one error) to check against full length (not `length - 1`)
                     if (to02 < str.size) {
-                        let after: String = str[to02..]
+                        var after: String = ""
+                        try {
+                            after = str[to02..]
+                        } catch (e: Exception) {
+                            break
+                        }
                         entries.insert(i2, TextImpl(after))
                     }
                     if (deleteCount != 1) {
