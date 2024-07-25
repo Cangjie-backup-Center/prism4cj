@@ -1,8 +1,8 @@
-[foo]: http://prismjs.com
-[foo]: http://prismjs.com "foo\"bar"
-[foo]: http://prismjs.com 'foo\'bar'
-![foo]: http://prismjs.com (foo (bar\) baz)
-[foo]: <http://prismjs.com> "Prism"
+[foo]: http://127.0.0.1
+[foo]: http://127.0.0.1 "foo\"bar"
+[foo]: http://127.0.0.1 'foo\'bar'
+![foo]: http://127.0.0.1 (foo (bar\) baz)
+[foo]: <http://127.0.0.1> "Prism"
 
 ----------------------------------------------------
 
@@ -12,14 +12,14 @@
 		["variable", "foo"],
 		["punctuation", "]"],
 		["punctuation", ":"],
-		" http://prismjs.com"
+		" http://127.0.0.1"
 	]],
 	["url-reference", [
 		["punctuation", "["],
 		["variable", "foo"],
 		["punctuation", "]"],
 		["punctuation", ":"],
-		" http://prismjs.com ",
+		" http://127.0.0.1 ",
 		["string", "\"foo\\\"bar\""]
 	]],
 	["url-reference", [
@@ -27,7 +27,7 @@
 		["variable", "foo"],
 		["punctuation", "]"],
 		["punctuation", ":"],
-		" http://prismjs.com ",
+		" http://127.0.0.1 ",
 		["string", "'foo\\'bar'"]
 	]],
 	["url-reference", [
@@ -36,7 +36,7 @@
 		["variable", "foo"],
 		["punctuation", "]"],
 		["punctuation", ":"],
-		" http://prismjs.com ",
+		" http://127.0.0.1 ",
 		["string", "(foo (bar\\) baz)"]
 	]],
 	["url-reference", [
@@ -45,7 +45,7 @@
 		["punctuation", "]"],
 		["punctuation", ":"],
 		["punctuation", "<"],
-		"http://prismjs.com",
+		"http://127.0.0.1",
 		["punctuation", ">"],
 		["string", "\"Prism\""]
 	]]

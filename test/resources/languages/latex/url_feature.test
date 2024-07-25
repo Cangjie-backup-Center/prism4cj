@@ -1,10 +1,10 @@
-\url{http://prismjs.com}
+\url{http://127.0.0.1}
 
 ----------------------------------------------------
 
 [
 	["function", "\\url"], ["punctuation", "{"],
-	["url", "http://prismjs.com"], ["punctuation", "}"]
+	["url", "http://127.0.0.1"], ["punctuation", "}"]
 ]
 
 ----------------------------------------------------
