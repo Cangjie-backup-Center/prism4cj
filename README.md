@@ -20,6 +20,17 @@ prism4cj 为以后的处理提供任意语法的标记化策略。
 - 🚀 支持不同语言的解析器/分发器
 - 🚀 支持预定义语法解析器
 
+### 架构
+
+```mermaid
+flowchart LR
+    md[/Markdown围栏代码Text/] -->grammar(语言查询)
+    grammar --> tokenize(代码及grammar解析)
+    tokenize --> renderer(Renderer渲染)
+    renderer <--> visitor[[Visitor遍历]]
+    renderer --> res[/渲染结果/]
+```
+
 ### 源码目录
 
 ```shell
