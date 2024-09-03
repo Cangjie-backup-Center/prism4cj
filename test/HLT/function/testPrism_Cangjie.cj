@@ -62,7 +62,7 @@ public class TestCangjie {
                 }
             }
         } catch (e: FSException) {
-            @Assert(e.message,"Failed to open the file!")
+            @Assert(e.message,"Failed to open the file. Is a directory")
         }
     }
 

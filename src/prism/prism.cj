@@ -172,9 +172,7 @@ public class Prism {
                         var group: String = ""
                         try {
                             group = matchRealData2.matchStr(1)
-                        } catch (e: Exception) {
-                            break
-                        }
+                        } catch (e: RegexException) {}
                         lookbehindLength = group.size
                     }
                     let begin02: Int64 = matchRealData2.matchPosition().start + greedyAdd + lookbehindLength
