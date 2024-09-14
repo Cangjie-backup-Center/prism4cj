@@ -69,9 +69,9 @@ public class TestGit {
         @Assert(hashkey_pattern1 != hashkey_pattern3 ,true)
         @Assert(hashkey_pattern1 == hashkey_pattern3 ,false)
         let ins: GrammarLocatorGrammarUtils = GrammarLocatorGrammarUtils()
-        let arrL: Array<Pattern> = Array<Pattern>([pattern1, pattern2])
+        let arrL: Array<Pattern> = [pattern1, pattern2]
         let token: Token = Prism.token("Token_presonal_1", arrL)
-        let arrL2: Array<Pattern> = Array<Pattern>([pattern1, pattern3])
+        let arrL2: Array<Pattern> = [pattern1, pattern3]
         let token2: Token = Prism.token("Token_presonal_2", arrL2)
         let tokens: ArrayList<Token> = ArrayList<Token>([token, token2])
         let grammar2: Grammar = GrammarImpl("GrammarImpl", tokens)

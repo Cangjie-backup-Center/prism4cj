@@ -100,7 +100,7 @@ public class TestCss {
         }
         let pattern4: Pattern = Prism.pattern(regex, true, true, " ")
         let pattern5: Pattern = PatternImpl(regex2, true, false, "pattern_personal", grammar)
-        let arrL: Array<Pattern> = Array<Pattern>([pattern4, pattern5])
+        let arrL: Array<Pattern> = [pattern4, pattern5]
         let token: Token = Prism.token("Token_presonal", arrL)
         var token_clone: Token = GrammarUtils.clone(token)
         @Assert(token_clone.name(),"Token_presonal")
