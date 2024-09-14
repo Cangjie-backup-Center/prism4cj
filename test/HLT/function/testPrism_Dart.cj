@@ -65,9 +65,9 @@ public class TestDart {
         let pattern1: Pattern = Prism.pattern(Regex("\\w+(?=\\s*\\()"))
         let pattern2: Pattern = Prism.pattern(Regex("(\\.)\\w+(?=\\s*\\{)"), true)
         let pattern3: Pattern = Prism.pattern(Regex("hello"), true, false)
-        let arrL: Array<Pattern> = Array<Pattern>([pattern1, pattern2])
+        let arrL: Array<Pattern> = [pattern1, pattern2]
         let token: Token = Prism.token("Token_presonal", arrL)
-        let arrL2: Array<Pattern> = Array<Pattern>([pattern1, pattern3])
+        let arrL2: Array<Pattern> = [pattern1, pattern3]
         let token2: Token = Prism.token("Token_presonal", arrL2)
         let tokens: ArrayList<Token> = ArrayList<Token>([token, token2])
         let grammar2: Grammar = GrammarImpl("GrammarImpl", tokens)

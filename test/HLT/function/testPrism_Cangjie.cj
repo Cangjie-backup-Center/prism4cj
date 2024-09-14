@@ -113,7 +113,7 @@ public class TestCangjie {
         @Assert(pattern2.alias(),None)
         @Assert(pattern3.alias(),"")
         @Assert(pattern3.greedy(),false)
-        let arrL: Array<Pattern> = Array<Pattern>([pattern, pattern2, pattern3, pattern4])
+        let arrL: Array<Pattern> = [pattern, pattern2, pattern3, pattern4]
         let token: Token = Prism.token("|cangjie\"", arrL)
         str = token.name()
         @Assert(str,"|cangjie\"")
