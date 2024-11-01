@@ -25,7 +25,7 @@ public class TestCangjie {
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
-            let fileValueArr: Array<Byte> = file.readToEnd()
+            let fileValueArr: Array<Byte> = File.readFrom(file.info.path)
             let raw: String = String.fromUtf8(fileValueArr)
             match (prism.grammar("cangjie")) {
                 case Some(v) => println(prism.tokenize(raw, v).toString())
@@ -41,7 +41,7 @@ public class TestCangjie {
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
-            let fileValueArr: Array<Byte> = file.readToEnd()
+            let fileValueArr: Array<Byte> = File.readFrom(file.info.path)
             let raw: String = String.fromUtf8(fileValueArr)
             match (prism.grammar("cj")) {
                 case Some(v) => println(prism.tokenize(raw, v).toString())
