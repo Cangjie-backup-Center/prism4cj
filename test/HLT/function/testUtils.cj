@@ -1,6 +1,5 @@
 import std.fs.*
-import std.os.*
-import std.os.posix.*
+import std.posix.*
 import std.collection.*
 import encoding.json.*
 import std.unittest.*
@@ -22,13 +21,13 @@ public abstract class TestUtils {
     }
 
     public static func readFile(file: File): String {
-        let fileValueArr: Array<Byte> = file.readToEnd()
+        let fileValueArr: Array<Byte> = File.readFrom(file.info.path)
         let raw: String = String.fromUtf8(fileValueArr)
         return raw
     }
 
     public static func readCase(file: File): Case {
-        let fileValueArr: Array<Byte> = file.readToEnd()
+        let fileValueArr: Array<Byte> = File.readFrom(file.info.path)
         let raw: String = String.fromUtf8(fileValueArr)
         let split: Array<String> = raw.split(DELIMITER)
         if (split.size < 2) {

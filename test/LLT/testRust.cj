@@ -25,7 +25,7 @@ public class TestRust {
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
-            let fileValueArr: Array<Byte> = file.readToEnd()
+            let fileValueArr: Array<Byte> = File.readFrom(file.info.path)
             let raw: String = String.fromUtf8(fileValueArr)
             match (prism.grammar("rust")) {
                 case Some(v) => println(prism.tokenize(raw, v).toString())
@@ -42,7 +42,7 @@ public class TestRust {
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
-            let fileValueArr: Array<Byte> = file.readToEnd()
+            let fileValueArr: Array<Byte> = File.readFrom(file.info.path)
             let raw: String = String.fromUtf8(fileValueArr)
             match (prism.grammar("Rust")) {
                 case Some(v) => println(prism.tokenize(raw, v).toString())
