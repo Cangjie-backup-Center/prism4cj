@@ -11,8 +11,7 @@ public abstract class TestUtils {
     private static let DELIMITER: String = "----------------------------------------------------"
 
     public static func testFiles(lang: String): Collection<File> {
-        let curProcess = Process.current
-        let path: ?String = curProcess.getEnv("cangjie_test_path")
+        let path: ?String = getEnv("cangjie_test_path")
         let folder: String = path.getOrThrow() + "/languages/" + lang + "/"
         let dir: Directory = Directory(folder)
         var arr: ArrayList<File> = ArrayList<File>()

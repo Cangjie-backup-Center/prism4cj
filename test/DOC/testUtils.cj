@@ -1,6 +1,5 @@
 import std.fs.*
-import std.posix.*
-import std.process.*
+import std.os.*
 import std.collection.*
 import encoding.json.*
 import std.unittest.*
@@ -11,8 +10,7 @@ public abstract class TestUtils {
     private static let DELIMITER: String = "----------------------------------------------------"
 
     public static func testFiles(lang: String): Collection<File> {
-        let curProcess = Process.current
-        let path: ?String = curProcess.getEnv("cangjie_test_path")
+        let path: ?String = getEnv("cangjie_test_path")
         let folder: String = path.getOrThrow() + "/languages/" + lang + "/"
         let dir: Directory = Directory(folder)
         var arr: ArrayList<File> = ArrayList<File>()
