@@ -19,3 +19,8 @@
   version = "0.0.1"
   package-configuration = {}
   scripts = {}
+
+[profile]
+  [profile.customized-option]
+    debug = "-g -Woff all"
+    release = "--fast-math -O2 -Woff all"
