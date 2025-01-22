@@ -15,7 +15,7 @@ public class TestC {
     var assertTag = false
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("c")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("c")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -30,7 +30,7 @@ public class TestC {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("c")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("c")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -47,7 +47,7 @@ public class TestC {
 
     @TestCase
     public func test_Swift_03(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("c")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("c")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {

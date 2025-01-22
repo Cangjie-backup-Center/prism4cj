@@ -8,7 +8,7 @@ public class PrismJson {
     public static func create(): Grammar {
         return GrammarImpl(
             "json",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "property",
                     Prism.pattern(Regex("\"(?:\\\\.|[^\\\\\"\\r\\n])*\"(?=\\s*:)", RegexOption().ignoreCase()))
@@ -23,7 +23,7 @@ public class PrismJson {
                 Prism.token("operator", Prism.pattern(Regex(":"))),
                 Prism.token("boolean", Prism.pattern(Regex("\\b(?:true|false)\\b", RegexOption().ignoreCase()))),
                 Prism.token("null", Prism.pattern(Regex("\\bnull\\b", RegexOption().ignoreCase())))
-            )
+            ])
         )
     }
 }

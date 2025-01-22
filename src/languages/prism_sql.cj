@@ -8,7 +8,7 @@ public class PrismSql {
     public static func create(): Grammar {
         return GrammarImpl(
             "sql",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "comment",
                     Prism.pattern(Regex("(^|[^\\\\])(?:\\/\\*[\\s\\S]*?\\*\\/|(?:--|\\/\\/|#).*)"), true)
@@ -35,7 +35,7 @@ public class PrismSql {
                     )
                 ),
                 Prism.token("punctuation", Prism.pattern(Regex("[;\\[\\]()`,.]")))
-            )
+            ])
         )
     }
 }

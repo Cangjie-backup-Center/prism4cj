@@ -16,7 +16,7 @@ public class TestCangjie {
     @TestCase
     public func test01(): Unit {
 
-        let fileArr: Collection<File> = TestUtils.testFiles("cangjie")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("cangjie")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -33,7 +33,7 @@ public class TestCangjie {
     @TestCase
     public func test02(): Unit {
         assertTag = false
-        let fileArr: Collection<File> = TestUtils.testFiles("cangjie")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("cangjie")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -51,7 +51,7 @@ public class TestCangjie {
     @TestCase
     public func test03(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -62,14 +62,14 @@ public class TestCangjie {
                 }
             }
         } catch (e: FSException) {
-            @Assert(e.message,"Failed to open the file. Is a directory")
+            @Assert(e.message,"The file read Error.")
         }
     }
 
     @TestCase
     public func test04(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("cangjie")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("cangjie")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -86,7 +86,7 @@ public class TestCangjie {
 
     @TestCase
     public func test05(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("cangjie")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("cangjie")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {

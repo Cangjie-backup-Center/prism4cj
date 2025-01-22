@@ -27,7 +27,7 @@ public class TestGroovy {
 
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("groovy")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("groovy")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -42,7 +42,7 @@ public class TestGroovy {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("groovy")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("groovy")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -60,7 +60,7 @@ public class TestGroovy {
     @TestCase
     public func test03(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
                 var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -78,7 +78,7 @@ public class TestGroovy {
     @TestCase
     public func test04(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("groovy")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("groovy")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -96,7 +96,7 @@ public class TestGroovy {
     @TestCase
     public func test05(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("gogogo")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("gogogo")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -113,7 +113,7 @@ public class TestGroovy {
 
     @TestCase
     public func test06(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("groovy")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("groovy")
         let mv: MyVisitor = MyVisitor()
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
@@ -136,7 +136,7 @@ public class TestGroovy {
         let cpp_personal: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "cpp_personal",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "function",
                     Prism.pattern(Regex("\\w+(?=\\s*\\()")),
@@ -151,16 +151,16 @@ public class TestGroovy {
                         None,
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(Prism.token("rule", Prism.pattern(Regex("@[\\w-]+"))))
+                            ArrayList<Token>([Prism.token("rule", Prism.pattern(Regex("@[\\w-]+")))])
                         )
                     )
                 )
-            )
+            ])
         )
 
         GrammarUtils.insertBeforeToken(cpp_personal, "text",
-            ArrayList<Token>(Prism.token("test", Prism.pattern(Regex("(\"\"\"|''')[\\s\\S]*?\\1"), false, false, "text")
-        )))
+            ArrayList<Token>([Prism.token("test", Prism.pattern(Regex("(\"\"\"|''')[\\s\\S]*?\\1"), false, false, "text")
+        )]))
         glgu.register("hellocpp", cpp_personal)
         var token = match (GrammarUtils.findToken(cpp_personal, "function")) {
             case Some(v) => v

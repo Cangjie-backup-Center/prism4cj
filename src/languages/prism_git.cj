@@ -8,7 +8,7 @@ public class PrismGit {
     public static func create(): Grammar {
         return GrammarImpl(
             "git",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("comment", Prism.pattern(Regex("^#.*", RegexOption().multiLine()))),
                 Prism.token("deleted", Prism.pattern(Regex("^[-–].*", RegexOption().multiLine()))),
                 Prism.token("inserted", Prism.pattern(Regex("^\\+.*", RegexOption().multiLine()))),
@@ -25,15 +25,15 @@ public class PrismGit {
                         None,
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(
+                            ArrayList<Token>([
                                 Prism.token("parameter", Prism.pattern(Regex("\\s--?\\w+", RegexOption().multiLine())))
-                            )
+                            ])
                         )
                     )
                 ),
                 Prism.token("coord", Prism.pattern(Regex("^@@.*@@$", RegexOption().multiLine()))),
                 Prism.token("commit_sha1", Prism.pattern(Regex("^commit \\w{40}$", RegexOption().multiLine())))
-            )
+            ])
         )
     }
 }

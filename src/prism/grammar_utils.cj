@@ -94,7 +94,7 @@ public abstract class GrammarUtils {
 
     private static func insertTokensAt(start: Int64, grammarTokens: ArrayList<Token>, tokens: Array<Token>) {
         for (i in 0..tokens.size) {
-            grammarTokens.insert(start + i, tokens[i])
+            grammarTokens.add(tokens[i], at: start + i)
         }
     }
 
@@ -123,7 +123,7 @@ public abstract class GrammarUtils {
         let overrides: HashMap<String, Token> = HashMap<String, Token>(size)
         if (let Some(v) <- tokens) {
             for (i in 0..v.size) {
-                overrides.put(v[i].name(), v[i])
+                overrides.add(v[i].name(), v[i])
             }
         }
         let origins: ArrayList<Token> = grammar.tokens()
@@ -132,9 +132,9 @@ public abstract class GrammarUtils {
         for (i in 0..origins.size) {
             override = overrides.get(origins[i].name())
             if (let Some(v) <- override) {
-                out.append(v)
+                out.add(v)
             } else {
-                out.append(clone(origins[i]))
+                out.add(clone(origins[i]))
             }
         }
         return GrammarImpl(name, out)
@@ -153,7 +153,7 @@ public abstract class GrammarUtils {
             overrides = HashMap<String, Token>(size)
             if (let Some(v) <- tokens) {
                 for (i in 0..v.size) {
-                    overrides.put(v[i].name(), v[i])
+                    overrides.add(v[i].name(), v[i])
                 }
             }
         }
@@ -167,9 +167,9 @@ public abstract class GrammarUtils {
             }
             override = overrides.get(origins[i].name())
             if (let Some(v) <- override) {
-                out.append(v)
+                out.add(v)
             } else {
-                out.append(clone(origins[i]))
+                out.add(clone(origins[i]))
             }
         }
         return GrammarImpl(name, out)

@@ -15,7 +15,7 @@ public class TestMarkupCssJavaScript {
     var assertTag = false
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("markup!+css+javascript")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("markup!+css+javascript")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -30,7 +30,7 @@ public class TestMarkupCssJavaScript {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("markup!+css+javascript")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("markup!+css+javascript")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -48,7 +48,7 @@ public class TestMarkupCssJavaScript {
     @TestCase
     public func test03(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("markup!+css+javascript")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("markup!+css+javascript")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -66,7 +66,7 @@ public class TestMarkupCssJavaScript {
     @TestCase
     public func test04(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("markup!+css+javascript")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("markup!+css+javascript")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -84,7 +84,7 @@ public class TestMarkupCssJavaScript {
     @TestCase
     public func test05(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("markup!+css+javascript")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("markup!+css+javascript")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {

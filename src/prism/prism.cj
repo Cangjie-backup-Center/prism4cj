@@ -53,7 +53,7 @@ public class Prism {
 
     public func tokenize(text: String, grammar: Grammar): ArrayList<Node> {
         var entries: ArrayList<Node> = ArrayList<Node>(3)
-        entries.append(TextImpl(text))
+        entries.add(TextImpl(text))
         matchGrammar(text, entries, grammar, 0, 0, false, None)
         return entries
     }
@@ -192,7 +192,7 @@ public class Prism {
                     }
                     var to02: Int64 = begin02 + mat.size
                     for (_ in 0..deleteCount) {
-                        entries.remove(i)
+                        entries.remove(at: i)
                     }
                     var i2: Int64 = i
                     if (begin02 != 0) {
@@ -204,7 +204,7 @@ public class Prism {
                         }
                         i += 1
                         position += before.size
-                        entries.insert(i2, TextImpl(before))
+                        entries.add(TextImpl(before), at: i2)
                         i2++
                     }
                     var tokenEntries: ArrayList<Node>
@@ -217,11 +217,11 @@ public class Prism {
                     if (hasInside) {
                         tokenEntries = tokenize(mat, inside.getOrThrow())
                     } else {
-                        tokenEntries = ArrayList<Node>(TextImpl(mat))
+                        tokenEntries = ArrayList<Node>([TextImpl(mat)])
                     }
                     let syntaxImp: Syntax = SyntaxImpl(token.name(), tokenEntries, pattern.alias(), mat, greedy,
                         hasInside)
-                    entries.insert(i2, syntaxImp)
+                    entries.add(syntaxImp, at: i2)
                     i2++
                     // important thing here (famous off-by one error) to check against full length (not `length - 1`)
                     if (to02 < str.size) {
@@ -231,7 +231,7 @@ public class Prism {
                         } catch (e: Exception) {
                             break
                         }
-                        entries.insert(i2, TextImpl(after))
+                        entries.add(TextImpl(after), at: i2)
                     }
                     if (deleteCount != 1) {
                         matchGrammar(text, entries, grammar, i, position, true, token)

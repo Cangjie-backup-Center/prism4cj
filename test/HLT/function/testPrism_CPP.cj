@@ -17,7 +17,7 @@ public class TestCPP {
 
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("cpp")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("cpp")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -32,7 +32,7 @@ public class TestCPP {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("cpp")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("cpp")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -52,7 +52,7 @@ public class TestCPP {
         GrammarUtils.require(prism, "clike"),
         "cpp_personal",
         TokenFilter_cpp_personalImpl(),
-        ArrayList<Token>(
+        ArrayList<Token>([
             Prism.token(
                 "function",
                 Prism.pattern(Regex("\\w+(?=\\s*\\()")),
@@ -65,14 +65,14 @@ public class TestCPP {
                     "\\+[+=]?|-[-=>]?|==?=?|!(?:!|==?)?|[\\/*%<>]=?|[?:]:?|\\.\\.|&&|\\|\\||\\b(?:and|inv|or|shl|shr|ushr|xor)\\b"
                 ))
             )
-        )
+        ])
     )
 
     @TestCase
     public func test03(): Unit {
         GrammarUtils.insertBeforeToken(cpp_personal, "text",
-            ArrayList<Token>(Prism.token("test", Prism.pattern(Regex("(\"\"\"|''')[\\s\\S]*?\\1"), false, false, "text")
-        )))
+            ArrayList<Token>([Prism.token("test", Prism.pattern(Regex("(\"\"\"|''')[\\s\\S]*?\\1"), false, false, "text")
+        )]))
 
         try {
             match (GrammarUtils.findToken(cpp_personal, "FUNCTION")) {
@@ -104,7 +104,7 @@ public class TestCPP {
         GrammarUtils.insertBeforeToken(
             cpp_personal,
             "string",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "atrule",
                     Prism.pattern(
@@ -114,11 +114,11 @@ public class TestCPP {
                         None,
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(Prism.token("rule", Prism.pattern(Regex("@[\\w-]+"))))
+                            ArrayList<Token>([Prism.token("rule", Prism.pattern(Regex("@[\\w-]+")))])
                         )
                     )
                 )
-            )
+            ])
         )
 
         var token = match (GrammarUtils.findToken(cpp_personal, "function")) {
@@ -163,7 +163,7 @@ public class TestCPP {
         GrammarUtils.insertBeforeToken(
             cpp_personal,
             "string",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "atrule",
                     Prism.pattern(
@@ -173,11 +173,11 @@ public class TestCPP {
                         None,
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(Prism.token("rule", Prism.pattern(Regex("@[\\w-]+"))))
+                            ArrayList<Token>([Prism.token("rule", Prism.pattern(Regex("@[\\w-]+")))])
                         )
                     )
                 )
-            )
+            ])
         )
 
         var token = match (GrammarUtils.findToken(cpp_personal, "token_test")) {
@@ -207,7 +207,7 @@ public class TestCPP {
 
     @TestCase
     public func test06(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("cpp")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("cpp")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {

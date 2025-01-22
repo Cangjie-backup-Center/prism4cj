@@ -9,7 +9,7 @@ public class PrismRust {
         let rust: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "cpp"),
             "rust",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("number",
                     Prism.pattern(
                     Regex(
@@ -39,7 +39,7 @@ public class PrismRust {
                     "\\{|\\}|\\[|\\]|\\(|\\)|::|:|\\.\\.\\.|\\.\\.=|\\.\\.|\\.|==|!=|\\|=|[\\^]=?|\\|\\||\\||&&|&=|&|*=|*|\\/=|\\/|%=|!|%|=>|=|+=|+|-=|->|-|#|<<=|<=|<<|<|>>=|>=|>>|>|?[?]|?|\\~|@|\\$|\\;|\\,|\\|_'"
                 ))),
                 Prism.token("shebang", Prism.pattern(Regex("#![\\s]*[^\\[\\s]+")))
-            )
+            ])
         )
         return rust
     }

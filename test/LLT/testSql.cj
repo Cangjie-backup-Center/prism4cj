@@ -33,7 +33,7 @@ public class TestSql {
 
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -48,7 +48,7 @@ public class TestSql {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -66,7 +66,7 @@ public class TestSql {
     @TestCase
     public func test03(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
                 var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -84,7 +84,7 @@ public class TestSql {
     @TestCase
     public func test04(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("sql")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -102,7 +102,7 @@ public class TestSql {
     @TestCase
     public func test05(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("sca")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("sca")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -119,7 +119,7 @@ public class TestSql {
 
     @TestCase
     public func test06(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -136,7 +136,7 @@ public class TestSql {
 
     @TestCase
     public func test07(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -153,7 +153,7 @@ public class TestSql {
 
     @TestCase
     public func test08(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -170,7 +170,7 @@ public class TestSql {
 
     @TestCase
     public func test09(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -187,7 +187,7 @@ public class TestSql {
 
     @TestCase
     public func test10(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -204,7 +204,7 @@ public class TestSql {
 
     @TestCase
     public func test11(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -221,7 +221,7 @@ public class TestSql {
 
     @TestCase
     public func test12(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -238,7 +238,7 @@ public class TestSql {
 
     @TestCase
     public func test13(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -255,7 +255,7 @@ public class TestSql {
 
     @TestCase
     public func test14(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("sql")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("sql")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {

@@ -15,7 +15,7 @@ public class TestBrainfuck {
     var assertTag = false
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("brainfuck")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("brainfuck")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -30,7 +30,7 @@ public class TestBrainfuck {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("brainfuck")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("brainfuck")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {

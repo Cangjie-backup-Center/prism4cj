@@ -8,18 +8,18 @@ public class PrismCsharp {
     public static func create(prism: Prism): Grammar {
         let classNameInsidePunctuation: Grammar = GrammarImpl(
             "inside",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "punctuation",
                     Prism.pattern(Regex("\\."))
                 )
-            )
+            ])
         )
 
         let csharp: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "csharp",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "keyword",
                     Prism.pattern(
@@ -67,13 +67,13 @@ public class PrismCsharp {
                     Prism.pattern(
                         Regex("\\b0x[\\da-f]+\\b|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)f?", RegexOption().ignoreCase()))
                 )
-            )
+            ])
         )
 
         GrammarUtils.insertBeforeToken(
             csharp,
             "class-name",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "generic-method",
                     Prism.pattern(
@@ -83,7 +83,7 @@ public class PrismCsharp {
                         None,
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(
+                            ArrayList<Token>([
                                 Prism.token("function", Prism.pattern(Regex("^\\w+"))),
                                 Prism.token(
                                     "class-name",
@@ -92,7 +92,7 @@ public class PrismCsharp {
                                 ),
                                 Prism.token("punctuation", Prism.pattern(Regex("[<>(),.:]"))),
                                 GrammarUtils.findToken(csharp, "keyword").getOrThrow()
-                            )
+                            ])
                         ),
                     )
                 ),
@@ -105,7 +105,7 @@ public class PrismCsharp {
                         "property",
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(
+                            ArrayList<Token>([
                                 Prism.token(
                                     "directive",
                                     Prism.pattern(
@@ -117,11 +117,11 @@ public class PrismCsharp {
                                         "keyword"
                                     )
                                 )
-                            )
+                            ])
                         )
                     )
                 )
-            )
+            ])
         )
         return csharp
     }

@@ -15,7 +15,7 @@ public class TestSwift {
     var assertTag = false
     @TestCase
     public func test_Swift_01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("swift")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("swift")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -30,7 +30,7 @@ public class TestSwift {
 
     @TestCase
     public func test_Swift_02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("swift")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("swift")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -47,7 +47,7 @@ public class TestSwift {
 
     @TestCase
     public func test_Swift_03(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("swift")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("swift")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         try {
@@ -68,7 +68,7 @@ public class TestSwift {
     @TestCase
     public func test_Swift_04(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("swift")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("swift")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -86,7 +86,7 @@ public class TestSwift {
     @TestCase
     public func test_Swift_05(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("swift")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("swift")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -104,7 +104,7 @@ public class TestSwift {
     @TestCase
     public func test_Swift_06(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -115,14 +115,14 @@ public class TestSwift {
                 }
             }
         } catch (e: FSException) {
-            @Assert(e.message,"Failed to open the file. Is a directory")
+            @Assert(e.message,"The file read Error.")
         }
     }
 
     @TestCase
     public func test_Swift_07(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("sft")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("sft")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -140,7 +140,7 @@ public class TestSwift {
 
     @TestCase
     public func test_Swift_08(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("swift")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("swift")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -153,7 +153,7 @@ public class TestSwift {
 
     @TestCase
     public func test_Swift_09(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("swift")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("swift")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         try {

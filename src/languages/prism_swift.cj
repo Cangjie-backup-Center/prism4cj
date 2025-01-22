@@ -9,7 +9,7 @@ public class PrismSwift {
         let swift: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "swift",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "string",
                     Prism.pattern(
@@ -19,7 +19,7 @@ public class PrismSwift {
                         None,
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(
+                            ArrayList<Token>([
                                 Prism.token(
                                     "interpolation",
                                     Prism.pattern(
@@ -29,7 +29,7 @@ public class PrismSwift {
                                         None,
                                         GrammarImpl(
                                             "inside",
-                                            ArrayList<Token>(
+                                            ArrayList<Token>([
                                                 Prism.token(
                                                     "delimiter",
                                                     Prism.pattern(
@@ -39,11 +39,11 @@ public class PrismSwift {
                                                         "variable"
                                                     )
                                                 )
-                                            )
+                                            ])
                                         )
                                     )
                                 )
-                            )
+                            ])
                         )
                     )
                 ),
@@ -63,13 +63,13 @@ public class PrismSwift {
                         )
                     )
                 )
-            )
+            ])
         )
 
         let tokens: ArrayList<Token> = swift.tokens()
 
-        tokens.append(Prism.token("constant", Prism.pattern(Regex("\\b(?:nil|[A-Z_]{2,}|k[A-Z][A-Za-z_]+)\\b"))))
-        tokens.append(
+        tokens.add(Prism.token("constant", Prism.pattern(Regex("\\b(?:nil|[A-Z_]{2,}|k[A-Z][A-Za-z_]+)\\b"))))
+        tokens.add(
             Prism.token(
                 "atrule",
                 Prism.pattern(
@@ -78,7 +78,7 @@ public class PrismSwift {
                 ))
             )
         )
-        tokens.append(
+        tokens.add(
             Prism.token(
                 "builtin",
                 Prism.pattern(
@@ -95,7 +95,7 @@ public class PrismSwift {
             None
         }
         if (let Some(v) <- interpolationGrammar) {
-            v.tokens().appendAll(swift.tokens())
+            v.tokens().add(all: swift.tokens())
         }
 
         return swift

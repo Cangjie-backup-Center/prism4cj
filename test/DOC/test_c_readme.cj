@@ -24,7 +24,7 @@ public class TestCReadme {
 
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("c")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("c")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {

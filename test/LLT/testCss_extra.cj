@@ -21,7 +21,7 @@ public class TestCss {
 
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("css!+css-extras")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("css!+css-extras")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -35,7 +35,7 @@ public class TestCss {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("css!+css-extras")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("css!+css-extras")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {

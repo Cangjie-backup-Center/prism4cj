@@ -21,11 +21,11 @@ public class TestCangjie {
 
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("cangjie")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("cangjie")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
-            let fileValueArr: Array<Byte> = File.readFrom(file.info.path)
+            let fileValueArr: Array<Byte> = File.readFrom(file.path)
             let raw: String = String.fromUtf8(fileValueArr)
             match (prism.grammar("cangjie")) {
                 case Some(v) => println(prism.tokenize(raw, v).toString())
@@ -37,11 +37,11 @@ public class TestCangjie {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("cangjie")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("cangjie")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
-            let fileValueArr: Array<Byte> = File.readFrom(file.info.path)
+            let fileValueArr: Array<Byte> = File.readFrom(file.path)
             let raw: String = String.fromUtf8(fileValueArr)
             match (prism.grammar("cj")) {
                 case Some(v) => println(prism.tokenize(raw, v).toString())

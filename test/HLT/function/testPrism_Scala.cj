@@ -15,7 +15,7 @@ public class TestScala {
     var assertTag = false
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("scala")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("scala")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -30,7 +30,7 @@ public class TestScala {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("scala")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("scala")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -47,7 +47,7 @@ public class TestScala {
 
     @TestCase
     public func test03(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("scala")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("scala")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -61,7 +61,7 @@ public class TestScala {
     @TestCase
     public func test04(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("scala")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("scala")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -79,7 +79,7 @@ public class TestScala {
     @TestCase
     public func test05(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("scala")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("scala")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {

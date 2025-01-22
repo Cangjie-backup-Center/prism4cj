@@ -15,7 +15,7 @@ public class TestDart {
     var assertTag = false
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("dart")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("dart")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -30,7 +30,7 @@ public class TestDart {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("dart")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("dart")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -48,7 +48,7 @@ public class TestDart {
 
     @TestCase
     public func test03(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("dart")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("dart")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -94,14 +94,14 @@ public class TestDart {
         let cpp_personal: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "cpp_personal",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "personal",
                     Prism.pattern(Regex("\\w+(?=\\s*\\()")),
                     Prism.pattern(Regex("(\\.)\\w+(?=\\s*\\{)"), true),
                     Prism.pattern(Regex("hello"), true, false, "cpp_personal")
                 )
-            )
+            ])
         )
         var grammar_clone: Grammar = GrammarUtils.clone(cpp_personal)
         @Assert(grammar_clone.name(),"cpp_personal")

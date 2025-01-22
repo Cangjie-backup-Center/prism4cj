@@ -39,7 +39,7 @@ class ClonerImpl <: Cloner {
         contextGrammar = GrammarImpl(grammar.name(), out)
         context.save(MyHashKey<Grammar>(grammar), contextGrammar.getOrThrow())
         for (i in 0..tokens.size) {
-            out.append(clone(context, tokens[i]))
+            out.add(clone(context, tokens[i]))
         }
         return contextGrammar.getOrThrow()
     }
@@ -54,7 +54,7 @@ class ClonerImpl <: Cloner {
         contextToken = TokenImpl(token.name(), out)
         context.save(MyHashKey<Token>(token), contextToken.getOrThrow())
         for (i in 0..patterns.size) {
-            out.append(clone(context, patterns[i]))
+            out.add(clone(context, patterns[i]))
         }
         return contextToken.getOrThrow()
     }
@@ -115,15 +115,15 @@ class ContextImpl <: Context {
     }
 
     public func save(origin: MyHashKey<Grammar>, clone: Grammar): Unit {
-        cache.put(origin.hashCode(), clone)
+        cache.add(origin.hashCode(), clone)
     }
 
     public func save(origin: MyHashKey<Token>, clone: Token): Unit {
-        cache.put(origin.hashCode(), clone)
+        cache.add(origin.hashCode(), clone)
     }
 
     public func save(origin: MyHashKey<Pattern>, clone: Pattern): Unit {
-        cache.put(origin.hashCode(), clone)
+        cache.add(origin.hashCode(), clone)
     }
 }
 
