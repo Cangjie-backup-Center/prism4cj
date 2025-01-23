@@ -9,7 +9,7 @@ public class PrismCangjie {
         let cangjie: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "cangjie",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("keyword",
                     Prism.pattern(
                     Regex(
@@ -41,8 +41,8 @@ public class PrismCangjie {
                 Prism.token(
                     "builtin",
                     Prism.pattern(Regex("(\$\\{[^}]*\\})"), false, true)
-                ),
-            )
+                )
+            ])
         )
         return cangjie
     }

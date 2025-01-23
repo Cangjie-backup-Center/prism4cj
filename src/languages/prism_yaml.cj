@@ -8,7 +8,7 @@ public class PrismYaml {
     public static func create(): Grammar {
         return GrammarImpl(
             "yaml",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("scalar",
                     Prism.pattern(
                     Regex(
@@ -48,7 +48,7 @@ public class PrismYaml {
                 Prism.token("tag", Prism.pattern(Regex("![^\\s]+"))),
                 Prism.token("important", Prism.pattern(Regex("[&*][\\w]+"))),
                 Prism.token("punctuation", Prism.pattern(Regex("---|[:\\[\\]{}\\-,|>?]|\\.\\.\\.")))
-            )
+            ])
         )
     }
 }

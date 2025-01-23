@@ -16,7 +16,7 @@ public class TestClike {
     var assertTag = false
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("clike")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("clike")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -31,7 +31,7 @@ public class TestClike {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("clike")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("clike")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -48,7 +48,7 @@ public class TestClike {
 
     @TestCase
     public func test03(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("clike")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("clike")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -112,7 +112,7 @@ public class TestClike {
         let regex: Regex = Regex("(#\\s*include\\s*)(?:<.+?>|(\"|')(?:\\\\?.)+?\\2)")
         let grammar = GrammarImpl(
             "inside",
-            ArrayList<Token>(Prism.token("punctuation", Prism.pattern(Regex("[.\\\\]"))))
+            ArrayList<Token>([Prism.token("punctuation", Prism.pattern(Regex("[.\\\\]")))])
         )
         try {
             let pattern: Pattern = Prism.pattern(regex, true, true, None, grammar)
@@ -138,7 +138,7 @@ public class TestClike {
         let regex: Regex = Regex("(#\\s*include\\s*)(?:<.+?>|(\"|')(?:\\\\?.)+?\\2)")
         let grammar = GrammarImpl(
             "text_else",
-            ArrayList<Token>(Prism.token("punctuation", Prism.pattern(Regex("[.\\\\]"))))
+            ArrayList<Token>([Prism.token("punctuation", Prism.pattern(Regex("[.\\\\]")))])
         )
         try {
             let pattern: Pattern = Prism.pattern(regex, true, true, None, grammar)

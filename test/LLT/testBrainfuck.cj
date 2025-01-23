@@ -24,7 +24,7 @@ public class TestBrainfuck {
 
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("brainfuck")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("brainfuck")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -39,7 +39,7 @@ public class TestBrainfuck {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("brainfuck")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("brainfuck")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -57,7 +57,7 @@ public class TestBrainfuck {
     @TestCase
     public func test03(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
                 var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -75,7 +75,7 @@ public class TestBrainfuck {
     @TestCase
     public func test04(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("brainfuck")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("brainfuck")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -93,7 +93,7 @@ public class TestBrainfuck {
     @TestCase
     public func test05(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("Brainfuck")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("Brainfuck")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {

@@ -11,7 +11,7 @@ public abstract class PrismCss {
     public static func create(): Grammar {
         let grammar: Grammar = GrammarImpl(
             "css",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("comment", Prism.pattern(Regex("\\/\\*[\\s\\S]*?\\*\\/"))),
                 Prism.token(
                     "atrule",
@@ -22,7 +22,7 @@ public abstract class PrismCss {
                         None,
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(Prism.token("rule", Prism.pattern(Regex("@[\\w-]+"))))
+                            ArrayList<Token>([Prism.token("rule", Prism.pattern(Regex("@[\\w-]+")))])
                         )
                     )
                 ),
@@ -47,7 +47,7 @@ public abstract class PrismCss {
                 Prism.token("important", Prism.pattern(Regex("\\B!important\\b", RegexOption().ignoreCase()))),
                 Prism.token("function", Prism.pattern(Regex("[-a-z0-9]+(?=\\()", RegexOption().ignoreCase()))),
                 Prism.token("punctuation", Prism.pattern(Regex("[(){};:]")))
-            )
+            ])
         )
 
         let atrule: Token = grammar.tokens()[1]
@@ -55,7 +55,7 @@ public abstract class PrismCss {
         if (let Some(v) <- inside) {
             for (i in 0..grammar.tokens().size) {
                 if ("atrule" != grammar.tokens()[i].name()) {
-                    v.tokens().append(grammar.tokens()[i])
+                    v.tokens().add(grammar.tokens()[i])
                 }
             }
         }
@@ -65,10 +65,10 @@ public abstract class PrismCss {
             GrammarUtils.insertBeforeToken(
                 v,
                 "tag",
-                ArrayList<Token>(
+                ArrayList<Token>([
                     Prism.token(
                         "style",
-                        ArrayList<Pattern>(
+                        ArrayList<Pattern>([
                             Prism.pattern(
                                 Regex("(<style[\\s\\S]*?>)[\\s\\S]*?(?=<\\/style>)", RegexOption().ignoreCase()),
                                 true,
@@ -76,9 +76,9 @@ public abstract class PrismCss {
                                 "language-css",
                                 grammar
                             )
-                        )
+                        ])
                     )
-                )
+                ])
             )
 
             // important thing here is to clone found grammar
@@ -98,7 +98,7 @@ public abstract class PrismCss {
             GrammarUtils.insertBeforeToken(
                 v,
                 "tag/attr-value",
-                ArrayList<Token>(
+                ArrayList<Token>([
                     Prism.token(
                         "style-attr",
                         Prism.pattern(
@@ -108,7 +108,7 @@ public abstract class PrismCss {
                             "language-css",
                             GrammarImpl(
                                 "inside",
-                                ArrayList<Token>(
+                                ArrayList<Token>([
                                     Prism.token(
                                         "attr-name",
                                         Prism.pattern(Regex("^\\s*style", RegexOption().ignoreCase()), false, false,
@@ -125,11 +125,11 @@ public abstract class PrismCss {
                                             grammar
                                         )
                                     )
-                                )
+                                ])
                             )
                         )
                     )
-                )
+                ])
             )
         }
         return grammar

@@ -10,7 +10,7 @@ public class PrismScala {
             GrammarUtils.require(prism, "java"),
             "scala",
             TokenFilterScalaImpl(),
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "keyword",
                     Prism.pattern(
@@ -32,15 +32,15 @@ public class PrismScala {
                         )
                     )
                 )
-            )
+            ])
         )
 
-        scala.tokens().append(Prism.token("symbol", Prism.pattern(Regex("'[^\\d\\s\\\\]\\w*"))))
+        scala.tokens().add(Prism.token("symbol", Prism.pattern(Regex("'[^\\d\\s\\\\]\\w*"))))
 
         GrammarUtils.insertBeforeToken(
             scala,
             "number",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "builtin",
                     Prism.pattern(
@@ -48,7 +48,7 @@ public class PrismScala {
                         "\\b(?:String|Int|Long|Short|Byte|Boolean|Double|Float|Char|Any|AnyRef|AnyVal|Unit|Nothing)\\b")
                     )
                 )
-            )
+            ])
         )
 
         return scala

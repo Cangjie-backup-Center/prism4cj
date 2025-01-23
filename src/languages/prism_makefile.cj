@@ -8,7 +8,7 @@ public class PrismMakefile {
     public static func create(): Grammar {
         return GrammarImpl(
             "makefile",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "comment",
                     Prism.pattern(
@@ -33,8 +33,8 @@ public class PrismMakefile {
                         false,
                         None,
                         GrammarImpl("inside",
-                            ArrayList<Token>(
-                            Prism.token("variable", Prism.pattern(Regex("\\$+(?:[^(){}:#=\\s]+|(?=[({]))")))))
+                            ArrayList<Token>([
+                            Prism.token("variable", Prism.pattern(Regex("\\$+(?:[^(){}:#=\\s]+|(?=[({]))")))]))
                     )
                 ),
                 Prism.token("variable", Prism.pattern(Regex("\\$+(?:[^(){}:#=\\s]+|\\([@*%<^+?][DF]\\)|(?=[({]))"))),
@@ -53,7 +53,7 @@ public class PrismMakefile {
                 ),
                 Prism.token("operator", Prism.pattern(Regex("(?:::|[?:+!])?=|[|@]"))),
                 Prism.token("punctuation", Prism.pattern(Regex("[:;(){}]")))
-            )
+            ])
         )
     }
 }

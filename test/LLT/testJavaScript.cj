@@ -27,7 +27,7 @@ public class TestJavascript {
 
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("javascript")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("javascript")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -42,7 +42,7 @@ public class TestJavascript {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("javascript")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("javascript")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -60,7 +60,7 @@ public class TestJavascript {
     @TestCase
     public func test03(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
                 var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -78,7 +78,7 @@ public class TestJavascript {
     @TestCase
     public func test04(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("javascript")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("javascript")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -96,7 +96,7 @@ public class TestJavascript {
     @TestCase
     public func test05(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("Js")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("Js")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -114,7 +114,7 @@ public class TestJavascript {
     @TestCase
     public func test06(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("javascript")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("javascript")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -132,7 +132,7 @@ public class TestJavascript {
     @TestCase
     public func test07(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("javascript")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("javascript")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -150,7 +150,7 @@ public class TestJavascript {
     @TestCase
     public func test08(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("javascript")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("javascript")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {

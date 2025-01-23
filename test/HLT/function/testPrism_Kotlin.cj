@@ -15,7 +15,7 @@ public class TestKotlin {
     var assertTag = false
     @TestCase
     public func test_Kotlin_01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("kotlin")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("kotlin")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -30,7 +30,7 @@ public class TestKotlin {
 
     @TestCase
     public func test_Kotlin_02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("kotlin")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("kotlin")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -47,7 +47,7 @@ public class TestKotlin {
 
     @TestCase
     public func test_Kotlin_03(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("kotlin")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("kotlin")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         try {
@@ -68,7 +68,7 @@ public class TestKotlin {
     @TestCase
     public func test_Kotlin_04(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("kotlin")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("kotlin")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -86,7 +86,7 @@ public class TestKotlin {
     @TestCase
     public func test_Kotlin_05(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("kotlin")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("kotlin")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -104,7 +104,7 @@ public class TestKotlin {
     @TestCase
     public func test_Kotlin_06(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -115,14 +115,14 @@ public class TestKotlin {
                 }
             }
         } catch (e: FSException) {
-            @Assert(e.message,"Failed to open the file. Is a directory")
+            @Assert(e.message,"The file read Error.")
         }
     }
 
     @TestCase
     public func test_Kotlin_07(): Unit {
         try {
-            let fileArr: Collection<File> = TestUtils.testFiles("kot")
+            let fileArr: Collection<FileInfo> = TestUtils.testFiles("kot")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
@@ -140,7 +140,7 @@ public class TestKotlin {
 
     @TestCase
     public func test_Kotlin_08(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("kotlin")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("kotlin")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -152,7 +152,7 @@ public class TestKotlin {
 
     @TestCase
     public func test_Kotlin_09(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("kotlin")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("kotlin")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         try {

@@ -9,7 +9,7 @@ public class PrismGroovy {
         let groovy: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "groovy",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("keyword",
                     Prism.pattern(
                     Regex(
@@ -29,16 +29,16 @@ public class PrismGroovy {
                     "(^|[^.])(?:~|==?~?|\\?[.:]?|\\*(?:[.=]|\\*=?)?|\\.[@&]|\\.\\.<|\\.{1,2}(?!\\.)|-[-=>]?|\\+[+=]?|!=?|<(?:<=?|=>?)?|>(?:>>?=?|=)?|&[&=]?|\\|[|=]?|\\/=?|\\^=?|%=?)"
                 ), true)),
                 Prism.token("punctuation", Prism.pattern(Regex("\\.+|[{}\\[\\];(),:$]")))
-            )
+            ])
         )
         GrammarUtils.insertBeforeToken(groovy, "string",
-            ArrayList<Token>(Prism.token("shebang", Prism.pattern(Regex("#!.+"), false, false, "comment"))))
+            ArrayList<Token>([Prism.token("shebang", Prism.pattern(Regex("#!.+"), false, false, "comment"))]))
         GrammarUtils.insertBeforeToken(groovy, "punctuation",
-            ArrayList<Token>(
-            Prism.token("spock-block", Prism.pattern(Regex("\\b(?:setup|given|when|then|and|cleanup|expect|where):")))))
+            ArrayList<Token>([
+            Prism.token("spock-block", Prism.pattern(Regex("\\b(?:setup|given|when|then|and|cleanup|expect|where):")))]))
         GrammarUtils.insertBeforeToken(groovy, "function",
-            ArrayList<Token>(Prism.token("annotation", Prism.pattern(Regex("(^|[^.])@\\w+"), true, false, "punctuation")
-        )))
+            ArrayList<Token>([Prism.token("annotation", Prism.pattern(Regex("(^|[^.])@\\w+"), true, false, "punctuation")
+        )]))
         // no string templates :(
         return groovy
     }

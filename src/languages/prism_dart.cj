@@ -9,7 +9,7 @@ public class PrismDart {
         let dart: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "dart",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "string",
                     Prism.pattern(Regex("r?(\"\"\"|''')[\\s\\S]*?\\1"), false, true),
@@ -29,11 +29,11 @@ public class PrismDart {
                         Regex(
                         "\\bis!|\\b(?:as|is)\\b|\\+\\+|--|&&|\\|\\||<<=?|>>=?|~(?:\\/=?)?|[+\\-*\\/%&^|=!<>]=?|\\?"))
                 )
-            )
+            ])
         )
 
         GrammarUtils.insertBeforeToken(dart, "function",
-            ArrayList<Token>(Prism.token("metadata", Prism.pattern(Regex("@\\w+"), false, false, "symbol"))))
+            ArrayList<Token>([Prism.token("metadata", Prism.pattern(Regex("@\\w+"), false, false, "symbol"))]))
         return dart
     }
 }

@@ -16,7 +16,7 @@ public class TestCss {
 
     @TestCase
     public func test01(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("css")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("css")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -31,7 +31,7 @@ public class TestCss {
 
     @TestCase
     public func test02(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("css")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("css")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -48,7 +48,7 @@ public class TestCss {
 
     @TestCase
     public func test03(): Unit {
-        let fileArr: Collection<File> = TestUtils.testFiles("css")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("css")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
@@ -65,13 +65,13 @@ public class TestCss {
         let cpp_personal: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "cpp_personal",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "function",
                     Prism.pattern(Regex("\\w+(?=\\s*\\()")),
                     Prism.pattern(Regex("(\\.)\\w+(?=\\s*\\{)"), true)
                 )
-            )
+            ])
         )
         var token = match (GrammarUtils.findToken(cpp_personal, "function")) {
             case Some(v) => v
@@ -137,7 +137,7 @@ public class TestCss {
     @TestCase
     public func test07(): Unit {
         assertTag = false
-        let fileArr: Collection<File> = TestUtils.testFiles("css")
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("css")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {

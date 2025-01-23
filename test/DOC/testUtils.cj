@@ -10,24 +10,24 @@ import prism4cj.prism.*
 public abstract class TestUtils {
     private static let DELIMITER: String = "----------------------------------------------------"
 
-    public static func testFiles(lang: String): Collection<File> {
+    public static func testFiles(lang: String): Collection<FileInfo> {
         let curProcess = Process.current
         let path: ?String = curProcess.getEnv("cangjie_test_path")
         let folder: String = path.getOrThrow() + "/languages/" + lang + "/"
-        let dir: Directory = Directory(folder)
-        var arr: ArrayList<File> = ArrayList<File>()
+        let dir: Array<FileInfo> = Directory.readFrom(folder)
+        var arr: ArrayList<FileInfo> = ArrayList<FileInfo>()
         for (f in dir) {
-            arr.append(File(f.path, Open(true, true)))
+            arr.add(f)
         }
         return arr
     }
 
-    public static func readCase(file: File): Case {
-        let fileValueArr: Array<Byte> = File.readFrom(file.info.path)
+    public static func readCase(file: FileInfo): Case {
+        let fileValueArr: Array<Byte> = File.readFrom(file.path)
         let raw: String = String.fromUtf8(fileValueArr)
         let split: Array<String> = raw.split(DELIMITER)
         if (split.size < 2) {
-            throw Exception("Test file seems to have wrong delimiter, file: " + file.info.path.toString())
+            throw Exception("Test file seems to have wrong delimiter, file: " + file.path.toString())
         }
         let input: String = split[0].trimAscii()
         let s = split[1].trimAscii()
