@@ -25,7 +25,11 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
         var grammar: ?Grammar = this.cache.get(name)
         match (grammar) {
             case Some(v: GrammarImpl) where refEq(v, NULL) => return None
-            case Some(v) => return v
+            case Some(v) => 
+                if (name != language) {
+                    return grammar2(prism, language)
+                }
+                return v
             case None =>
                 grammar = this.obtainGrammar(prism, name)
                 if (grammar.isNone()) {
@@ -33,7 +37,26 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
                 } else {
                     this.cache.add(name, grammar.getOrThrow())
                 }
-                this.triggerModify(prism, name)
+                if(language != name) {
+                    this.triggerModify(prism, name)
+                }
+                return grammar
+        }
+    }
+
+    func grammar2(prism: Prism, language: String): ?Grammar {
+        var grammar: ?Grammar = this.cache.get(language)
+        match (grammar) {
+            case Some(v: GrammarImpl) where refEq(v, NULL) => return None
+            case Some(v) => return v
+            case None =>
+                grammar = this.obtainGrammar(prism, language)
+                if (grammar.isNone()) {
+                    this.cache.add(language, NULL)
+                } else {
+                    this.cache.add(language, grammar.getOrThrow())
+                }
+                this.triggerModify(prism, language)
                 return grammar
         }
     }

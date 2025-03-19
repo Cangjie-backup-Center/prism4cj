@@ -115,14 +115,14 @@ public class Prism {
                         var begin: Int64 = matchRealData.matchPosition().start
                         if (lookbehind) {
                             try {
-                                begin += matchRealData.matchStr(1).size
+                                begin += matchRealData.matchString(1).size
                             } catch (e: Exception) {
                                 break
                             }
                         }
                         var to: Int64 = 0
                         try {
-                            to = matchRealData.matchPosition().start + matchRealData.matchStr(0).size
+                            to = matchRealData.matchPosition().start + matchRealData.matchString(0).size
                         } catch (e: Exception) {
                             break
                         }
@@ -171,7 +171,7 @@ public class Prism {
                     if (lookbehind) {
                         var group: String = ""
                         try {
-                            group = matchRealData2.matchStr(1)
+                            group = matchRealData2.matchString(1)
                         } catch (e: RegexException) {}
                         lookbehindLength = group.size
                     }
@@ -179,13 +179,13 @@ public class Prism {
                     var mat: String
                     if (lookbehindLength > 0) {
                         try {
-                            mat = matchRealData2.matchStr()[lookbehindLength..]
+                            mat = matchRealData2.matchString()[lookbehindLength..]
                         } catch (e: Exception) {
                             break
                         }
                     } else {
                         try {
-                            mat = matchRealData2.matchStr()
+                            mat = matchRealData2.matchString()
                         } catch (e: Exception) {
                             break
                         }

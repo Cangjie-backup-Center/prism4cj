@@ -4,6 +4,10 @@
 
 package prism4cj.languages
 
+// 将 . 替换成 [^\\r\\n]
+let wildcard: String = "[^\\r\\n]"
+
+
 public class PrismCangjie {
     public static func create(prism: Prism): Grammar {
         let cangjie: Grammar = GrammarUtils.extendGrammar(
@@ -33,7 +37,7 @@ public class PrismCangjie {
                 Prism.token("operator",
                     Prism.pattern(
                     Regex(
-                    "==?=?|!(?:!|==?)?|\\|\\||\\+[+=>]?|-[-=>]?|<<=|<=|<<|<|>>=|>=|>>|>|&[&=>]?|**=|*=|[\\/]=?|\\|\\|=|\\|=|[\\^]=?|[%]=?|\\(|\\)|\\}|\\[|\\]|\\,|\\.\\.\\.|\\.\\.=|\\.\\.|\\.|\\~>|\\~|:|*[*]?|\\$|\\;|@|?[?]|?|}|{"
+                    "==?=?|!(?:!|==?)?|\\|\\||\\+[+=>]?|-[-=>]?|<<=|<=|<<|<|>>=|>=|>>|>|&[&=>]?|\\*\\*=|\\*=|[\\/]=?|\\|\\|=|\\|=|[\\^]=?|[%]=?|\\(|\\)|\\}|\\[|\\]|,|\\.\\.\\.|\\.\\.=|\\.\\.|\\.|\\~>|\\~|:|\\*[*]?|\\$\\{|\\$|;|@|\\?[?]|\\?|}|{|#|\\||\\\\"
                 ))),
                 Prism.token("comment", Prism.pattern(Regex("(^|[^\\\\])\\/\\*[\\s\\S]*?(?:\\*\\/|$)"), true),
                     Prism.pattern(Regex("(^|[^\\\\:])\\/\\/.*"), true, true)),

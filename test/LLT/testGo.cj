@@ -23,6 +23,8 @@ main(): Int64 {
 @Test
 public class TestGo {
 
+    var error: Bool = false
+
     @TestCase
     public func test01(): Unit {
         let fileArr: Collection<FileInfo> = TestUtils.testFiles("go")
@@ -57,9 +59,9 @@ public class TestGo {
 
     @TestCase
     public func test03(): Unit {
-        try {
+        let e = @AssertThrows[FSException]({=>
             let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
-                var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
                 c = TestUtils.readCase(file)
@@ -68,62 +70,52 @@ public class TestGo {
                     case None => ()
                 }    
             }
-        } catch (e: FSException) {
-            println("测试文件读取有误...")   
-        }
+        }())
+        @Assert(e.toString(), "FSException: The file read Error.")
     }
 
     @TestCase
     public func test04(): Unit {
-        try {
-            let fileArr: Collection<FileInfo> = TestUtils.testFiles("go")
-            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
-            var c: Case
-            for (file in fileArr) {
-                c = TestUtils.readCase(file)
-                match (prism.grammar("")) {
-                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
-                    case None => ()
-                }    
-            }
-        } catch (e: FSException) {
-            println("测试文件读取有误...")   
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("go")
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var c: Case
+        for (file in fileArr) {
+            c = TestUtils.readCase(file)
+            match (prism.grammar("")) {
+                case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                case None => error = true
+            }    
         }
+        @Assert(error, true)
     }
 
     @TestCase
     public func test05(): Unit {
-        try {
-            let fileArr: Collection<FileInfo> = TestUtils.testFiles("gogogo")
-            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
-            var c: Case
-            for (file in fileArr) {
-                c = TestUtils.readCase(file)
-                match (prism.grammar("")) {
-                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
-                    case None => ()
-                }    
-            }
-        } catch (e: FSException) {
-            println("测试文件读取有误...")   
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("go")
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var c: Case
+        for (file in fileArr) {
+            c = TestUtils.readCase(file)
+            match (prism.grammar("gggo")) {
+                case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                case None => error = true
+            }    
         }
+        @Assert(error, true)
     }
 
     @TestCase
     public func test06(): Unit {
-        try {
-            let fileArr: Collection<FileInfo> = TestUtils.testFiles("go")
-            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
-            var c: Case
-            for (file in fileArr) {
-                c = TestUtils.readCase(file)
-                match (prism.grammar("golang")) {
-                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
-                    case None => ()
-                }    
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("go")
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var c: Case
+        for (file in fileArr) {
+            c = TestUtils.readCase(file)
+            match (prism.grammar("golang")) {
+                case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                case None => ()
             }
-        } catch (e: FSException) {
-            println("测试文件读取有误...")   
+            
         }
     }
 }

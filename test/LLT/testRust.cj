@@ -28,11 +28,11 @@ public class TestRust {
             let fileValueArr: Array<Byte> = File.readFrom(file.path)
             let raw: String = String.fromUtf8(fileValueArr)
             match (prism.grammar("rust")) {
-                case Some(v) => println(prism.tokenize(raw, v).toString())
-                // case Some(v) => prism.tokenize(raw, v)
+                case Some(v) => 
+                    let arr = prism.tokenize(raw, v)
+                    @Assert(arr.size > 0, true)
                 case None => ()
             }
-            
         }
     }
 
@@ -45,10 +45,11 @@ public class TestRust {
             let fileValueArr: Array<Byte> = File.readFrom(file.path)
             let raw: String = String.fromUtf8(fileValueArr)
             match (prism.grammar("Rust")) {
-                case Some(v) => println(prism.tokenize(raw, v).toString())
+                case Some(v) => 
+                    let arr = prism.tokenize(raw, v)
+                    @Assert(arr.size > 0, true)
                 case None => ()
             }
-            
         }
     }
 }

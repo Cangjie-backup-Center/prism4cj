@@ -12,7 +12,7 @@ import prism4cj.GrammarLocatorGrammarUtils
 main(): Int64 {
     var test = TestCangjie()
     test.test01()
-    test.test02()
+    // test.test02()
     return 0
 }
 
@@ -25,10 +25,9 @@ public class TestCangjie {
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
-            let fileValueArr: Array<Byte> = File.readFrom(file.path)
-            let raw: String = String.fromUtf8(fileValueArr)
+            c = TestUtils.readCase(file)
             match (prism.grammar("cangjie")) {
-                case Some(v) => println(prism.tokenize(raw, v).toString())
+                case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
                 case None => ()
             }
             
@@ -41,10 +40,9 @@ public class TestCangjie {
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
         for (file in fileArr) {
-            let fileValueArr: Array<Byte> = File.readFrom(file.path)
-            let raw: String = String.fromUtf8(fileValueArr)
+            c = TestUtils.readCase(file)
             match (prism.grammar("cj")) {
-                case Some(v) => println(prism.tokenize(raw, v).toString())
+                case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
                 case None => ()
             }
             

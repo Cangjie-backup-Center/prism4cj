@@ -22,6 +22,13 @@ public abstract class TestUtils {
         return arr
     }
 
+    public static func readString(file: FileInfo): String {
+        let fileValueArr: Array<Byte> = File.readFrom(file.path)
+        let raw: String = String.fromUtf8(fileValueArr)
+        let input: String = raw.trimAscii()
+        return input
+    }
+
     public static func readCase(file: FileInfo): Case {
         let fileValueArr: Array<Byte> = File.readFrom(file.path)
         let raw: String = String.fromUtf8(fileValueArr)
@@ -32,16 +39,30 @@ public abstract class TestUtils {
         let input: String = split[0].trimAscii()
         let s = split[1].trimAscii()
         let simplifiedOutput: JsonArray = JsonArray().add(JsonValue.fromStr(split[1].trimAscii()))
-        let description: String = split[2].trimAscii()
-        return Case(input, simplifiedOutput, description)
+        return Case(input, simplifiedOutput, "")
     }
 
-    public static func assertCase(c: Case, nodes: ArrayList<Node>) {
-        let expected: String = c.simplifiedOutput.toString()
-        let actual: String = simplify(nodes).toString()
-        println("expected===> \n ${expected}")
-        println("actual===> \n ${actual}")
-        // @Assert(expected, actual)
+    static func parseJsonArray(arr: ArrayList<JsonValue>): String {
+        var str: String = ""
+        for (jv in arr) {
+            if (let Some(v) <- (jv as JsonArray)) {
+                str += parseJsonArray(v.getItems())
+            } else {
+                str += jv.toString()
+            }
+        }
+        return str
+    }
+
+    public static func assertCase(c: Case, nodes: ArrayList<Node>): Unit {
+        let expected: ArrayList<JsonValue> = c.simplifiedOutput.getItems()
+        var str1 = parseJsonArray(expected)
+        let actual: ArrayList<JsonValue> = simplify(nodes).getItems()
+        var str2 = parseJsonArray(actual)
+        println("str1 ====> ${str1}")
+        println("##################################################")
+        println("str2 ====> ${str2}")
+        @Assert(str1 == str2,true)
     }
 
     public static func simplify(nodes: ArrayList<Node>): JsonArray {
