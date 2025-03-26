@@ -23,7 +23,7 @@ public abstract class PrismClike {
                 Prism.token(
                     "comment",
                     Prism.pattern(Regex("(^|[^\\\\])\\/\\*[\\s\\S]*?(?:\\*\\/|$)"), true),
-                    Prism.pattern(Regex("(^|[^\\\\:])\\/\\/.*"), true, true)
+                    Prism.pattern(Regex("(^|[^\\\\:])\\/\\/${wildcard}*"), true, true)
                 ),
                 Prism.token(
                     "string",

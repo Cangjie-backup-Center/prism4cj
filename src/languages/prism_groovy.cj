@@ -32,7 +32,7 @@ public class PrismGroovy {
             ])
         )
         GrammarUtils.insertBeforeToken(groovy, "string",
-            ArrayList<Token>([Prism.token("shebang", Prism.pattern(Regex("#!.+"), false, false, "comment"))]))
+            ArrayList<Token>([Prism.token("shebang", Prism.pattern(Regex("#!${wildcard}+"), false, false, "comment"))]))
         GrammarUtils.insertBeforeToken(groovy, "punctuation",
             ArrayList<Token>([
             Prism.token("spock-block", Prism.pattern(Regex("\\b(?:setup|given|when|then|and|cleanup|expect|where):")))]))

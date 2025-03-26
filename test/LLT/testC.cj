@@ -22,6 +22,8 @@ main(): Int64 {
 @Test
 public class TestC {
 
+    var error: Bool = false
+
     @TestCase
     public func test01(): Unit {
         let fileArr: Collection<FileInfo> = TestUtils.testFiles("c")
@@ -56,9 +58,9 @@ public class TestC {
 
     @TestCase
     public func test03(): Unit {
-        try {
+        let e = @AssertThrows[FSException]({=>
             let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
-                var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
             var c: Case
             for (file in fileArr) {
                 c = TestUtils.readCase(file)
@@ -67,44 +69,38 @@ public class TestC {
                     case None => ()
                 }    
             }
-        } catch (e: FSException) {
-            println("测试文件读取有误...")   
-        }
+        }())
+        @Assert(e.toString(), "FSException: The file read Error.")
     }
 
     @TestCase
     public func test04(): Unit {
-        try {
-            let fileArr: Collection<FileInfo> = TestUtils.testFiles("c")
-            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
-            var c: Case
-            for (file in fileArr) {
-                c = TestUtils.readCase(file)
-                match (prism.grammar("")) {
-                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
-                    case None => ()
-                }    
-            }
-        } catch (e: FSException) {
-            println("测试文件读取有误...")   
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("c")
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var c: Case
+        for (file in fileArr) {
+            c = TestUtils.readCase(file)
+            match (prism.grammar("")) {
+                case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                case None => error = true
+            }    
         }
+        @Assert(error, true)
     }
+
 
     @TestCase
     public func test05(): Unit {
-        try {
-            let fileArr: Collection<FileInfo> = TestUtils.testFiles("C")
-            var prism: Prism = Prism(GrammarLocatorGrammarUtils())
-            var c: Case
-            for (file in fileArr) {
-                c = TestUtils.readCase(file)
-                match (prism.grammar("")) {
-                    case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
-                    case None => ()
-                }    
+        let fileArr: Collection<FileInfo> = TestUtils.testFiles("c")
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var c: Case
+        for (file in fileArr) {
+            c = TestUtils.readCase(file)
+            match (prism.grammar("cc")) {
+                case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                case None => error = true
             }
-        } catch (e: FSException) {
-            println("测试文件读取有误...")   
         }
+        @Assert(error, true)
     }
 }

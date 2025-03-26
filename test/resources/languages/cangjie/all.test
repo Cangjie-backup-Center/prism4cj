@@ -1,65 +1,30 @@
-a == b
-        a != b
-        a || b
-        a++
-        a--
-        a < b
-        a << b
-        a <= b
-        a <<= b
-        a > b
-        a >> b
-        a >= b
-        a >>= b
-        a & b
-        a && b
-        a += b
-        a -= b
-        a *= b
-        a **= b
-        a /= b
-        a &= b
-        a |= b
-        a ||= b
-        a ^= b
-        a %= b
-        (
-        )
+== != || ++ -- < << <= <<= >
+>> >= >>= & && += -= *= **=
+/= &= |= ^= %= ( ) }
+[ ] , . = ~ : + - *
+/ | ^ # -> $ ${ ; @ 
+** ? ?? |> ~> .. ..= ... {} \\
+
+public class A {
+        func a() {
+                println("")
+                return
         }
-        []
-        ,
-        .
-        a = b
-        ~
-        :
-        a + b
-        a - b
-        a * b
-        a / b
-        a | b
-        a ^ b
-        a # b
-        a -> b
-        a $ b
-        ${
-        ;
-        @
-        a ** b
-        a ? b
-        a ?? b
-        |>
-        a~>b
-        ..
-        ..=
-        ...
-        {}
-        \\
-        main() {}
-        func a(): UInt64 {}
-        println("aaa")
-        print("bbb")
-        //
-        /*
-        */
-        /**
-        **/
+}
+
+----------------------------------------------------
+
+[
+	["operator", "=="], ["operator", "!="], ["operator", "||"], ["operator", "++"], ["operator", "--"], ["operator", "<"], ["operator", "<<"], ["operator", "<="], ["operator", "<<="], ["operator", ">"],
+	["operator", ">>"], ["operator", ">="], ["operator", ">>="], ["operator", "&"], ["operator", "&&"], ["operator", "+="], ["operator", "-="], ["operator", "*="], ["operator", "**="],
+	["operator", "/="], ["operator", "&="], ["operator", "|="], ["operator", "^="], ["operator", "%="], ["operator", "("], ["operator", ")"], ["operator", "}"],
+	["operator", "["], ["operator", "]"], ["operator", ","], ["operator", "."], ["operator", "="], ["operator", "~"], ["operator", ":"], ["operator", "+"], ["operator", "-"], ["operator", "*"],
+	["operator", "/"], ["operator", "|"], ["operator", "^"], ["operator", "#"], ["operator", "->"], ["operator", "$"], ["operator", "${"], ["operator", ";"], ["operator", "@"],
+	["operator", "**"], ["operator", "?"], ["operator", "??"], ["operator", "|"], ["operator", ">"], ["operator", "~>"], ["operator", ".."], ["operator", "..="], ["operator", "..."], ["operator", "{"], ["operator", "}"], ["operator", "\\"], ["operator", "\\"],
+        ["keyword", "public"], ["keyword", "class"], ["class-name", "A"], ["operator", "{"],
+        ["keyword", "func"], ["function", "a"], ["operator", "("], ["operator", ")"], ["operator", "{"], ["function", "println"], ["operator", "("], ["string", "\"\""], ["operator", ")"], ["keyword", "return"], ["operator", "}"], ["operator", "}"]
+]
+
+----------------------------------------------------
+
+Checks for all

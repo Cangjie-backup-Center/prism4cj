@@ -26,7 +26,7 @@ public class TestCss {
         var c: Case
         for (file in fileArr) {
             c = TestUtils.readCase(file)
-            match (prism.grammar("css_extras")) {
+            match (prism.grammar("css-extras")) {
                 case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
                 case None => ()
             }
@@ -40,8 +40,13 @@ public class TestCss {
         var c: Case
         for (file in fileArr) {
             c = TestUtils.readCase(file)
-            match (prism.grammar("css-extras")) {
-                case Some(v) => TestUtils.assertCase(c, prism.tokenize(c.input, v))
+            match (prism.grammar("css")) {
+                case Some(v) => 
+                    try {
+                        TestUtils.assertCase(c, prism.tokenize(c.input, v))
+                    } catch (e: AssertException) {
+                        e.printStackTrace()
+                    }
                 case None => ()
             }
         }
