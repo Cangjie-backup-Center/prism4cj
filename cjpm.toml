@@ -17,14 +17,14 @@
 [dependencies]
 
 [package]
-  cjc-version = "0.59.6"
-  compile-option = ""
+  cjc-version = "0.60.5"
+  compile-option = "-O2"
   description = "nothing here"
   link-option = ""
   name = "prism4cj"
   output-type = "dynamic"
   src-dir = "src"
   target-dir = ""
-  version = "1.0.2"
+  version = "1.0.3"
   package-configuration = {}
   scripts = {}

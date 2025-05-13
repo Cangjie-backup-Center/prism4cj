@@ -2,7 +2,7 @@ import std.fs.*
 import std.posix.*
 import std.process.*
 import std.collection.*
-import encoding.json.*
+import stdx.encoding.json.*
 import std.unittest.*
 import std.unittest.testmacro.*
 import prism4cj.prism.*
