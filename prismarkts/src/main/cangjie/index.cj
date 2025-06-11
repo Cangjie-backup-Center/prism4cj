@@ -8,7 +8,7 @@ import ohos.component.*
 import ohos.state_manage.*
 import ohos.state_macro_manage.*
 
-@Interop[ArkTS]
+@Interop[ArkTS,Async]
 public func codeStringToColorStringArkts(code: String, info: Option<String>, isDarkula: Bool): PrismNodesParseResColorArkts {
     let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorString(code, info, isDarkula)
     let listArkts: ArrayList<PrismNodesParseResArkts> = ArrayList<PrismNodesParseResArkts>()

@@ -13,6 +13,6 @@ export declare class PrismNodesParseResArkts {
 
 export declare interface CustomLib {
     PrismNodesParseResArkts: {new (types: string, text: string, alias: string | undefined, color: number | undefined): PrismNodesParseResArkts}
-    codeStringToColorStringArkts(code: string, info: string | undefined, isDarkula: boolean): PrismNodesParseResColorArkts
     PrismNodesParseResColorArkts: {new (list: Array<PrismNodesParseResArkts>, background: number, defaultFontColor: number): PrismNodesParseResColorArkts}
+    codeStringToColorStringArkts(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColorArkts>
 }

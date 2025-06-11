@@ -32,8 +32,8 @@ struct Index6 {
   @State
   defaultFontColor: number = undefined!
 
-  aboutToAppear(): void {
-    let a: PrismNodesParseResColorArkts = codeStringToColorString(this.message, "python", false)
+  async aboutToAppear(): Promise<void> {
+    let a: PrismNodesParseResColorArkts = await codeStringToColorString(this.message, "python", false)
     this.txtBackground = a.getBackground()
     this.defaultFontColor = a.getDefaultFontColor()
     this.list = a.getListColor()
