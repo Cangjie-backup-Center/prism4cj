@@ -1,6 +1,6 @@
 {
   "module": {
-    "name": "prismarkts_test",
+    "name": "prism_test",
     "type": "feature",
     "deviceTypes": [
       "default"

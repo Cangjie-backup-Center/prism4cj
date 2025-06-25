@@ -1,4 +1,4 @@
-import { codeStringToColorString, PrismNodesParseResArkts, PrismNodesParseResColorArkts } from 'prismarkts';
+import { codeStringToColorString, PrismNodesParseResArkts, PrismNodesParseResColorArkts } from '@cangjie-tpc/prism';
 
 @Entry
 @Component

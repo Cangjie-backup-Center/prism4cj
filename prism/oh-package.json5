@@ -1,9 +1,9 @@
 {
-  "name": "prismarkts",
+  "name": "@cangjie-tpc/prism",
   "version": "1.0.0",
-  "description": "Please describe the basic information.",
+  "description": "对代码块内容进行高亮",
   "main": "Index.ets",
-  "author": "",
+  "author": "cangjie-tpc",
   "license": "Apache-2.0",
   "dependencies": {
     "libark_interop_loader.so": "file:./src/main/cangjie/loader",

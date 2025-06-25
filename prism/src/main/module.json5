@@ -1,6 +1,6 @@
 {
   "module": {
-    "name": "prismarkts",
+    "name": "prism",
     "type": "har",
     "deviceTypes": [
       "default"

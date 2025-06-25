@@ -21,7 +21,7 @@
       path-option = [ "${X86_64_DARWIN_TPC_MACRO_LIBS}" ]
 
 [dependencies]
-  [dependencies.cj_res_prismarkts]
+  [dependencies.cj_res_prism]
     path = "./cj_res"
     version = "1.0.0"
 

@@ -1,0 +1,19 @@
+## 1.0.4
+- 互操作封装
+
+## 1.0.3
+- 适配 cangjie 0.60.5
+
+## 1.0.2
+- 适配 cangjie 0.59.6
+
+## 1.0.1
+- 适配 cangjie 0.58.3
+
+## 1.0.0
+
+- 支持标记不同类型的关键词
+- 支持不同语言的解析器/分发器
+- 支持预定义语法解析器
+    本库目前支持的语法有：    
+    brainfuck、clojure、cangjie、latex、git、makefile、python、sql、yaml、json、markup、markdown、css、css_extras、clike、csharp、dart、go、swift、javascript、groovy、kotlin、java、scala、c、cpp 26种语法
