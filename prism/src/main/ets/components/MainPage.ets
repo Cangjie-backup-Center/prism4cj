@@ -1,4 +1,4 @@
-import { CustomLib, PrismNodesParseResColorArkts } from "libark_interop_api.so";
+import { CustomLib, PrismNodesParseResColorArkts } from "libark_interop_api_prism.so";
 import { requireCJLib } from "libark_interop_loader.so";
 
 export function codeStringToColorString(code: string, info: string | undefined,
