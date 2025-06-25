@@ -225,7 +225,7 @@ struct Index1 {
 
 #### 执行结果如下
 
-![img2](../doc/assets/img2.PNG)
+![img2](https://raw.gitcode.com/Cangjie-TPC/prism4cj/blobs/4313510d64db757c4f048fdd454570eae96248bd/img2.PNG)
 
 ## 约束与限制
 
