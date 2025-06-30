@@ -28,12 +28,34 @@ func codeStringToColorString(code: String, info: ?String, isDarkula: Bool): Pris
         var psh: PrismSyntaxHighlight = PrismSyntaxHighlight.create(prism, prismTheme)
         prismNodesParseResList = psh.highlight(info, code)
     } catch (e: Exception) {
-        let prismNodesParseRes: PrismNodesParseRes = PrismNodesParseRes("", code, Option<String>.None,
-            Option<Color>.None)
+        let prismNodesParseRes: PrismNodesParseRes = PrismNodesParseRes("", code, Option<String>.None, Option<Color>.None)
         prismNodesParseResList.append(prismNodesParseRes)
     }
-    return PrismNodesParseResColor(prismNodesParseResList, prismTheme.background().toUInt32(),
-        prismTheme.textColor().toUInt32())
+    return PrismNodesParseResColor(prismNodesParseResList, prismTheme.background().toUInt32(), prismTheme.textColor().toUInt32())
+}
+
+/**
+ * 将代码转换成带有颜色的列表
+ *
+ * @param code 传入代码内容
+ * @param info 传入代码类型
+ * @param background 背景颜色
+ * @param text 默认文本颜色
+ * @param colorMap 颜色map
+ * @return 高亮颜色列表
+ */
+func codeStringToColorStringCustomize(code: String, info: ?String, background: UInt32, text: UInt32, colorMap: HashMap<PrismColor, Color>): PrismNodesParseResColor {
+    var prismNodesParseResList: ArrayList<PrismNodesParseRes> = ArrayList<PrismNodesParseRes>()
+    let prismTheme: PrismTheme = MyPrismTheme.create(Color(background), colorMap, Color(text))
+    try {
+        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
+        var psh: PrismSyntaxHighlight = PrismSyntaxHighlight.create(prism, prismTheme)
+        prismNodesParseResList = psh.highlight(info, code)
+    } catch (e: Exception) {
+        let prismNodesParseRes: PrismNodesParseRes = PrismNodesParseRes("", code, Option<String>.None, Option<Color>.None)
+        prismNodesParseResList.append(prismNodesParseRes)
+    }
+    return PrismNodesParseResColor(prismNodesParseResList, prismTheme.background().toUInt32(), prismTheme.textColor().toUInt32())
 }
 
 class PrismNodesParseResColor {

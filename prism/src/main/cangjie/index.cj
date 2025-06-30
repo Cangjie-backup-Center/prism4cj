@@ -8,7 +8,7 @@ import ohos.component.*
 import ohos.state_manage.*
 import ohos.state_macro_manage.*
 
-@Interop[ArkTS,Async]
+@Interop[ArkTS, Async]
 public func codeStringToColorStringArkts(code: String, info: Option<String>, isDarkula: Bool): PrismNodesParseResColorArkts {
     let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorString(code, info, isDarkula)
     let listArkts: ArrayList<PrismNodesParseResArkts> = ArrayList<PrismNodesParseResArkts>()
@@ -16,7 +16,24 @@ public func codeStringToColorStringArkts(code: String, info: Option<String>, isD
         listArkts.append(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
     }
     let jsList: JSArrayEx<PrismNodesParseResArkts> = JSArrayEx<PrismNodesParseResArkts>(listArkts.toArray())
-    return PrismNodesParseResColorArkts(jsList,prismNodesParseResColor.getBackground(),prismNodesParseResColor.getDefaultFontColor())
+    return PrismNodesParseResColorArkts(jsList, prismNodesParseResColor.getBackground(), prismNodesParseResColor.getDefaultFontColor())
+}
+
+@Interop[ArkTS]
+public func codeStringToColorStringCustomizeArkts(code: String, info: Option<String>, background: UInt32, text: UInt32, colorMap: JSHashMapEx<String, UInt32>): PrismNodesParseResColorArkts {
+    let map: HashMap<PrismColor, Color> = HashMap<PrismColor, Color>()
+    let mapStr: HashMap<String, UInt32> = colorMap.toHashMap()
+    let list: Array<(String, UInt32)> = mapStr.toArray()
+    for (i in list) {
+        map.put(PrismColor.fromString(i[0].toAsciiLower()), Color(i[1]))
+    }
+    let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorStringCustomize(code, info, background, text, map)
+    let listArkts: ArrayList<PrismNodesParseResArkts> = ArrayList<PrismNodesParseResArkts>()
+    for (i in 0..prismNodesParseResColor.getListColor().size) {
+        listArkts.append(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
+    }
+    let jsList: JSArrayEx<PrismNodesParseResArkts> = JSArrayEx<PrismNodesParseResArkts>(listArkts.toArray())
+    return PrismNodesParseResColorArkts(jsList, prismNodesParseResColor.getBackground(), prismNodesParseResColor.getDefaultFontColor())
 }
 
 @Interop[ArkTS]

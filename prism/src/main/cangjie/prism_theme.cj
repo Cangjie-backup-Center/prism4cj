@@ -514,7 +514,113 @@ public enum PrismColor <: Hashable & Equatable<PrismColor> {
         return !(this == that)
     }
 
-    protected static func fromString(str: String): PrismColor {
+    public static func fromInt(index:Int64):PrismColor{
+        return match (index) {
+        	case 0 => PrismColor.COMMENT
+        	case 1 => PrismColor.PROLOG
+        	case 2 => PrismColor.DOCTYPE
+        	case 3 => PrismColor.CDATA
+        	case 4 => PrismColor.PUNCTUATION
+        	case 5 => PrismColor.PROPERTY
+        	case 6 => PrismColor.TAG
+        	case 7 => PrismColor.BOOLEAN
+        	case 8 => PrismColor.NUMBER
+        	case 9 => PrismColor.CONSTANT
+        	case 10 => PrismColor.SYMBOL
+        	case 11 => PrismColor.DELETED
+        	case 12 => PrismColor.SELECTOR
+        	case 13 => PrismColor.ATTR_NAME
+        	case 14 => PrismColor.STRING
+        	case 15 => PrismColor.CHAR
+        	case 16 => PrismColor.BUILTIN
+        	case 17 => PrismColor.INSERTED
+        	case 18 => PrismColor.OPERATOR
+        	case 19 => PrismColor.URL
+        	case 20 => PrismColor.ENTITY
+        	case 21 => PrismColor.ATRULE
+        	case 22 => PrismColor.ATTR_VALUE
+        	case 23 => PrismColor.KEYWORD
+        	case 24 => PrismColor.FUNCTION
+        	case 25 => PrismColor.CLASS_NAME
+        	case 26 => PrismColor.REGEX
+        	case 27 => PrismColor.IMPORTANT
+        	case 28 => PrismColor.VARIABLE
+        	case 29 => PrismColor.DELIMITER
+        	case 30 => PrismColor.ANNOTATION
+        	case 31 => PrismColor.ESCAPE_SEQ
+        	case 32 => PrismColor.GENERIC_METHOD
+        	case 33 => PrismColor.PSEUDO_ELEMENT
+        	case 34 => PrismColor.PSEUDO_CLASS
+        	case 35 => PrismColor.CLASS
+        	case 36 => PrismColor.ID
+        	case 37 => PrismColor.ATTRIBUTE
+        	case 38 => PrismColor.HEXCODE
+        	case 39 => PrismColor.COMMAND
+        	case 40 => PrismColor.PARAMETER
+        	case 41 => PrismColor.COORD
+        	case 42 => PrismColor.COMMIT_SHA1
+        	case 43 => PrismColor.SPOCK_BLOCK
+        	case 44 => PrismColor.NULL
+        	case 45 => PrismColor.NAMESPACE
+        	case 46 => PrismColor.SHEBANG
+            case _ => PrismColor.DEFAULT
+        }
+    }
+
+    public func toInt():Int64{
+        return match(this) {
+            case COMMENT => 0
+            case PROLOG => 1
+            case DOCTYPE => 2
+            case CDATA => 3
+            case PUNCTUATION => 4
+            case PROPERTY => 5
+            case TAG => 6
+            case BOOLEAN => 7
+            case NUMBER => 8
+            case CONSTANT => 9
+            case SYMBOL => 10
+            case DELETED => 11
+            case SELECTOR => 12
+            case ATTR_NAME => 13
+            case STRING => 14
+            case CHAR => 15
+            case BUILTIN => 16
+            case INSERTED => 17
+            case OPERATOR => 18
+            case URL => 19
+            case ENTITY => 20
+            case ATRULE => 21
+            case ATTR_VALUE => 22
+            case KEYWORD => 23
+            case FUNCTION => 24
+            case CLASS_NAME => 25
+            case REGEX => 26
+            case IMPORTANT => 27
+            case VARIABLE => 28
+            case DELIMITER => 29
+            case ANNOTATION => 30
+            case ESCAPE_SEQ => 31
+            case GENERIC_METHOD => 32
+            case PSEUDO_ELEMENT => 33
+            case PSEUDO_CLASS => 34
+            case CLASS => 35
+            case ID => 36
+            case ATTRIBUTE => 37
+            case HEXCODE => 38
+            case COMMAND => 39
+            case PARAMETER => 40
+            case COORD => 41
+            case COMMIT_SHA1 => 42
+            case SPOCK_BLOCK => 43
+            case NULL => 44
+            case NAMESPACE => 45
+            case SHEBANG => 46
+            case DEFAULT => 47
+        }
+    }
+
+    public static func fromString(str: String): PrismColor {
         return match (str) {
         	case "comment" => PrismColor.COMMENT
         	case "prolog" => PrismColor.PROLOG
