@@ -1,4 +1,6 @@
-import { codeStringToColorStringCustomize, PrismNodesParseResArkts, PrismNodesParseResColorArkts,PrismColor } from '@cangjie-tpc/prism';
+import { PrismNodesParseResColor, PrismNodesParseRes, codeStringToColorStringCustomize,
+  PrismColor} from '@cangjie-tpc/prism';
+import { ArrayList } from '@kit.ArkTS';
 
 @Entry
 @Component
@@ -38,7 +40,7 @@ struct Index17 {
     '    return 0;\n' +
     '}';
   @State
-  list: Array<PrismNodesParseResArkts> = undefined!
+  list: ArrayList<PrismNodesParseRes> = new ArrayList<PrismNodesParseRes>()
   @State
   txtBackground: number = undefined!
   @State
@@ -97,10 +99,18 @@ struct Index17 {
         [PrismColor.DEFAULT, 0XFFFFFFFF]
       ]
     );
-    let a: PrismNodesParseResColorArkts = await codeStringToColorStringCustomize(this.message, "c", 0xFF000000, 0XFFFFFFFF, map)
+    let a: PrismNodesParseResColor= await codeStringToColorStringCustomize(this.message, "c", 0xFF000000, 0XFFFFFFFF, map)
     this.txtBackground = a.getBackground()
     this.defaultFontColor = a.getDefaultFontColor()
-    this.list = a.getListColor()
+    let b :IterableIterator<PrismNodesParseRes> = a.getListColor().values()
+    let ret =  b.next()
+    this.list.add(ret.value as PrismNodesParseRes)
+    while (!ret.done){
+      ret = b.next()
+      if(!ret.done){
+        this.list.add(ret.value as PrismNodesParseRes)
+      }
+    }
   }
 
   isColor(getColor: number | undefined): number {
@@ -118,7 +128,7 @@ struct Index17 {
           Scroll() {
             Column() {
               Text() {
-                ForEach(this.list, (item: PrismNodesParseResArkts, index: number) => {
+                ForEach(this.list.convertToArray(), (item: PrismNodesParseRes, index: number) => {
                   Span(item.getText())
                     .fontColor(this.isColor(item.getColor()))
                 })

@@ -1,26 +1,109 @@
 import { CustomLib, PrismNodesParseResColorArkts } from "libark_interop_api_prism.so";
 import { requireCJLib } from "libark_interop_loader.so";
+import { collections } from "@kit.ArkTS";
 
 let lib = requireCJLib("libprism4cj.so") as CustomLib
 
-export function codeStringToColorString(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColorArkts> {
-  return lib.codeStringToColorStringArkts(code, info, isDarkula)
+export function codeStringToColorStringCJ(code: string, info: string | undefined, isDarkula: boolean): PrismNodesParseResColor  {
+  let prismNodesParseResColorArkts:PrismNodesParseResColorArkts = lib.codeStringToColorStringArkts(code, info, isDarkula)
+  let list = prismNodesParseResColorArkts.getListColor()
+  let cList = new collections.Array<PrismNodesParseRes>()
+  for (let index = 0; index < list.length; index++) {
+    let prismNodesParseRes = new PrismNodesParseRes(list[index].getType(),list[index].getText(),list[index].getAlias(),list[index].getColor())
+    cList.push(prismNodesParseRes)
+  }
+  let prismNodesParseResColor:PrismNodesParseResColor = new PrismNodesParseResColor(cList,prismNodesParseResColorArkts.getBackground(),prismNodesParseResColorArkts.getDefaultFontColor())
+  return prismNodesParseResColor
 }
 
-export function codeStringToColorStringCustomize(code: string, info: string | undefined, background: number, text: number, colorMap: Map<PrismColor, number>): Promise<PrismNodesParseResColorArkts> {
-  let map: Map<string, number> = new Map<string, number>()
-  colorMap.forEach(
-    (value: number, key: PrismColor) => {
-      map.set(key.toString(), value)
-    }
-  )
-  const promise: Promise<PrismNodesParseResColorArkts> = new Promise((resolve: Function, reject: Function) => {
-    setTimeout(() => {
-      resolve(lib.codeStringToColorStringCustomizeArkts(code, info, background, text, map));
-    }, 0);
-  })
-  return promise
+export function codeStringToColorStringCustomizeCJ(code: string, info: string | undefined, background: number, text: number, colorMap: Map<PrismColor, number>): PrismNodesParseResColor {
+  let prismNodesParseResColorArkts:PrismNodesParseResColorArkts =lib.codeStringToColorStringCustomizeArkts(code, info, background, text, colorMap)
+  let list = prismNodesParseResColorArkts.getListColor()
+  let cList = new collections.Array<PrismNodesParseRes>()
+  for (let index = 0; index < list.length; index++) {
+    let prismNodesParseRes = new PrismNodesParseRes(list[index].getType(),list[index].getText(),list[index].getAlias(),list[index].getColor())
+    cList.push(prismNodesParseRes)
+  }
+  let prismNodesParseResColor:PrismNodesParseResColor = new PrismNodesParseResColor(cList,prismNodesParseResColorArkts.getBackground(),prismNodesParseResColorArkts.getDefaultFontColor())
+  return prismNodesParseResColor
 }
+
+@Sendable
+export class PrismNodesParseResColor {
+  list: collections.Array<PrismNodesParseRes> = new collections.Array<PrismNodesParseRes>()
+  background: number = 0
+  defaultFontColor: number = 0
+
+  constructor(list: collections.Array<PrismNodesParseRes>, background: number,defaultFontColor: number ) {
+    this.list = list
+    this.background = background
+    this.defaultFontColor = defaultFontColor
+  }
+
+  getBackground(): number {
+    return this.background
+  }
+
+  getDefaultFontColor(): number {
+    return this.defaultFontColor
+  }
+
+  getListColor(): collections.Array<PrismNodesParseRes> {
+    return this.list
+  }
+}
+
+@Sendable
+export class PrismNodesParseRes {
+  types: string = ""
+  text: string = ""
+  alias: string | undefined = undefined
+  color: number | undefined = undefined
+
+  constructor(types: string,text: string,alias: string | undefined,color: number | undefined) {
+    this.types = types
+    this.text = text
+    this.alias = alias
+    this.color = color
+  }
+
+  /**
+   * 获取结果对象类型
+   *
+   * @return 返回结果对象的类型
+   */
+  getType(): string {
+    return this.types
+  }
+
+  /**
+   * 获取结果对象文本
+   *
+   * @return 返回结果对象的文本信息
+   */
+  getText(): string {
+    return this.text
+  }
+
+  /**
+   * 获取结果对象别名
+   *
+   * @return 返回结果对象的别名
+   */
+  getAlias(): string | undefined {
+    return this.alias
+  }
+
+  /**
+   * 获取结果对象文本对应的颜色
+   *
+   * @return 返回结果对象文本对应的颜色
+   */
+  getColor(): number | undefined {
+    return this.color
+  }
+}
+
 
 export enum PrismColor {
   COMMENT = "COMMENT", // 注释内容

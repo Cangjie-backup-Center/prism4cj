@@ -1,4 +1,5 @@
-import { codeStringToColorString, PrismNodesParseResArkts, PrismNodesParseResColorArkts } from '@cangjie-tpc/prism';
+import { codeStringToColorString, PrismNodesParseRes, PrismNodesParseResColor } from '@cangjie-tpc/prism';
+import { ArrayList } from '@kit.ArkTS';
 
 @Entry
 @Component
@@ -26,17 +27,25 @@ struct Index6 {
     'results = analyze_sales(\'sales_2024.csv\')\n' +
     'print(results)';
   @State
-  list: Array<PrismNodesParseResArkts> = undefined!
+  list: ArrayList<PrismNodesParseRes> = new ArrayList<PrismNodesParseRes>()
   @State
   txtBackground: number = undefined!
   @State
   defaultFontColor: number = undefined!
 
   async aboutToAppear(): Promise<void> {
-    let a: PrismNodesParseResColorArkts = await codeStringToColorString(this.message, "python", false)
+    let a: PrismNodesParseResColor= await codeStringToColorString(this.message, "python", false)
     this.txtBackground = a.getBackground()
     this.defaultFontColor = a.getDefaultFontColor()
-    this.list = a.getListColor()
+    let b :IterableIterator<PrismNodesParseRes> = a.getListColor().values()
+    let ret =  b.next()
+    this.list.add(ret.value as PrismNodesParseRes)
+    while (!ret.done){
+      ret = b.next()
+      if(!ret.done){
+        this.list.add(ret.value as PrismNodesParseRes)
+      }
+    }
   }
 
   isColor(getColor: number | undefined): number {
@@ -54,7 +63,7 @@ struct Index6 {
           Scroll() {
             Column() {
               Text() {
-                ForEach(this.list, (item: PrismNodesParseResArkts, index: number) => {
+                ForEach(this.list.convertToArray(), (item: PrismNodesParseRes, index: number) => {
                   Span(item.getText())
                     .fontColor(this.isColor(item.getColor()))
                 })

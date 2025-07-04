@@ -1,4 +1,6 @@
-import { codeStringToColorString, PrismNodesParseResArkts, PrismNodesParseResColorArkts } from '@cangjie-tpc/prism';
+import { codeStringToColorString, PrismNodesParseRes, PrismNodesParseResColor } from '@cangjie-tpc/prism';
+import { ArrayList, taskpool } from '@kit.ArkTS';
+import hilog from '@ohos.hilog';
 
 @Entry
 @Component
@@ -24,17 +26,25 @@ struct Index1 {
     '    }\n' +
     '}';
   @State
-  list: Array<PrismNodesParseResArkts> = undefined!
+  list: ArrayList<PrismNodesParseRes> = new ArrayList<PrismNodesParseRes>()
   @State
   txtBackground: number = undefined!
   @State
   defaultFontColor: number = undefined!
 
   async aboutToAppear(): Promise<void> {
-    let a: PrismNodesParseResColorArkts = await codeStringToColorString(this.message, "java", true)
+    let a: PrismNodesParseResColor = await codeStringToColorString(this.message, "java", true)
     this.txtBackground = a.getBackground()
     this.defaultFontColor = a.getDefaultFontColor()
-    this.list = a.getListColor()
+    let b :IterableIterator<PrismNodesParseRes> = a.getListColor().values()
+    let ret =  b.next()
+    this.list.add(ret.value as PrismNodesParseRes)
+    while (!ret.done){
+      ret = b.next()
+      if(!ret.done){
+        this.list.add(ret.value as PrismNodesParseRes)
+      }
+    }
   }
 
   isColor(getColor: number | undefined): number {
@@ -52,9 +62,9 @@ struct Index1 {
           Scroll() {
             Column() {
               Text() {
-                ForEach(this.list, (item: PrismNodesParseResArkts, index: number) => {
-                  Span(item.getText())
-                    .fontColor(this.isColor(item.getColor()))
+                ForEach(this.list.convertToArray(), (item: PrismNodesParseRes, index: number) => {
+                  Span(item.text)
+                    .fontColor(this.isColor(item.color))
                 })
               }
               .fontSize(14)
@@ -85,4 +95,13 @@ struct Index1 {
     .height(`100%`)
     .backgroundColor(Color.White)
   }
+}
+
+@Concurrent
+async function parseToColorStringImpl(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor> {
+  return await codeStringToColorString(code, info, isDarkula)
+}
+
+export async function parseToColorString(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor> {
+  return taskpool.execute(parseToColorStringImpl, code, info, isDarkula) as Promise<PrismNodesParseResColor>
 }

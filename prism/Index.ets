@@ -1,5 +1,17 @@
-export { codeStringToColorString, codeStringToColorStringCustomize, PrismColor } from './src/main/ets/components/MainPage';
+import {
+  codeStringToColorStringCJ,
+  codeStringToColorStringCustomizeCJ,
+  PrismColor,
+  PrismNodesParseResColor } from './src/main/ets/components/MainPage';
 
-export { PrismNodesParseResArkts, PrismNodesParseResColorArkts, CustomLib } from 'libark_interop_api_prism.so';
+export { PrismNodesParseResColor, PrismColor, PrismNodesParseRes } from './src/main/ets/components/MainPage'
 
-export { requireCJLib } from 'libark_interop_loader.so';
+@Concurrent
+export async function codeStringToColorString(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor> {
+  return codeStringToColorStringCJ(code, info, isDarkula)
+}
+
+@Concurrent
+export async function codeStringToColorStringCustomize(code: string, info: string | undefined, background: number, text: number, colorMap: Map<PrismColor, number>): Promise<PrismNodesParseResColor> {
+  return codeStringToColorStringCustomizeCJ(code, info, background,text,colorMap)
+}
