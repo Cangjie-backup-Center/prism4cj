@@ -56,9 +56,9 @@ flowchart LR
  * @param code 代码内容
  * @param info 代码类型
  * @param isDarkula 是否深色模式
- * @return Promise<PrismNodesParseResColorArkts> 返回代码颜色标记对象
+ * @return Promise<PrismNodesParseResColor> 返回代码颜色标记对象
  */
-function codeStringToColorString(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColorArkts>
+function codeStringToColorString(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor>
 
 /**
  * 自定义设置不同标记颜色
@@ -68,14 +68,15 @@ function codeStringToColorString(code: string, info: string | undefined, isDarku
  * @param background 背景颜色
  * @param text 默认文本颜色
  * @param colorMap 颜色map
- * @return Promise<PrismNodesParseResColorArkts> 返回代码颜色标记对象
+ * @return Promise<PrismNodesParseResColor> 返回代码颜色标记对象
  */
-function codeStringToColorStringCustomize(code: string, info: string | undefined, background: number, text: number, colorMap: Map<PrismColor, number>): Promise<PrismNodesParseResColorArkts>
+function codeStringToColorStringCustomize(code: string, info: string | undefined, background: number, text: number, colorMap: Map<PrismColor, number>): Promise<PrismNodesParseResColor>
 
 /**
  * 代码块颜色标记对象
  */
-class PrismNodesParseResColorArkts {
+@Sendable
+class PrismNodesParseResColor {
     /**
      * 返回代码块背景色
      *
@@ -93,15 +94,16 @@ class PrismNodesParseResColorArkts {
     /**
      * 返回代码标记颜色列表
      *
-     * @return Array<PrismNodesParseResArkts> 代码标记颜色列表
+     * @return collections.Array<PrismNodesParseResArkts> 代码标记颜色列表
      */
-    getListColor(): Array<PrismNodesParseResArkts>
+    getListColor(): collections.Array<PrismNodesParseResArkts>
 }
 
 /**
  * 单独代码颜色标记对象
  */
-class PrismNodesParseResArkts {
+@Sendable
+class PrismNodesParseRes {
     /**
      * 返回代码类型
      *
@@ -199,7 +201,8 @@ ohpm install @cangjie-tpc/prism
 #### java语言高亮显示
 
 ```ets
-import { codeStringToColorString, PrismNodesParseResArkts, PrismNodesParseResColorArkts } from '@cangjie-tpc/prism';
+import { codeStringToColorString, PrismNodesParseRes, PrismNodesParseResColor } from '@cangjie-tpc/prism';
+import { ArrayList, taskpool } from '@kit.ArkTS';
 
 @Entry
 @Component
@@ -225,17 +228,25 @@ struct Index1 {
     '    }\n' +
     '}';
   @State
-  list: Array<PrismNodesParseResArkts> = undefined!
+  list: ArrayList<PrismNodesParseRes> = new ArrayList<PrismNodesParseRes>()
   @State
   txtBackground: number = undefined!
   @State
   defaultFontColor: number = undefined!
 
   async aboutToAppear(): Promise<void> {
-    let a: PrismNodesParseResColorArkts = await codeStringToColorString(this.message, "java", true)
+    let a: PrismNodesParseResColor = await codeStringToColorString(this.message, "java", true)
     this.txtBackground = a.getBackground()
     this.defaultFontColor = a.getDefaultFontColor()
-    this.list = a.getListColor()
+    let b :IterableIterator<PrismNodesParseRes> = a.getListColor().values()
+    let ret =  b.next()
+    this.list.add(ret.value as PrismNodesParseRes)
+    while (!ret.done){
+      ret = b.next()
+      if(!ret.done){
+        this.list.add(ret.value as PrismNodesParseRes)
+      }
+    }
   }
 
   isColor(getColor: number | undefined): number {
@@ -253,9 +264,9 @@ struct Index1 {
           Scroll() {
             Column() {
               Text() {
-                ForEach(this.list, (item: PrismNodesParseResArkts, index: number) => {
-                  Span(item.getText())
-                    .fontColor(this.isColor(item.getColor()))
+                ForEach(this.list.convertToArray(), (item: PrismNodesParseRes, index: number) => {
+                  Span(item.text)
+                    .fontColor(this.isColor(item.color))
                 })
               }
               .fontSize(14)
@@ -286,6 +297,15 @@ struct Index1 {
     .height(`100%`)
     .backgroundColor(Color.White)
   }
+}
+
+@Concurrent
+async function parseToColorStringImpl(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor> {
+  return await codeStringToColorString(code, info, isDarkula)
+}
+
+export async function parseToColorString(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor> {
+  return taskpool.execute(parseToColorStringImpl, code, info, isDarkula) as Promise<PrismNodesParseResColor>
 }
 ```
 

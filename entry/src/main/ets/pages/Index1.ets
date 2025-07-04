@@ -1,6 +1,5 @@
 import { codeStringToColorString, PrismNodesParseRes, PrismNodesParseResColor } from '@cangjie-tpc/prism';
 import { ArrayList, taskpool } from '@kit.ArkTS';
-import hilog from '@ohos.hilog';
 
 @Entry
 @Component
