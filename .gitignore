@@ -30,3 +30,5 @@ cjpm.lock
 .idea
 oh_modules
 oh-package-lock.json5
+**/IDL_Dependencies_List~
+**/build-script-cache

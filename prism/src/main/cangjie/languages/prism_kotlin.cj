@@ -10,7 +10,7 @@ public class PrismKotlin {
             GrammarUtils.require(prism, "clike"),
             "kotlin",
             TokenFilterKotlinImpl(),
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "keyword",
                     Prism.pattern(
@@ -39,42 +39,42 @@ public class PrismKotlin {
                         "\\+[+=]?|-[-=>]?|==?=?|!(?:!|==?)?|[\\/*%<>]=?|[?:]:?|\\.\\.|&&|\\|\\||\\b(?:and|inv|or|shl|shr|ushr|xor)\\b"
                     ))
                 )
-            )
+            ])
         )
 
         GrammarUtils.insertBeforeToken(kotlin, "string",
-            ArrayList<Token>(
-            Prism.token("raw-string", Prism.pattern(Regex("(\"\"\"|''')[\\s\\S]*?\\1"), false, false, "string"))))
+            ArrayList<Token>([
+            Prism.token("raw-string", Prism.pattern(Regex("(\"\"\"|''')[\\s\\S]*?\\1"), false, false, "string"))]))
 
         GrammarUtils.insertBeforeToken(
             kotlin,
             "keyword",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "annotation",
                     Prism.pattern(Regex("\\B@(?:\\w+:)?(?:[A-Z]\\w*|\\[[^\\]]+\\])"), false, false, "builtin")
                 )
-            )
+            ])
         )
 
         GrammarUtils.insertBeforeToken(kotlin, "function",
-            ArrayList<Token>(Prism.token("label", Prism.pattern(Regex("\\w+@|@\\w+"), false, false, "symbol"))))
+            ArrayList<Token>([Prism.token("label", Prism.pattern(Regex("\\w+@|@\\w+"), false, false, "symbol"))]))
 
         // this grammar has 1 token: interpolation, which has 2 patterns
         let interpolationInside: Grammar
         let tokens: ArrayList<Token> = ArrayList<Token>(kotlin.tokens().size + 1)
-        tokens.append(Prism.token("delimiter", Prism.pattern(Regex("^\\$\\{|\\}$"), false, false, "variable")))
-        tokens.appendAll(kotlin.tokens())
+        tokens.add(Prism.token("delimiter", Prism.pattern(Regex("^\\$\\{|\\}$"), false, false, "variable")))
+        tokens.add(all: kotlin.tokens())
 
         interpolationInside = GrammarImpl(
             "inside",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "interpolation",
                     Prism.pattern(Regex("\\$\\{[^}]+\\}"), false, false, None, GrammarImpl("inside", tokens)),
                     Prism.pattern(Regex("\\$\\w+"), false, false, "variable")
                 )
-            )
+            ])
         )
 
         let string: ?Token = GrammarUtils.findToken(kotlin, "string")
@@ -86,16 +86,16 @@ public class PrismKotlin {
             let stringPattern: Pattern = strValue.patterns()[0]
             let rawStringPattern: Pattern = rawStrValue.patterns()[0]
 
-            strValue.patterns().append(
+            strValue.patterns().add(
                 Prism.pattern(stringPattern.regex(), stringPattern.lookbehind(), stringPattern.greedy(),
                 stringPattern.alias(), interpolationInside))
 
-            rawStrValue.patterns().append(
+            rawStrValue.patterns().add(
                 Prism.pattern(rawStringPattern.regex(), rawStringPattern.lookbehind(), rawStringPattern.greedy(),
                 rawStringPattern.alias(), interpolationInside))
 
-            strValue.patterns().remove(0)
-            rawStrValue.patterns().remove(0)
+            strValue.patterns().remove(at: 0)
+            rawStrValue.patterns().remove(at: 0)
         } else {
             throw Exception(
                 "Unexpected state, cannot find `string` and/or `raw-string` tokens " + "inside kotlin grammar")

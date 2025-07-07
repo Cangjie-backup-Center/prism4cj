@@ -8,7 +8,7 @@ public class PrismClojure {
     public static func create(): Grammar {
         return GrammarImpl(
             "clojure",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("comment", Prism.pattern(Regex(";+.*"))),
                 Prism.token("string", Prism.pattern(Regex("\"(?:\\\\.|[^\\\\\"\\r\\n])*\""))),
                 Prism.token(
@@ -27,7 +27,7 @@ public class PrismClojure {
                 Prism.token("boolean", Prism.pattern(Regex("\\b(?:true|false|nil)\\b"))),
                 Prism.token("number", Prism.pattern(Regex("\\b[0-9A-Fa-f]+\\b"))),
                 Prism.token("punctuation", Prism.pattern(Regex("[{}\\[\\](),]")))
-            )
+            ])
         )
     }
 }

@@ -13,7 +13,7 @@ public func codeStringToColorStringArkts(code: String, info: Option<String>, isD
     let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorString(code, info, isDarkula)
     let listArkts: ArrayList<PrismNodesParseResArkts> = ArrayList<PrismNodesParseResArkts>()
     for (i in 0..prismNodesParseResColor.getListColor().size) {
-        listArkts.append(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
+        listArkts.add(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
     }
     let jsList: JSArrayEx<PrismNodesParseResArkts> = JSArrayEx<PrismNodesParseResArkts>(listArkts.toArray())
     return PrismNodesParseResColorArkts(jsList, prismNodesParseResColor.getBackground(), prismNodesParseResColor.getDefaultFontColor())
@@ -25,12 +25,12 @@ public func codeStringToColorStringCustomizeArkts(code: String, info: Option<Str
     let mapStr: HashMap<String, UInt32> = colorMap.toHashMap()
     let list: Array<(String, UInt32)> = mapStr.toArray()
     for (i in list) {
-        map.put(PrismColor.fromString(i[0].toAsciiLower()), Color(i[1]))
+        map.add(PrismColor.fromString(i[0].toAsciiLower()), Color(i[1]))
     }
     let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorStringCustomize(code, info, background, text, map)
     let listArkts: ArrayList<PrismNodesParseResArkts> = ArrayList<PrismNodesParseResArkts>()
     for (i in 0..prismNodesParseResColor.getListColor().size) {
-        listArkts.append(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
+        listArkts.add(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
     }
     let jsList: JSArrayEx<PrismNodesParseResArkts> = JSArrayEx<PrismNodesParseResArkts>(listArkts.toArray())
     return PrismNodesParseResColorArkts(jsList, prismNodesParseResColor.getBackground(), prismNodesParseResColor.getDefaultFontColor())
@@ -49,7 +49,7 @@ public class PrismNodesParseResColorArkts {
     public init(list: JSArrayEx<PrismNodesParseResArkts>, background: UInt32, defaultFontColor: UInt32) {
         let a = ArrayList<PrismNodesParseRes>()
         for (i in 0..list.size) {
-            a.append(list[i].prismNodesParseRes)
+            a.add(list[i].prismNodesParseRes)
         }
         this.prismNodesParseResColor = PrismNodesParseResColor(a, background, defaultFontColor)
     }
@@ -65,7 +65,7 @@ public class PrismNodesParseResColorArkts {
     public func getListColor(): JSArrayEx<PrismNodesParseResArkts> {
         let a = ArrayList<PrismNodesParseResArkts>()
         for (i in 0..prismNodesParseResColor.getListColor().size) {
-            a.append(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
+            a.add(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
         }
         return JSArrayEx<PrismNodesParseResArkts>(a.toArray())
     }

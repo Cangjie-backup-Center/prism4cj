@@ -9,7 +9,7 @@ public class PrismCpp {
         let cpp: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "c"),
             "cpp",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "keyword",
                     Prism.pattern(
@@ -23,34 +23,34 @@ public class PrismCpp {
                         Regex(
                         "--?|\\+\\+?|!=?|<{1,2}=?|>{1,2}=?|->|:{1,2}|={1,2}|\\^|~|%|&{1,2}|\\|\\|?|\\?|\\*|\\/|\\b(?:and|and_eq|bitand|bitor|not|not_eq|or|or_eq|xor|xor_eq)\\b"
                     ))
-                ),
-            )
+                )
+            ])
         )
 
         // in Prism-js cpp is extending c, but c has not booleans... (like classes)
         GrammarUtils.insertBeforeToken(cpp, "function",
-            ArrayList<Token>(Prism.token("boolean", Prism.pattern(Regex("\\b(?:true|false)\\b")))))
+            ArrayList<Token>([Prism.token("boolean", Prism.pattern(Regex("\\b(?:true|false)\\b")))]))
 
         GrammarUtils.insertBeforeToken(
             cpp,
             "keyword",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "class-name",
                     Prism.pattern(Regex("(class\\s+)\\w+", RegexOption().ignoreCase()), true)
                 )
-            )
+            ])
         )
 
         GrammarUtils.insertBeforeToken(
             cpp,
             "string",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "raw-string",
                     Prism.pattern(Regex("R\"([^()\\\\ ]{0,16})\\([\\s\\S]*?\\)\\1\""), false, true, "string")
                 )
-            )
+            ])
         )
         return cpp
     }

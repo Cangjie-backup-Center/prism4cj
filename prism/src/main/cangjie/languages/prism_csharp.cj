@@ -8,18 +8,18 @@ public class PrismCsharp {
     public static func create(prism: Prism): Grammar {
         let classNameInsidePunctuation: Grammar = GrammarImpl(
             "inside",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "punctuation",
                     Prism.pattern(Regex("\\."))
                 )
-            )
+            ])
         )
 
         let csharp: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "csharp",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "keyword",
                     Prism.pattern(
@@ -35,20 +35,13 @@ public class PrismCsharp {
                 Prism.token(
                     "class-name",
                     Prism.pattern(
-                        Regex("\\b[A-Z]\\w*(?:\\.\\w+)*\\b(?=\\s+\\w+)"),
+                        Regex("\\b[A-Z]\\w*(?:\\.\\w+)*\\b(?=\\s*[^\\s()])"),
                         false,
                         false,
                         None
                     ),
                     Prism.pattern(
                         Regex("(\\[)[A-Z]\\w*(?:\\.\\w+)*\\b"),
-                        true,
-                        false,
-                        None,
-                        classNameInsidePunctuation
-                    ),
-                    Prism.pattern(
-                        Regex("((?:\\b(?:class|interface|new)\\s+)|(?:catch\\s+\\())[A-Z]\\w*(?:\\.\\w+)*\\b"),
                         true,
                         false,
                         None,
@@ -67,13 +60,13 @@ public class PrismCsharp {
                     Prism.pattern(
                         Regex("\\b0x[\\da-f]+\\b|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)f?", RegexOption().ignoreCase()))
                 )
-            )
+            ])
         )
 
         GrammarUtils.insertBeforeToken(
             csharp,
             "class-name",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "generic-method",
                     Prism.pattern(
@@ -83,7 +76,7 @@ public class PrismCsharp {
                         None,
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(
+                            ArrayList<Token>([
                                 Prism.token("function", Prism.pattern(Regex("^\\w+"))),
                                 Prism.token(
                                     "class-name",
@@ -92,20 +85,20 @@ public class PrismCsharp {
                                 ),
                                 Prism.token("punctuation", Prism.pattern(Regex("[<>(),.:]"))),
                                 GrammarUtils.findToken(csharp, "keyword").getOrThrow()
-                            )
+                            ])
                         ),
                     )
                 ),
                 Prism.token(
                     "preprocessor",
                     Prism.pattern(
-                        Regex("(^\\s*)#.*", RegexOption().multiLine()),
+                        Regex("(^\\s*)#${wildcard}*", RegexOption().multiLine()),
                         true,
                         false,
                         "property",
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(
+                            ArrayList<Token>([
                                 Prism.token(
                                     "directive",
                                     Prism.pattern(
@@ -117,11 +110,11 @@ public class PrismCsharp {
                                         "keyword"
                                     )
                                 )
-                            )
+                            ])
                         )
                     )
                 )
-            )
+            ])
         )
         return csharp
     }

@@ -29,7 +29,7 @@ func codeStringToColorString(code: String, info: ?String, isDarkula: Bool): Pris
         prismNodesParseResList = psh.highlight(info, code)
     } catch (e: Exception) {
         let prismNodesParseRes: PrismNodesParseRes = PrismNodesParseRes("", code, Option<String>.None, Option<Color>.None)
-        prismNodesParseResList.append(prismNodesParseRes)
+        prismNodesParseResList.add(prismNodesParseRes)
     }
     return PrismNodesParseResColor(prismNodesParseResList, prismTheme.background().toUInt32(), prismTheme.textColor().toUInt32())
 }
@@ -53,7 +53,7 @@ func codeStringToColorStringCustomize(code: String, info: ?String, background: U
         prismNodesParseResList = psh.highlight(info, code)
     } catch (e: Exception) {
         let prismNodesParseRes: PrismNodesParseRes = PrismNodesParseRes("", code, Option<String>.None, Option<Color>.None)
-        prismNodesParseResList.append(prismNodesParseRes)
+        prismNodesParseResList.add(prismNodesParseRes)
     }
     return PrismNodesParseResColor(prismNodesParseResList, prismTheme.background().toUInt32(), prismTheme.textColor().toUInt32())
 }

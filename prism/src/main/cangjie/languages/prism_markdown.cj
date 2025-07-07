@@ -21,7 +21,7 @@ public class PrismMarkdown {
                 None,
                 GrammarImpl(
                     "inside",
-                    ArrayList<Token>(Prism.token("punctuation", Prism.pattern(Regex("^\\*\\*|^__|\\*\\*$|__$"))))
+                    ArrayList<Token>([Prism.token("punctuation", Prism.pattern(Regex("^\\*\\*|^__|\\*\\*$|__$")))])
                 )
             )
         )
@@ -33,7 +33,7 @@ public class PrismMarkdown {
                 true,
                 false,
                 None,
-                GrammarImpl("inside", ArrayList<Token>(Prism.token("punctuation", Prism.pattern(Regex("^[*_]|[*_]$")))))
+                GrammarImpl("inside", ArrayList<Token>([Prism.token("punctuation", Prism.pattern(Regex("^[*_]|[*_]$")))]))
             )
         )
 
@@ -46,10 +46,10 @@ public class PrismMarkdown {
                 None,
                 GrammarImpl(
                     "inside",
-                    ArrayList<Token>(
+                    ArrayList<Token>([
                         Prism.token("variable", Prism.pattern(Regex("(!?\\[)[^\\]]+(?=\\]$)"), true)),
                         Prism.token("string", Prism.pattern(Regex("\"(?:\\\\.|[^\"\\\\])*\"(?=\\)$)")))
-                    )
+                    ])
                 )
             )
         )
@@ -57,11 +57,11 @@ public class PrismMarkdown {
         GrammarUtils.insertBeforeToken(
             markdown,
             "prolog",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("blockquote", Prism.pattern(Regex("^>(?:[\\t ]*>)*", RegexOption().multiLine()))),
                 Prism.token(
                     "code",
-                    Prism.pattern(Regex("^(?: {4}|\\t).+", RegexOption().multiLine()), false, false, "keyword"),
+                    Prism.pattern(Regex("^(?: {4}|\\t)${wildcard}+", RegexOption().multiLine()), false, false, "keyword"),
                     Prism.pattern(Regex("``.+?``|`[^`\\n]+`"), false, false, "keyword")
                 ),
                 Prism.token(
@@ -73,17 +73,17 @@ public class PrismMarkdown {
                         "important",
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(Prism.token("punctuation", Prism.pattern(Regex("==+$|--+$"))))
+                            ArrayList<Token>([Prism.token("punctuation", Prism.pattern(Regex("==+$|--+$")))])
                         )
                     ),
                     Prism.pattern(
-                        Regex("(^\\s*)#+.+", RegexOption().multiLine()),
+                        Regex("(^\\s*)#+${wildcard}+", RegexOption().multiLine()),
                         true,
                         false,
                         "important",
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(Prism.token("punctuation", Prism.pattern(Regex("^#+|#+$"))))
+                            ArrayList<Token>([Prism.token("punctuation", Prism.pattern(Regex("^#+|#+$")))])
                         )
                     )
                 ),
@@ -116,7 +116,7 @@ public class PrismMarkdown {
                         "url",
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(
+                            ArrayList<Token>([
                                 Prism.token("variable", Prism.pattern(Regex("^(!?\\[)[^\\]]+"), true)),
                                 Prism.token(
                                     "string",
@@ -126,14 +126,14 @@ public class PrismMarkdown {
                                     )
                                 ),
                                 Prism.token("punctuation", Prism.pattern(Regex("^[\\[\\]!:]|[<>]")))
-                            )
+                            ])
                         )
                     )
                 ),
                 bold,
                 italic,
                 url
-            )
+            ])
         )
 
         add(GrammarUtils.findFirstInsideGrammar(bold), url, italic)
@@ -143,8 +143,8 @@ public class PrismMarkdown {
 
     private static func add(grammar: ?Grammar, first: Token, second: Token): Unit {
         if (let Some(v) <- grammar) {
-            v.tokens().append(first)
-            v.tokens().append(second)
+            v.tokens().add(first)
+            v.tokens().add(second)
         }
     }
 }
