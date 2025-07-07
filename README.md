@@ -3,9 +3,9 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v1.0.3-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.0.4-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v0.60.5-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v1.0.0-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-94.4%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -93,9 +93,9 @@ flowchart LR
 
 ### 接口说明
 
-主要是核心类和成员函数说明,详情见 [API](./doc/feature_api.md)
+主要是核心类和成员函数说明,详情见 [API](https://gitcode.com/Cangjie-TPC/prism4cj/blob/develop/doc/feature_api.md)
 
-## <img alt="" src="./doc/assets/readme-icon-compile.png" style="display: inline-block;" width=3%/> 使用说明
+## <img alt="" src="https://raw.gitcode.com/Cangjie-TPC/prism4cj/blobs/da64231ac2d2bf0a586c6a35353585af005e2faf/readme-icon-compile.png" style="display: inline-block;" width=3%/> 使用说明
 
 ### 编译构建
 
@@ -212,13 +212,13 @@ public class TestCReadme {
 
 在下述版本验证通过：
 ```shell
-Cangjie Version: 0.60.5
+Cangjie Version: 1.0.0
 ```
 
 ## 开源协议
 
 本项目基于 [Apache License 2.0](https://gitcode.com/Cangjie-TPC/prism4cj/blob/develop/LICENSE) ，请自由的享受和参与开源。
 
-## <img alt="" src="./doc/assets/readme-icon-contribute.png" style="display: inline-block;" width=3%/> 参与贡献
+## <img alt="" src="https://raw.gitcode.com/Cangjie-TPC/prism4cj/blobs/db89f3665c31896952fbb4c657fd09d30adf952b/readme-icon-contribute.png" style="display: inline-block;" width=3%/> 参与贡献
 
 欢迎给我们提交 PR，欢迎给我们提交 issue，欢迎参与任何形式的贡献。
