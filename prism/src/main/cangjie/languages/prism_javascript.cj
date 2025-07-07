@@ -9,7 +9,7 @@ public class PrismJavascript {
         let js: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "javascript",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "keyword",
                     Prism.pattern(
@@ -35,13 +35,13 @@ public class PrismJavascript {
                         "-[-=]?|\\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\\|[|=]?|\\*\\*?=?|\\/=?|~|\\^=?|%=?|\\?|\\.{3}"
                     ))
                 )
-            )
+            ])
         )
 
         GrammarUtils.insertBeforeToken(
             js,
             "keyword",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "regex",
                     Prism.pattern(
@@ -65,7 +65,7 @@ public class PrismJavascript {
                     )
                 ),
                 Prism.token("constant", Prism.pattern(Regex("\\b[A-Z][A-Z\\d_]*\\b")))
-            )
+            ])
         )
 
         let interpolation: Token = Prism.token("interpolation")
@@ -73,7 +73,7 @@ public class PrismJavascript {
         GrammarUtils.insertBeforeToken(
             js,
             "string",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "template-string",
                     Prism.pattern(
@@ -83,28 +83,28 @@ public class PrismJavascript {
                         None,
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(
+                            ArrayList<Token>([
                                 interpolation,
                                 Prism.token("string", Prism.pattern(Regex("[\\s\\S]+")))
-                            )
+                            ])
                         )
                     )
                 )
-            )
+            ])
         )
 
         let insideInterpolation: Grammar
         let tokens: ArrayList<Token> = ArrayList<Token>(js.tokens().size + 1)
-        tokens.append(
+        tokens.add(
             Prism.token(
                 "interpolation-punctuation",
                 Prism.pattern(Regex("^\\$\\{|\\}$"), false, false, "punctuation")
             )
         )
-        tokens.appendAll(js.tokens())
+        tokens.add(all: js.tokens())
         insideInterpolation = GrammarImpl("inside", tokens)
 
-        interpolation.patterns().append(
+        interpolation.patterns().add(
             Prism.pattern(
                 Regex("\\$\\{[^}]+\\}"),
                 false,
@@ -119,7 +119,7 @@ public class PrismJavascript {
             GrammarUtils.insertBeforeToken(
                 v,
                 "tag",
-                ArrayList<Token>(
+                ArrayList<Token>([
                     Prism.token(
                         "script",
                         Prism.pattern(
@@ -130,7 +130,7 @@ public class PrismJavascript {
                             js
                         )
                     )
-                )
+                ])
             )
         }
 

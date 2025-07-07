@@ -8,11 +8,11 @@ public class PrismPython {
     public static func create(): Grammar {
         return GrammarImpl(
             "python",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "comment",
                     Prism.pattern(
-                        Regex("(^|[^\\\\])#.*"),
+                        Regex("(^|[^\\\\])#${wildcard}*"),
                         true
                     )
                 ),
@@ -58,7 +58,7 @@ public class PrismPython {
                     "builtin",
                     Prism.pattern(
                         Regex(
-                        "\\b(?:__import__|abs|all|any|apply|ascii|basestring|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|Regex|complex|delattr|dict|dir|divmod|enumerate|eval|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\b"
+                        "\\b(?:__import__|abs|all|any|apply|ascii|basestring|bin|bool|buffer|bytearray|bytes|callable|chr|classmethod|cmp|coerce|compile|Regex|complex|delattr|dict|dir|divmod|enumerate|eval|execfile|file|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|intern|isinstance|issubclass|iter|len|list|locals|long|map|max|memoryview|min|next|object|oct|open|ord|pow|property|range|raw_input|reduce|reload|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|unichr|unicode|vars|xrange|zip)\\b"
                     ))
                 ),
                 Prism.token("boolean", Prism.pattern(Regex("\\b(?:True|False|None)\\b"))),
@@ -76,7 +76,7 @@ public class PrismPython {
                     Prism.pattern(Regex("[-+%=]=?|!=|\\*\\*?=?|\\/\\/?=?|<[<=>]?|>[=>]?|[&|^~]|\\b(?:or|and|not)\\b"))
                 ),
                 Prism.token("punctuation", Prism.pattern(Regex("[{}\\[\\];(),.:]")))
-            )
+            ])
         )
     }
 }

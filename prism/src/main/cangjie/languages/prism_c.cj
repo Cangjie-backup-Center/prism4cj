@@ -10,7 +10,7 @@ public class PrismC {
             GrammarUtils.require(prism, "clike"),
             "c",
             TokenFilterCImpl(),
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("keyword",
                     Prism.pattern(
                     Regex(
@@ -22,12 +22,12 @@ public class PrismC {
                     Prism.pattern(
                     Regex("(?:\\b0x[\\da-f]+|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e[+-]?\\d+)?)[ful]*",
                     RegexOption().ignoreCase())))
-            )
+            ])
         )
         GrammarUtils.insertBeforeToken(
             c,
             "string",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "macro",
                     Prism.pattern(
@@ -37,7 +37,7 @@ public class PrismC {
                         "property",
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(
+                            ArrayList<Token>([
                                 Prism.token("string",
                                     Prism.pattern(Regex("(#\\s*include\\s*)(?:<.+?>|(\"|')(?:\\\\?.)+?\\2)"), true)),
                                 Prism.token("directive",
@@ -45,12 +45,12 @@ public class PrismC {
                                     Regex(
                                     "(#\\s*)\\b(?:define|defined|elif|else|endif|error|ifdef|ifndef|if|import|include|line|pragma|undef|using)\\b"
                                 ), true, false, "keyword"))
-                            )
+                            ])
                         )
                     )
                 ),
                 Prism.token("constant", Prism.pattern(Regex("\\b(?:__FILE__|__LINE__|__DATE__|__TIME__|__TIMESTAMP__|__func__|EOF|NULL|SEEK_CUR|SEEK_END|SEEK_SET|stdin|stdout|stderr)\\b")))
-            )
+            ])
         )
         return c
     }

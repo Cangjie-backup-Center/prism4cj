@@ -17,7 +17,7 @@ public class PrismCssExtras {
                     None,
                     GrammarImpl(
                         "inside",
-                        ArrayList<Token>(
+                        ArrayList<Token>([
                             Prism.token(
                                 "pseudo-element",
                                 Prism.pattern(Regex(":(?:after|before|first-letter|first-line|selection)|::[-\\w]+"))
@@ -26,21 +26,21 @@ public class PrismCssExtras {
                             Prism.token("class", Prism.pattern(Regex("\\.[-:.\\w]+"))),
                             Prism.token("id", Prism.pattern(Regex("#[-:.\\w]+"))),
                             Prism.token("attribute", Prism.pattern(Regex("\\[[^\\]]+\\]")))
-                        )
+                        ])
                     )
                 )
                 m.patterns().clear()
-                m.patterns().append(pattern)
+                m.patterns().add(pattern)
             }
 
             GrammarUtils.insertBeforeToken(
                 v,
                 "function",
-                ArrayList<Token>(
+                ArrayList<Token>([
                     Prism.token("hexcode", Prism.pattern(Regex("#[\\da-f]{3,8}", RegexOption().ignoreCase()))),
                     Prism.token("entity", Prism.pattern(Regex("\\\\[\\da-f]{1,8}", RegexOption().ignoreCase()))),
                     Prism.token("number", Prism.pattern(Regex("[\\d%.]+")))
-                )
+                ])
             )
         }
         return None

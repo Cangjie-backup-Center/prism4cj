@@ -9,7 +9,7 @@ public abstract class PrismMarkup {
         let entity: Token = Prism.token("entity", Prism.pattern(Regex("&#?[\\da-z]{1,8};", RegexOption().ignoreCase())));
         return GrammarImpl(
             "markup",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("comment", Prism.pattern(Regex("<!--[\\s\\S]*?-->"))),
                 Prism.token("prolog", Prism.pattern(Regex("<\\?[\\s\\S]+?\\?>"))),
                 Prism.token("doctype", Prism.pattern(Regex("<!DOCTYPE[\\s\\S]+?>", RegexOption().ignoreCase()))),
@@ -26,7 +26,7 @@ public abstract class PrismMarkup {
                         None,
                         GrammarImpl(
                             "inside",
-                            ArrayList<Token>(
+                            ArrayList<Token>([
                                 Prism.token(
                                     "tag",
                                     Prism.pattern(
@@ -36,10 +36,10 @@ public abstract class PrismMarkup {
                                         None,
                                         GrammarImpl(
                                             "inside",
-                                            ArrayList<Token>(
+                                            ArrayList<Token>([
                                                 Prism.token("punctuation", Prism.pattern(Regex("^<\\/?"))),
                                                 Prism.token("namespace", Prism.pattern(Regex("^[^\\s>\\/:]+:")))
-                                            )
+                                        ])
                                         )
                                     )
                                 ),
@@ -55,14 +55,14 @@ public abstract class PrismMarkup {
                                         None,
                                         GrammarImpl(
                                             "inside",
-                                            ArrayList<Token>(
+                                            ArrayList<Token>([
                                                 Prism.token(
                                                     "punctuation",
                                                     Prism.pattern(Regex("^=")),
                                                     Prism.pattern(Regex("(^|[^\\\\])[\"']"), true)
                                                 ),
                                                 entity
-                                            )
+                                            ])
                                         )
                                     )
                                 ),
@@ -76,17 +76,17 @@ public abstract class PrismMarkup {
                                         None,
                                         GrammarImpl(
                                             "inside",
-                                            ArrayList<Token>(
-                                                Prism.token("namespace", Prism.pattern(Regex("^[^\\s>\\/:]+:"))))
+                                            ArrayList<Token>([
+                                                Prism.token("namespace", Prism.pattern(Regex("^[^\\s>\\/:]+:")))])
                                         )
                                     )
                                 )
-                            )
+                            ])
                         )
                     )
                 ),
                 entity
-            )
+            ])
         )
     }
 

@@ -19,11 +19,11 @@ public abstract class PrismClike {
     public static func create(): Grammar {
         return GrammarImpl(
             "clike",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token(
                     "comment",
                     Prism.pattern(Regex("(^|[^\\\\])\\/\\*[\\s\\S]*?(?:\\*\\/|$)"), true),
-                    Prism.pattern(Regex("(^|[^\\\\:])\\/\\/.*"), true, true)
+                    Prism.pattern(Regex("(^|[^\\\\:])\\/\\/${wildcard}*"), true, true)
                 ),
                 Prism.token(
                     "string",
@@ -36,7 +36,7 @@ public abstract class PrismClike {
                         "((?:\\b(?:class|interface|extends|implements|trait|instanceof|new)\\s+)|(?:catch\\s+\\())[\\w.\\\\]+"
                     ), true, false, None,
                         GrammarImpl("inside",
-                        ArrayList<Token>(Prism.token("punctuation", Prism.pattern(Regex("[.\\\\]"))))))
+                        ArrayList<Token>([Prism.token("punctuation", Prism.pattern(Regex("[.\\\\]")))])))
                 ),
                 Prism.token(
                     "keyword",
@@ -53,7 +53,7 @@ public abstract class PrismClike {
                     Prism.pattern(Regex("--?|\\+\\+?|!=?=?|<=?|>=?|==?=?|&&?|\\|\\|?|\\?|\\*|\\/|~|\\^|%"))
                 ),
                 Prism.token("punctuation", Prism.pattern(Regex("[{}\\[\\];(),.:]")))
-            )
+            ])
         )
     }
 

@@ -14,7 +14,7 @@ public class PrismJava {
         let java: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),
             "java",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 keyword,
                 Prism.token("number",
                     Prism.pattern(
@@ -26,23 +26,23 @@ public class PrismJava {
                     Regex(
                     "(^|[^.])(?:\\+[+=]?|-[-=]?|!=?|<<?=?|>>?>?=?|==?|&[&=]?|\\|[|=]?|\\*=?|\\/=?|%=?|\\^=?|[?:~])",
                     RegexOption().multiLine()), true))
-            )
+            ])
         )
         GrammarUtils.insertBeforeToken(
             java,
             "function",
-            ArrayList<Token>(Prism.token("annotation", Prism.pattern(Regex("(^|[^.])@\\w+"), true, false, "punctuation")
-            ))
+            ArrayList<Token>([Prism.token("annotation", Prism.pattern(Regex("(^|[^.])@\\w+"), true, false, "punctuation")
+            )])
         )
         GrammarUtils.insertBeforeToken(
             java,
             "class-name",
-            ArrayList<Token>(
+            ArrayList<Token>([
                 Prism.token("generics",
                 Prism.pattern(Regex("<\\s*\\w+(?:\\.\\w+)?(?:\\s*,\\s*\\w+(?:\\.\\w+)?)*>", RegexOption().ignoreCase()),
                 false, false, "function",
                 GrammarImpl("inside",
-                ArrayList<Token>(keyword, Prism.token("punctuation", Prism.pattern(Regex("[<>(),.:]"))))))))
+                ArrayList<Token>([keyword, Prism.token("punctuation", Prism.pattern(Regex("[<>(),.:]")))]))))])
         )
         return java
     }

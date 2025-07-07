@@ -5,6 +5,7 @@
   "main": "Index.ets",
   "author": "cangjie-tpc",
   "license": "Apache-2.0",
+  "repository": "https://gitcode.com/Cangjie-TPC/pinyin4cj.git",
   "dependencies": {
     "libark_interop_loader.so": "file:./src/main/cangjie/loader",
     "cjhyapiregister": "file:./har/CJHyAPIRegister-v1.0.1.har",

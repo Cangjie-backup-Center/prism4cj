@@ -17,7 +17,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
     }
 
     public func register(name: String, grammar: Grammar): Unit {
-        this.cache.put(name, grammar)
+        this.cache.add(name, grammar)
     }
 
     public func grammar(prism: Prism, language: String): ?Grammar {
@@ -25,15 +25,38 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
         var grammar: ?Grammar = this.cache.get(name)
         match (grammar) {
             case Some(v: GrammarImpl) where refEq(v, NULL) => return None
-            case Some(v) => return v
+            case Some(v) => 
+                if (name != language) {
+                    return grammar2(prism, language)
+                }
+                return v
             case None =>
                 grammar = this.obtainGrammar(prism, name)
                 if (grammar.isNone()) {
-                    this.cache.put(name, NULL)
+                    this.cache.add(name, NULL)
                 } else {
-                    this.cache.put(name, grammar.getOrThrow())
+                    this.cache.add(name, grammar.getOrThrow())
                 }
-                this.triggerModify(prism, name)
+                if(language != name) {
+                    this.triggerModify(prism, name)
+                }
+                return grammar
+        }
+    }
+
+    func grammar2(prism: Prism, language: String): ?Grammar {
+        var grammar: ?Grammar = this.cache.get(language)
+        match (grammar) {
+            case Some(v: GrammarImpl) where refEq(v, NULL) => return None
+            case Some(v) => return v
+            case None =>
+                grammar = this.obtainGrammar(prism, language)
+                if (grammar.isNone()) {
+                    this.cache.add(language, NULL)
+                } else {
+                    this.cache.add(language, grammar.getOrThrow())
+                }
+                this.triggerModify(prism, language)
                 return grammar
         }
     }
@@ -107,33 +130,33 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
 
     public func languages(): HashSet<String> {
         var set: HashSet<String> = HashSet<String>(27)
-        set.put("brainfuck")
-        set.put("c")
-        set.put("clike")
-        set.put("clojure")
-        set.put("cpp")
-        set.put("csharp")
-        set.put("css")
-        set.put("css-extras")
-        set.put("dart")
-        set.put("git")
-        set.put("go")
-        set.put("groovy")
-        set.put("java")
-        set.put("javascript")
-        set.put("json")
-        set.put("kotlin")
-        set.put("latex")
-        set.put("makefile")
-        set.put("markdown")
-        set.put("markup")
-        set.put("python")
-        set.put("scala")
-        set.put("sql")
-        set.put("swift")
-        set.put("yaml")
-        set.put("cangjie")
-        set.put("rust")
+        set.add("brainfuck")
+        set.add("c")
+        set.add("clike")
+        set.add("clojure")
+        set.add("cpp")
+        set.add("csharp")
+        set.add("css")
+        set.add("css-extras")
+        set.add("dart")
+        set.add("git")
+        set.add("go")
+        set.add("groovy")
+        set.add("java")
+        set.add("javascript")
+        set.add("json")
+        set.add("kotlin")
+        set.add("latex")
+        set.add("makefile")
+        set.add("markdown")
+        set.add("markup")
+        set.add("python")
+        set.add("scala")
+        set.add("sql")
+        set.add("swift")
+        set.add("yaml")
+        set.add("cangjie")
+        set.add("rust")
         return set
     }
 }
