@@ -1,5 +1,4 @@
 import { codeStringToColorString, PrismNodesParseRes, PrismNodesParseResColor } from '@cangjie-tpc/prism';
-import { ArrayList } from '@kit.ArkTS';
 
 @Entry
 @Component
@@ -91,7 +90,7 @@ struct Index22 {
     '</body>\n' +
     '</html>';
   @State
-  list: ArrayList<PrismNodesParseRes> = new ArrayList<PrismNodesParseRes>()
+  list: Array<PrismNodesParseRes> = new Array<PrismNodesParseRes>()
   @State
   txtBackground: number = undefined!
   @State
@@ -103,11 +102,11 @@ struct Index22 {
     this.defaultFontColor = a.getDefaultFontColor()
     let b :IterableIterator<PrismNodesParseRes> = a.getListColor().values()
     let ret =  b.next()
-    this.list.add(ret.value as PrismNodesParseRes)
+    this.list.push(ret.value as PrismNodesParseRes)
     while (!ret.done){
       ret = b.next()
       if(!ret.done){
-        this.list.add(ret.value as PrismNodesParseRes)
+        this.list.push(ret.value as PrismNodesParseRes)
       }
     }
   }
@@ -127,7 +126,7 @@ struct Index22 {
           Scroll() {
             Column() {
               Text() {
-                ForEach(this.list.convertToArray(), (item: PrismNodesParseRes, index: number) => {
+                ForEach(this.list, (item: PrismNodesParseRes, index: number) => {
                   Span(item.getText())
                     .fontColor(this.isColor(item.getColor()))
                 })

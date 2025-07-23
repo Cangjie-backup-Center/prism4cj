@@ -4,8 +4,8 @@ import { collections } from "@kit.ArkTS";
 
 let lib = requireCJLib("libprism4cj.so") as CustomLib
 
-export function codeStringToColorStringCJ(code: string, info: string | undefined, isDarkula: boolean): PrismNodesParseResColor  {
-  let prismNodesParseResColorArkts:PrismNodesParseResColorArkts = lib.codeStringToColorStringArkts(code, info, isDarkula)
+export async function codeStringToColorStringCJ(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor>  {
+  let prismNodesParseResColorArkts:PrismNodesParseResColorArkts =  await lib.codeStringToColorStringArkts(code, info, isDarkula)
   let list = prismNodesParseResColorArkts.getListColor()
   let cList = new collections.Array<PrismNodesParseRes>()
   for (let index = 0; index < list.length; index++) {
