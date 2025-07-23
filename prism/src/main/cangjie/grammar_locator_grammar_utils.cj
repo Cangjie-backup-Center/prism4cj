@@ -66,10 +66,7 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
         match (name) {
             case "c++" => out = "cpp"
             case "js" | "typescript" | "ts" => out = "javascript"
-            case "xml" => ()
-            case "html" => ()
-            case "mathml" => ()
-            case "svg" => out = "markup"
+            case "xml" | "html" | "mathml" | "svg" => out = "markup"
             case "dotnet" | "c#" => out = "csharp"
             case "golang" => out = "go"
             case "jsonp" => out = "json"
@@ -90,28 +87,28 @@ public class GrammarLocatorGrammarUtils <: GrammarLocator {
             case "c" => grammar = PrismC.create(prism)
             case "clike" => grammar = PrismClike.create()
             case "clojure" => grammar = PrismClojure.create()
-            case "cpp" => grammar = PrismCpp.create(prism)
-            case "csharp" => grammar = PrismCsharp.create(prism)
+            case "cpp" | "c++" => grammar = PrismCpp.create(prism)
+            case "csharp" | "dotnet" | "c#" => grammar = PrismCsharp.create(prism)
             case "css" => grammar = PrismCss.create()
-            case "css-extras" => grammar = PrismCssExtras.create(prism)
+            case "css-extras" | "css_extras" => grammar = PrismCssExtras.create(prism)
             case "dart" => grammar = PrismDart.create(prism)
             case "git" => grammar = PrismGit.create()
-            case "go" => grammar = PrismGo.create(prism)
+            case "go" | "golang" => grammar = PrismGo.create(prism)
             case "groovy" => grammar = PrismGroovy.create(prism)
             case "java" => grammar = PrismJava.create(prism)
-            case "javascript" => grammar = PrismJavascript.create(prism)
-            case "json" => grammar = PrismJson.create()
+            case "javascript" | "js" | "typescript" | "ts" => grammar = PrismJavascript.create(prism)
+            case "json" | "jsonp" => grammar = PrismJson.create()
             case "kotlin" => grammar = PrismKotlin.create(prism)
             case "latex" => grammar = PrismLatex.create()
             case "makefile" => grammar = PrismMakefile.create()
-            case "markdown" => grammar = PrismMarkdown.create(prism)
-            case "markup" => grammar = PrismMarkup.create()
-            case "python" => grammar = PrismPython.create()
+            case "markdown" | "md" => grammar = PrismMarkdown.create(prism)
+            case "markup" | "xml" | "html" | "mathml" | "svg" => grammar = PrismMarkup.create()
+            case "python" | "python3" | "py" | "py3" | "python ml" | "pythonml" | "pandas" | "pythondata" => grammar = PrismPython.create()
             case "scala" => grammar = PrismScala.create(prism)
-            case "sql" => grammar = PrismSql.create()
+            case "sql" | "mysql" | "oracle" | "sqlserver" | "ms sql server" | "mssql" | "oraclesql" | "postgresql" | "pgsql" => grammar = PrismSql.create()
             case "swift" => grammar = PrismSwift.create(prism)
             case "yaml" => grammar = PrismYaml.create()
-            case "cangjie" => grammar = PrismCangjie.create(prism)
+            case "cangjie" | "cj" => grammar = PrismCangjie.create(prism)
             case "rust" => grammar = PrismRust.create(prism)
             case _ => grammar = None
         }
