@@ -3,9 +3,9 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v1.0.5-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.1.5-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v1.0.0-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v1.0.1-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-94.4%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -202,7 +202,6 @@ ohpm install @cangjie-tpc/prism
 
 ```ets
 import { codeStringToColorString, PrismNodesParseRes, PrismNodesParseResColor } from '@cangjie-tpc/prism';
-import { ArrayList, taskpool } from '@kit.ArkTS';
 
 @Entry
 @Component
@@ -228,7 +227,7 @@ struct Index1 {
     '    }\n' +
     '}';
   @State
-  list: ArrayList<PrismNodesParseRes> = new ArrayList<PrismNodesParseRes>()
+  list: Array<PrismNodesParseRes> = new Array<PrismNodesParseRes>()
   @State
   txtBackground: number = undefined!
   @State
@@ -240,11 +239,11 @@ struct Index1 {
     this.defaultFontColor = a.getDefaultFontColor()
     let b :IterableIterator<PrismNodesParseRes> = a.getListColor().values()
     let ret =  b.next()
-    this.list.add(ret.value as PrismNodesParseRes)
+    this.list.push(ret.value as PrismNodesParseRes)
     while (!ret.done){
       ret = b.next()
       if(!ret.done){
-        this.list.add(ret.value as PrismNodesParseRes)
+        this.list.push(ret.value as PrismNodesParseRes)
       }
     }
   }
@@ -264,7 +263,7 @@ struct Index1 {
           Scroll() {
             Column() {
               Text() {
-                ForEach(this.list.convertToArray(), (item: PrismNodesParseRes, index: number) => {
+                ForEach(this.list, (item: PrismNodesParseRes, index: number) => {
                   Span(item.text)
                     .fontColor(this.isColor(item.color))
                 })
@@ -298,15 +297,6 @@ struct Index1 {
     .backgroundColor(Color.White)
   }
 }
-
-@Concurrent
-async function parseToColorStringImpl(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor> {
-  return await codeStringToColorString(code, info, isDarkula)
-}
-
-export async function parseToColorString(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor> {
-  return taskpool.execute(parseToColorStringImpl, code, info, isDarkula) as Promise<PrismNodesParseResColor>
-}
 ```
 
 #### 执行结果如下
@@ -315,7 +305,7 @@ export async function parseToColorString(code: string, info: string | undefined,
 
 ## 约束与限制
 
-当前基于 DevEco Studio for Windows 5.0.13.200 和 DevEco Studio Cangjie Plugin Canary for Windows 5.0.13.200 版本实现的
+当前基于 DevEco Studio for Windows 5.1.1.821 版本实现的
 
 ## 开源协议
 
