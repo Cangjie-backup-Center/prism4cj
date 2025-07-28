@@ -1,6 +1,6 @@
 import std.fs.*
-import std.posix.*
-import std.process.*
+import std.os.*
+import std.os.posix.*
 import std.collection.*
 import encoding.json.*
 import std.unittest.*
