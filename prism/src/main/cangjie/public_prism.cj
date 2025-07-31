@@ -3,10 +3,7 @@
  */
 package prism4cj
 
-import ohos.base.*
-import ohos.component.*
-import ohos.state_manage.*
-import ohos.state_macro_manage.*
+import ohos.base.Color
 
 /**
  * 将代码转换成带有颜色的列表

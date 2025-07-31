@@ -3,15 +3,12 @@
  */
 package prism4cj
 
-import ohos.base.*
-import ohos.component.*
-import ohos.state_manage.*
-import ohos.state_macro_manage.*
 import prism4cj.languages.*
 import prism4cj.prism.*
 import prism4cj.prism.Text as PrismText
 import prism4cj.prism.Node as PrismNode
 import prism4cj.prism.Grammar as PrismGrammar
+import ohos.base.Color
 
 /**
  * prism 句法高亮类

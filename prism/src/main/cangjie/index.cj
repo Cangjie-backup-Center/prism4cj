@@ -1,12 +1,8 @@
 package prism4cj
 
+import ohos.base.Color
 import ohos.ark_interop.*
 import ohos.ark_interop_macro.*
-import ohos.ark_interop_helper.*
-import ohos.base.*
-import ohos.component.*
-import ohos.state_manage.*
-import ohos.state_macro_manage.*
 
 @Interop[ArkTS, Async]
 public func codeStringToColorStringArkts(code: String, info: Option<String>, isDarkula: Bool): PrismNodesParseResColorArkts {
