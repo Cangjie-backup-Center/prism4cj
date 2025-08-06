@@ -51,6 +51,10 @@ export class PrismNodesParseResColor {
   getListColor(): collections.Array<PrismNodesParseRes> {
     return this.list
   }
+
+  addRes(res:PrismNodesParseRes):void{
+    this.list.push(res)
+  }
 }
 
 @Sendable
@@ -154,4 +158,13 @@ export enum PrismColor {
   NAMESPACE = "NAMESPACE", // 命名空间
   SHEBANG = "SHEBANG", // 脚本文件开头的 #! 行
   DEFAULT = "DEFAULT" // 其它值
+}
+
+
+const resColorFactory = (background: number,defaultFontColor: number)=>new PrismNodesParseResColor(new collections.Array(),background,defaultFontColor)
+const resFactory = (types: string,text: string,alias: string | undefined,color: number | undefined)=>new PrismNodesParseRes(types,text,alias,color)
+
+export async function parseIntoJs(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor>  {
+  let res = await lib.parseIntoJs(code, info, isDarkula, resColorFactory, resFactory) as PrismNodesParseResColor
+  return res
 }
