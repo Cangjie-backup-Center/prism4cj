@@ -9,7 +9,7 @@ public class PrismJava {
         let keyword: Token = Prism.token("keyword",
             Prism.pattern(
             Regex(
-            "\\b(?:abstract|continue|for|new|switch|assert|default|goto|package|synchronized|boolean|do|if|private|this|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|transient|catch|extends|int|short|try|char|final|interface|static|void|class|finally|long|strictfp|volatile|const|float|native|super|while)\\b"
+            "\\b(?:abstract|continue|for|new|switch|assert|default|goto|package|synchronized|boolean|do|if|private|this|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|transient|catch|extends|int|short|try|char|final|interface|static|void|class|finally|long|strictfp|volatile|const|float|native|super|while|String)\\b"
         )))
         let java: Grammar = GrammarUtils.extendGrammar(
             GrammarUtils.require(prism, "clike"),

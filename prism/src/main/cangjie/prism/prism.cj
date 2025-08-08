@@ -14,6 +14,7 @@ internal import std.regex.MatchData
 
 public class Prism {
     var grammarLocator: GrammarLocator
+    let EMPTY: TextImpl = TextImpl("\n")
 
     public init(grammarLocator: GrammarLocator) {
         this.grammarLocator = grammarLocator
@@ -55,7 +56,45 @@ public class Prism {
         var entries: ArrayList<Node> = ArrayList<Node>(3)
         entries.add(TextImpl(text))
         matchGrammar(text, entries, grammar, 0, 0, false, None)
-        return entries
+        return splitTextImplNewlines(entries)
+    }
+
+    private func splitTextImplNewlines(entries: ArrayList<Node>): ArrayList<Node> {
+        var result: ArrayList<Node> = ArrayList<Node>()
+        for (node in entries) {
+            if (let Some(text) <- (node as TextImpl)) {
+                var str = text.literal()
+                if ((str.size <= 1) || (str.size == 2 && str[0] == b'\r' && str[1] == b'\n')) {
+                    result.add(text)
+                    continue
+                }
+                if (str[0] == b'\n') {
+                    result.add(EMPTY)
+                    str = str[1..]
+                }else if (str[0] == b'\r' && str[1] == b'\n') {
+                    result.add(EMPTY)
+                    str = str[2..]
+                }else if (str[0] == b'\r') {
+                    result.add(EMPTY)
+                    str = str[1..]
+                }
+                text.textLiteral = str
+                result.add(text)
+                if (str.size > 1 && str[str.size - 1] == b'\r') {
+                    text.textLiteral = str[..str.size - 1]
+                    result.add(EMPTY)
+                } else if (str.size > 2 && str[str.size - 2] == b'\r' && str[str.size - 1] == b'\n') {
+                    text.textLiteral = str[..str.size - 2]
+                    result.add(EMPTY)
+                } else if (str.size > 1 && str[str.size - 1] == b'\n') {
+                    text.textLiteral = str[..str.size - 1]
+                    result.add(EMPTY)
+                }
+            } else {
+                result.add(node)
+            }
+        }
+        return result
     }
 
     private func matchGrammar(
