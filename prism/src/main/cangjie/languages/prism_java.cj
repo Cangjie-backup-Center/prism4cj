@@ -20,12 +20,12 @@ public class PrismJava {
                     Prism.pattern(
                     Regex(
                     "\\b0b[01]+\\b|\\b0x[\\da-f]*\\.?[\\da-fp-]+\\b|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e[+-]?\\d+)?[df]?",
-                    RegexOption().ignoreCase()))),
+                    RegexFlag.IgnoreCase))),
                 Prism.token("operator",
                     Prism.pattern(
                     Regex(
                     "(^|[^.])(?:\\+[+=]?|-[-=]?|!=?|<<?=?|>>?>?=?|==?|&[&=]?|\\|[|=]?|\\*=?|\\/=?|%=?|\\^=?|[?:~])",
-                    RegexOption().multiLine()), true))
+                    RegexFlag.MultiLine), true))
             ])
         )
         GrammarUtils.insertBeforeToken(
@@ -39,7 +39,7 @@ public class PrismJava {
             "class-name",
             ArrayList<Token>([
                 Prism.token("generics",
-                Prism.pattern(Regex("<\\s*\\w+(?:\\.\\w+)?(?:\\s*,\\s*\\w+(?:\\.\\w+)?)*>", RegexOption().ignoreCase()),
+                Prism.pattern(Regex("<\\s*\\w+(?:\\.\\w+)?(?:\\s*,\\s*\\w+(?:\\.\\w+)?)*>", RegexFlag.IgnoreCase),
                 false, false, "function",
                 GrammarImpl("inside",
                 ArrayList<Token>([keyword, Prism.token("punctuation", Prism.pattern(Regex("[<>(),.:]")))]))))])

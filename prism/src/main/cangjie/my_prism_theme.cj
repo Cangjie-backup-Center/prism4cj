@@ -3,17 +3,15 @@
  */
 package prism4cj
 
-import ohos.base.Color
-
 class MyPrismTheme <: PrismThemeBase {
     // 背景颜色
-    var bg: Color
+    var bg: UInt32
     // 颜色map
-    var colorMap: HashMap<PrismColor, Color>
+    var colorMap: HashMap<String, UInt32>
     // 文本颜色
-    var text: Color
+    var text: UInt32
 
-    init(background: Color, colorMap: HashMap<PrismColor, Color>, text: Color) {
+    init(background: UInt32, colorMap: HashMap<String, UInt32>, text: UInt32) {
         this.bg = background
         this.colorMap = colorMap
         this.text = text
@@ -24,7 +22,7 @@ class MyPrismTheme <: PrismThemeBase {
      *
      * @return 返回一个默认背景色的主题
      */
-    public static func create(background: Color, colorMap: HashMap<PrismColor, Color>, text: Color): MyPrismTheme {
+    public static func create(background: UInt32, colorMap: HashMap<String, UInt32>, text: UInt32): MyPrismTheme {
         return MyPrismTheme(background, colorMap, text)
     }
 
@@ -33,7 +31,7 @@ class MyPrismTheme <: PrismThemeBase {
      *
      * @return 返回背景色
      */
-    public override func background(): Color {
+    public override func background(): UInt32 {
         return this.bg
     }
 
@@ -41,7 +39,7 @@ class MyPrismTheme <: PrismThemeBase {
      * 设置背景色
      * @param bg 背景色值
      */
-    public override func setBackground(bg: Color): Unit {
+    public override func setBackground(bg: UInt32): Unit {
         this.bg = bg
     }
 
@@ -50,7 +48,7 @@ class MyPrismTheme <: PrismThemeBase {
      *
      * @return 返回文本颜色
      */
-    public override func textColor(): Color {
+    public override func textColor(): UInt32 {
         return this.text
     }
 
@@ -58,7 +56,7 @@ class MyPrismTheme <: PrismThemeBase {
      * 设置文本颜色
      * @param text 文本颜色
      */
-    public override func setTextColor(text: Color): Unit {
+    public override func setTextColor(text: UInt32): Unit {
         this.text = text
     }
 
@@ -66,7 +64,7 @@ class MyPrismTheme <: PrismThemeBase {
      * 获取颜色存储集合
      * @return HashMap<String, Color> 返回颜色存储集合
      */
-    public override func getColorMap(): HashMap<PrismColor, Color> {
+    public override func getColorMap(): HashMap<String, UInt32> {
         return this.colorMap
     }
 
@@ -74,7 +72,7 @@ class MyPrismTheme <: PrismThemeBase {
      * 自定义设置颜色存储集合
      * @param HashMap<String, Color> 颜色存储集合
      */
-    public override func setColorMap(colorMap: HashMap<PrismColor, Color>): Unit {
+    public override func setColorMap(colorMap: HashMap<String, UInt32>): Unit {
         this.colorMap = colorMap
     }
 }

@@ -28,7 +28,7 @@ public class PrismMakefile {
                 Prism.token(
                     "symbol",
                     Prism.pattern(
-                        Regex("^[^:=\\r\\n]+(?=\\s*:(?!=))", RegexOption().multiLine()),
+                        Regex("^[^:=\\r\\n]+(?=\\s*:(?!=))", RegexFlag.MultiLine),
                         false,
                         false,
                         None,

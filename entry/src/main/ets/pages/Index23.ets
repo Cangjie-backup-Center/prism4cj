@@ -1,4 +1,4 @@
-import { parseIntoJs, PrismNodesParseRes, PrismNodesParseResColor } from '@cangjie-tpc/prism/src/main/ets/components/MainPage';
+import { codeStringToColorString, PrismNodesParseRes, PrismNodesParseResColor } from '@cangjie-tpc/prism/src/main/ets/components/MainPage';
 
 @Entry
 @Component
@@ -97,7 +97,7 @@ struct Index22 {
   defaultFontColor: number = undefined!
 
   async aboutToAppear(): Promise<void> {
-    let a: PrismNodesParseResColor= await parseIntoJs(this.message, "html", false)
+    let a: PrismNodesParseResColor= await codeStringToColorString(this.message, "html", false)
     this.txtBackground = a.getBackground()
     this.defaultFontColor = a.getDefaultFontColor()
     let b :IterableIterator<PrismNodesParseRes> = a.getListColor().values()

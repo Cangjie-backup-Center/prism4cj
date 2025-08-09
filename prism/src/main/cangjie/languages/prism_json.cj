@@ -11,7 +11,7 @@ public class PrismJson {
             ArrayList<Token>([
                 Prism.token(
                     "property",
-                    Prism.pattern(Regex("\"(?:\\\\.|[^\\\\\"\\r\\n])*\"(?=\\s*:)", RegexOption().ignoreCase()))
+                    Prism.pattern(Regex("\"(?:\\\\.|[^\\\\\"\\r\\n])*\"(?=\\s*:)", RegexFlag.IgnoreCase))
                 ),
                 Prism.token("string", Prism.pattern(Regex("\"(?:\\\\.|[^\\\\\"\\r\\n])*\"(?!\\s*:)"), false, true)),
                 Prism.token(
@@ -21,8 +21,8 @@ public class PrismJson {
                 Prism.token("punctuation", Prism.pattern(Regex("[{}\\[\\]);,]"))),
                 // not sure about this one...
                 Prism.token("operator", Prism.pattern(Regex(":"))),
-                Prism.token("boolean", Prism.pattern(Regex("\\b(?:true|false)\\b", RegexOption().ignoreCase()))),
-                Prism.token("null", Prism.pattern(Regex("\\bnull\\b", RegexOption().ignoreCase())))
+                Prism.token("boolean", Prism.pattern(Regex("\\b(?:true|false)\\b", RegexFlag.IgnoreCase))),
+                Prism.token("null", Prism.pattern(Regex("\\bnull\\b", RegexFlag.IgnoreCase)))
             ])
         )
     }

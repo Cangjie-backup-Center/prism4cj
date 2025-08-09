@@ -4,9 +4,44 @@ import ohos.base.Color
 import ohos.ark_interop.*
 import ohos.ark_interop_macro.*
 
-@Interop[ArkTS, Async]
-public func codeStringToColorStringArkts(code: String, info: Option<String>, isDarkula: Bool): PrismNodesParseResColorArkts {
-    let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorString(code, info, isDarkula)
+public func arktsCodeStringToColorString(context: JSContext, callInfo: JSCallInfo): JSValue {
+    let code = callInfo[0].toString(context)
+    let info: ?String = if (callInfo[1].isNull()) {
+        None
+    } else {
+        String.fromJSValue(context, callInfo[1])
+    }
+    let isDarkula = Bool.fromJSValue(context, callInfo[2])
+    let PrismNodesParseResColor_factory = callInfo[3].asFunction()
+    let PrismNodesParseRes_factory = callInfo[4].asFunction()
+    let promise = context.promiseCapability()
+    spawn {
+        let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorString(code, info, isDarkula)
+        context.postJSTask {
+            =>
+            let resColor: JSObject = PrismNodesParseResColor_factory
+                .call(prismNodesParseResColor.background.toJSValue(context),prismNodesParseResColor.defaultFontColor.toJSValue(context))
+                .asObject()
+            for (i in 0..prismNodesParseResColor.getListColor().size) {
+                let cjcolor = prismNodesParseResColor.getListColor()[i]
+                let jscolor: JSValue = PrismNodesParseRes_factory.call(
+                    cjcolor.types.toJSValue(context),
+                    cjcolor.text.toJSValue(context),
+                    (cjcolor.alias?.toJSValue(context)) ?? context.undefined().toJSValue(),
+                    (cjcolor.color?.toJSValue(context)) ?? context.undefined().toJSValue()
+                )
+                resColor.callMethod('addRes', jscolor)
+            }
+            let ret = resColor.toJSValue()
+            promise.resolve(ret)
+        }
+    }
+    return promise.toJSValue()
+}
+
+@Interop[ArkTS]
+public func arktsCodeStringToColorStringCustomize(code: String, info: Option<String>, background: UInt32, text: UInt32, colorMap: JSHashMapEx<String, UInt32>): PrismNodesParseResColorArkts {
+    let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorStringCustomize(code, info, background, text, colorMap.toHashMap())
     let listArkts: ArrayList<PrismNodesParseResArkts> = ArrayList<PrismNodesParseResArkts>()
     for (i in 0..prismNodesParseResColor.getListColor().size) {
         listArkts.add(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
@@ -15,21 +50,8 @@ public func codeStringToColorStringArkts(code: String, info: Option<String>, isD
     return PrismNodesParseResColorArkts(jsList, prismNodesParseResColor.getBackground(), prismNodesParseResColor.getDefaultFontColor())
 }
 
-@Interop[ArkTS]
-public func codeStringToColorStringCustomizeArkts(code: String, info: Option<String>, background: UInt32, text: UInt32, colorMap: JSHashMapEx<String, UInt32>): PrismNodesParseResColorArkts {
-    let map: HashMap<PrismColor, Color> = HashMap<PrismColor, Color>()
-    let mapStr: HashMap<String, UInt32> = colorMap.toHashMap()
-    let list: Array<(String, UInt32)> = mapStr.toArray()
-    for (i in list) {
-        map.add(PrismColor.fromString(i[0].toAsciiLower()), Color(i[1]))
-    }
-    let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorStringCustomize(code, info, background, text, map)
-    let listArkts: ArrayList<PrismNodesParseResArkts> = ArrayList<PrismNodesParseResArkts>()
-    for (i in 0..prismNodesParseResColor.getListColor().size) {
-        listArkts.add(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
-    }
-    let jsList: JSArrayEx<PrismNodesParseResArkts> = JSArrayEx<PrismNodesParseResArkts>(listArkts.toArray())
-    return PrismNodesParseResColorArkts(jsList, prismNodesParseResColor.getBackground(), prismNodesParseResColor.getDefaultFontColor())
+let EXPORT_MODULE1 = JSModule.registerModule {
+    runtime, exports => exports["arktsCodeStringToColorString"] = runtime.function(arktsCodeStringToColorString).toJSValue()
 }
 
 @Interop[ArkTS]
@@ -86,10 +108,10 @@ public class PrismNodesParseResArkts {
      * @param text  文本对应的颜色
      */
     public init(types: String, text: String, alias: Option<String>, color: Option<UInt32>) {
-        let c = if (let Some(v) <- color) {
-            Color(v)
+        let c: ?UInt32 = if (let Some(v) <- color) {
+            v
         } else {
-            Option<Color>.None
+            Option<UInt32>.None
         }
         this.prismNodesParseRes = PrismNodesParseRes(types, text, alias, c)
     }
@@ -128,7 +150,7 @@ public class PrismNodesParseResArkts {
      */
     public func getColor(): Option<UInt32> {
         return if (let Some(v) <- this.prismNodesParseRes.getColor()) {
-            v.toUInt32()
+            v
         } else {
             Option<UInt32>.None
         }

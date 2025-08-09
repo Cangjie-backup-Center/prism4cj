@@ -3,8 +3,6 @@
  */
 package prism4cj
 
-import ohos.base.Color
-
 /**
  * prism 主题接口
  */
@@ -14,42 +12,42 @@ public interface PrismTheme {
      *
      * @return UInt32 返回背景色
      */
-    func background(): Color
+    func background(): UInt32
 
     /**
      * 设置背景色
      *
      * @param bg 背景色值
      */
-    func setBackground(bg: Color): Unit
+    func setBackground(bg: UInt32): Unit
 
     /**
      * 获取文本颜色
      *
      * @return UInt32 返回文本颜色
      */
-    func textColor(): Color
+    func textColor(): UInt32
 
     /**
      * 设置文本颜色
      *
      * @param text 文本颜色
      */
-    func setTextColor(text: Color): Unit
+    func setTextColor(text: UInt32): Unit
 
     /**
      * 获取字段颜色存储集合
      *
      * @return HashMap<PrismColor, Color> 返回颜色存储集合
      */
-    func getColorMap(): HashMap<PrismColor, Color>
+    func getColorMap(): HashMap<String, UInt32>
 
     /**
      * 自定义设置字段颜色存储集合
      *
      * @param HashMap<PrismColor, Color> 颜色存储集合
      */
-    func setColorMap(colorMap: HashMap<PrismColor, Color>): Unit
+    func setColorMap(colorMap: HashMap<String, UInt32>): Unit
 }
 
 /**
@@ -87,12 +85,12 @@ public abstract open class PrismThemeBase <: PrismTheme {
 public class PrismThemeDefault <: PrismThemeBase {
 
     // 背景颜色
-    var bg: Color
-    var colorMap: HashMap<PrismColor, Color>
+    var bg: UInt32
+    var colorMap: HashMap<String, UInt32>
     // 文本颜色
-    var text: Color
+    var text: UInt32
 
-    init(background: Color, colorMap: HashMap<PrismColor, Color>, text: Color) {
+    init(background: UInt32, colorMap: HashMap<String, UInt32>, text: UInt32) {
         this.bg = background
         this.colorMap = colorMap
         this.text = text
@@ -104,7 +102,7 @@ public class PrismThemeDefault <: PrismThemeBase {
      * @return 返回一个默认背景色的主题
      */
     public static func create(): PrismThemeDefault {
-        return PrismThemeDefault(Color(0xFFf5f2f0), ColorHashMap().initDefaultColor(), Color(0xdd000000))
+        return PrismThemeDefault(0xFFf5f2f0, ColorHashMap().initDefaultColor(), 0xdd000000)
     }
 
     /**
@@ -113,7 +111,7 @@ public class PrismThemeDefault <: PrismThemeBase {
      * @param 传入背景色
      * @return 返回自定义背景色的主题
      */
-    static func create(background: Color, text: Color): PrismThemeDefault {
+    static func create(background: UInt32, text: UInt32): PrismThemeDefault {
         return PrismThemeDefault(background, ColorHashMap().initDefaultColor(), text)
     }
 
@@ -122,7 +120,7 @@ public class PrismThemeDefault <: PrismThemeBase {
      *
      * @return 返回背景色
      */
-    public func background(): Color {
+    public func background(): UInt32 {
         return this.bg
     }
 
@@ -131,7 +129,7 @@ public class PrismThemeDefault <: PrismThemeBase {
      *
      * @param bg 背景色值
      */
-    public func setBackground(bg: Color): Unit {
+    public func setBackground(bg: UInt32): Unit {
         this.bg = bg
     }
 
@@ -140,7 +138,7 @@ public class PrismThemeDefault <: PrismThemeBase {
      *
      * @return 返回文本颜色
      */
-    public func textColor(): Color {
+    public func textColor(): UInt32 {
         return this.text
     }
 
@@ -149,7 +147,7 @@ public class PrismThemeDefault <: PrismThemeBase {
      *
      * @param text 文本颜色
      */
-    public func setTextColor(text: Color): Unit {
+    public func setTextColor(text: UInt32): Unit {
         this.text = text
     }
 
@@ -158,7 +156,7 @@ public class PrismThemeDefault <: PrismThemeBase {
      *
      * @return HashMap<PrismColor, Color> 返回颜色存储集合
      */
-    public open override func getColorMap(): HashMap<PrismColor, Color> {
+    public open override func getColorMap(): HashMap<String, UInt32> {
         return this.colorMap
     }
 
@@ -167,7 +165,7 @@ public class PrismThemeDefault <: PrismThemeBase {
      *
      * @param HashMap<PrismColor, Color> 颜色存储集合
      */
-    public open override func setColorMap(colorMap: HashMap<PrismColor, Color>): Unit {
+    public open override func setColorMap(colorMap: HashMap<String, UInt32>): Unit {
         this.colorMap = colorMap
     }
 }
@@ -177,10 +175,10 @@ public class PrismThemeDefault <: PrismThemeBase {
  */
 public class PrismThemeDarkula <: PrismThemeBase {
     // 背景颜色
-    var bg: Color
-    var colorMap: HashMap<PrismColor, Color>
+    var bg: UInt32
+    var colorMap: HashMap<String, UInt32>
     // 文本颜色
-    var text: Color
+    var text: UInt32
 
     /**
      * PrismThemeDarkula 构造函数
@@ -189,7 +187,7 @@ public class PrismThemeDarkula <: PrismThemeBase {
      * @param colorMap  颜色存储集合
      * @param text 文本颜色
      */
-    init(background: Color, colorMap: HashMap<PrismColor, Color>, text: Color) {
+    init(background: UInt32, colorMap: HashMap<String, UInt32>, text: UInt32) {
         this.bg = background
         this.colorMap = colorMap
         this.text = text
@@ -201,7 +199,7 @@ public class PrismThemeDarkula <: PrismThemeBase {
      * @return 返回一个默认背景色的暗黑主题
      */
     public static func create(): PrismThemeDarkula {
-        return PrismThemeDarkula(Color(0xFF2d2d2d), ColorHashMap().initDarkulaColor(), Color(0xFFa9b7c6))
+        return PrismThemeDarkula(0xFF2d2d2d, ColorHashMap().initDarkulaColor(), 0xFFa9b7c6)
     }
 
     /**
@@ -210,7 +208,7 @@ public class PrismThemeDarkula <: PrismThemeBase {
      * @param 传入背景色
      * @return 返回自定义背景色的暗黑主题
      */
-    static func create(background: Color, text: Color): PrismThemeDarkula {
+    static func create(background: UInt32, text: UInt32): PrismThemeDarkula {
         return PrismThemeDarkula(background, ColorHashMap().initDarkulaColor(), text)
     }
 
@@ -219,7 +217,7 @@ public class PrismThemeDarkula <: PrismThemeBase {
      *
      * @return 返回背景色
      */
-    public func background(): Color {
+    public func background(): UInt32 {
         return this.bg
     }
 
@@ -228,7 +226,7 @@ public class PrismThemeDarkula <: PrismThemeBase {
      *
      * @param bg 背景色值
      */
-    public func setBackground(bg: Color): Unit {
+    public func setBackground(bg: UInt32): Unit {
         this.bg = bg
     }
 
@@ -237,7 +235,7 @@ public class PrismThemeDarkula <: PrismThemeBase {
      *
      * @return 返回文本颜色
      */
-    public func textColor(): Color {
+    public func textColor(): UInt32 {
         return this.text
     }
 
@@ -246,25 +244,25 @@ public class PrismThemeDarkula <: PrismThemeBase {
      *
      * @param text 文本颜色
      */
-    public func setTextColor(text: Color): Unit {
+    public func setTextColor(text: UInt32): Unit {
         this.text = text
     }
 
     /**
      * 获取颜色存储集合
      *
-     * @return HashMap<PrismColor, Color> 返回颜色存储集合
+     * @return HashMap<PrismColor, UInt32> 返回颜色存储集合
      */
-    public open override func getColorMap(): HashMap<PrismColor, Color> {
+    public open override func getColorMap(): HashMap<String, UInt32> {
         return this.colorMap
     }
 
     /**
      * 自定义设置颜色存储集合
      *
-     * @param HashMap<PrismColor, Color> 颜色存储集合
+     * @param HashMap<PrismColor, UInt32> 颜色存储集合
      */
-    public open override func setColorMap(colorMap: HashMap<PrismColor, Color>): Unit {
+    public open override func setColorMap(colorMap: HashMap<String, UInt32>): Unit {
         this.colorMap = colorMap
     }
 }
@@ -273,114 +271,114 @@ public class PrismThemeDarkula <: PrismThemeBase {
  * 代码颜色值存储集合
  */
 public class ColorHashMap {
-    var colorMap: HashMap<PrismColor, Color>
+    var colorMap: HashMap<String, UInt32>
 
-    func initDefaultColor(): HashMap<PrismColor, Color> {
-        this.colorMap = HashMap<PrismColor, Color>()
-        this.colorMap.add(PrismColor.COMMENT, Color(0xFF708090))
-        this.colorMap.add(PrismColor.PROLOG, Color(0xFF708090))
-        this.colorMap.add(PrismColor.DOCTYPE, Color(0xFF708090))
-        this.colorMap.add(PrismColor.CDATA, Color(0xFF708090))
-        this.colorMap.add(PrismColor.PUNCTUATION, Color(0xFF999999))
-        this.colorMap.add(PrismColor.PROPERTY, Color(0xFF990055))
-        this.colorMap.add(PrismColor.TAG, Color(0xFF990055))
-        this.colorMap.add(PrismColor.BOOLEAN, Color(0xFF990055))
-        this.colorMap.add(PrismColor.NUMBER, Color(0xFF990055))
-        this.colorMap.add(PrismColor.CONSTANT, Color(0xFF990055))
-        this.colorMap.add(PrismColor.SYMBOL, Color(0xFF990055))
-        this.colorMap.add(PrismColor.DELETED, Color(0xFF990055))
-        this.colorMap.add(PrismColor.SELECTOR, Color(0xFF669900))
-        this.colorMap.add(PrismColor.ATTR_NAME, Color(0xFF669900))
-        this.colorMap.add(PrismColor.STRING, Color(0xFF669900))
-        this.colorMap.add(PrismColor.CHAR, Color(0xFF669900))
-        this.colorMap.add(PrismColor.BUILTIN, Color(0xFF669900))
-        this.colorMap.add(PrismColor.INSERTED, Color(0xFF669900))
-        this.colorMap.add(PrismColor.OPERATOR, Color(0xFF9a6e3a))
-        this.colorMap.add(PrismColor.URL, Color(0xFF9a6e3a))
-        this.colorMap.add(PrismColor.ENTITY, Color(0xFF9a6e3a))
-        this.colorMap.add(PrismColor.ATRULE, Color(0xFF0077aa))
-        this.colorMap.add(PrismColor.ATTR_VALUE, Color(0xFF0077aa))
-        this.colorMap.add(PrismColor.KEYWORD, Color(0xFF0077aa))
-        this.colorMap.add(PrismColor.FUNCTION, Color(0xFFDD4A68))
-        this.colorMap.add(PrismColor.CLASS_NAME, Color(0xFFDD4A68))
-        this.colorMap.add(PrismColor.REGEX, Color(0xFFee9900))
-        this.colorMap.add(PrismColor.IMPORTANT, Color(0xFFee9900))
-        this.colorMap.add(PrismColor.VARIABLE, Color(0xFFee9900))
-        this.colorMap.add(PrismColor.DELIMITER, Color(0xFF669900))
-        this.colorMap.add(PrismColor.ANNOTATION, Color(0xFF669900))
-        this.colorMap.add(PrismColor.ESCAPE_SEQ, Color(0xFF669900))
-        this.colorMap.add(PrismColor.GENERIC_METHOD, Color(0xFF669900))
-        this.colorMap.add(PrismColor.PSEUDO_ELEMENT, Color(0xFF669900))
-        this.colorMap.add(PrismColor.PSEUDO_CLASS, Color(0xFF669900))
-        this.colorMap.add(PrismColor.CLASS, Color(0xFF669900))
-        this.colorMap.add(PrismColor.ID, Color(0xFF9a6e3a))
-        this.colorMap.add(PrismColor.ATTRIBUTE, Color(0xFF9a6e3a))
-        this.colorMap.add(PrismColor.HEXCODE, Color(0xFF9a6e3a))
-        this.colorMap.add(PrismColor.COMMAND, Color(0xFF0077aa))
-        this.colorMap.add(PrismColor.PARAMETER, Color(0xFF0077aa))
-        this.colorMap.add(PrismColor.COORD, Color(0xFF0077aa))
-        this.colorMap.add(PrismColor.COMMIT_SHA1, Color(0xFFDD4A68))
-        this.colorMap.add(PrismColor.SPOCK_BLOCK, Color(0xFFDD4A68))
-        this.colorMap.add(PrismColor.NULL, Color(0xFFee9900))
-        this.colorMap.add(PrismColor.NAMESPACE, Color(0xFFee9900))
-        this.colorMap.add(PrismColor.SHEBANG, Color(0xFFee9900))
+    func initDefaultColor(): HashMap<String, UInt32> {
+        this.colorMap = HashMap<String, UInt32>()
+        this.colorMap.add("comment", 0xFF708090)
+        this.colorMap.add("prolog", 0xFF708090)
+        this.colorMap.add("doctype", 0xFF708090)
+        this.colorMap.add("cdata", 0xFF708090)
+        this.colorMap.add("punctuation", 0xFF999999)
+        this.colorMap.add("property", 0xFF990055)
+        this.colorMap.add("tag", 0xFF990055)
+        this.colorMap.add("boolean", 0xFF990055)
+        this.colorMap.add("number", 0xFF990055)
+        this.colorMap.add("constant", 0xFF990055)
+        this.colorMap.add("symbol", 0xFF990055)
+        this.colorMap.add("deleted", 0xFF990055)
+        this.colorMap.add("selector", 0xFF669900)
+        this.colorMap.add("attr-name", 0xFF669900)
+        this.colorMap.add("string", 0xFF669900)
+        this.colorMap.add("char", 0xFF669900)
+        this.colorMap.add("builtin", 0xFF669900)
+        this.colorMap.add("inserted", 0xFF669900)
+        this.colorMap.add("operator", 0xFF9a6e3a)
+        this.colorMap.add("url", 0xFF9a6e3a)
+        this.colorMap.add("entity", 0xFF9a6e3a)
+        this.colorMap.add("atrule", 0xFF0077aa)
+        this.colorMap.add("attr-value", 0xFF0077aa)
+        this.colorMap.add("keyword", 0xFF0077aa)
+        this.colorMap.add("function", 0xFFDD4A68)
+        this.colorMap.add("class-name", 0xFFDD4A68)
+        this.colorMap.add("regex", 0xFFee9900)
+        this.colorMap.add("important", 0xFFee9900)
+        this.colorMap.add("variable", 0xFFee9900)
+        this.colorMap.add("delimiter", 0xFF669900)
+        this.colorMap.add("annotation", 0xFF669900)
+        this.colorMap.add("escape_seq", 0xFF669900)
+        this.colorMap.add("generic-method", 0xFF669900)
+        this.colorMap.add("pseudo-element", 0xFF669900)
+        this.colorMap.add("pseudo-class", 0xFF669900)
+        this.colorMap.add("class", 0xFF669900)
+        this.colorMap.add("id", 0xFF9a6e3a)
+        this.colorMap.add("attribute", 0xFF9a6e3a)
+        this.colorMap.add("hexcode", 0xFF9a6e3a)
+        this.colorMap.add("command", 0xFF0077aa)
+        this.colorMap.add("parameter", 0xFF0077aa)
+        this.colorMap.add("coord", 0xFF0077aa)
+        this.colorMap.add("commit_sha1", 0xFFDD4A68)
+        this.colorMap.add("spock-block", 0xFFDD4A68)
+        this.colorMap.add("null", 0xFFee9900)
+        this.colorMap.add("namespace", 0xFFee9900)
+        this.colorMap.add("shebang", 0xFFee9900)
         return this.colorMap
     }
 
-    func initDarkulaColor(): HashMap<PrismColor, Color> {
-        this.colorMap = HashMap<PrismColor, Color>()
-        this.colorMap.add(PrismColor.COMMENT, Color(0xFF808080))
-        this.colorMap.add(PrismColor.PROLOG, Color(0xFF808080))
-        this.colorMap.add(PrismColor.CDATA, Color(0xFF808080))
-        this.colorMap.add(PrismColor.DELIMITER, Color(0xFFcc7832))
-        this.colorMap.add(PrismColor.BOOLEAN, Color(0xFFcc7832))
-        this.colorMap.add(PrismColor.KEYWORD, Color(0xFFcc7832))
-        this.colorMap.add(PrismColor.SELECTOR, Color(0xFFcc7832))
-        this.colorMap.add(PrismColor.IMPORTANT, Color(0xFFcc7832))
-        this.colorMap.add(PrismColor.ATRULE, Color(0xFFcc7832))
-        this.colorMap.add(PrismColor.OPERATOR, Color(0xFFa9b7c6))
-        this.colorMap.add(PrismColor.PUNCTUATION, Color(0xFFa9b7c6))
-        this.colorMap.add(PrismColor.ATTR_NAME, Color(0xFFa9b7c6))
-        this.colorMap.add(PrismColor.TAG, Color(0xFFe8bf6a))
-        this.colorMap.add(PrismColor.DOCTYPE, Color(0xFFe8bf6a))
-        this.colorMap.add(PrismColor.BUILTIN, Color(0xFFe8bf6a))
-        this.colorMap.add(PrismColor.ENTITY, Color(0xFF6897bb))
-        this.colorMap.add(PrismColor.NUMBER, Color(0xFF6897bb))
-        this.colorMap.add(PrismColor.SYMBOL, Color(0xFF6897bb))
-        this.colorMap.add(PrismColor.PROPERTY, Color(0xFF9876aa))
-        this.colorMap.add(PrismColor.CONSTANT, Color(0xFF9876aa))
-        this.colorMap.add(PrismColor.VARIABLE, Color(0xFF9876aa))
-        this.colorMap.add(PrismColor.STRING, Color(0xFF6a8759))
-        this.colorMap.add(PrismColor.CHAR, Color(0xFF6a8759))
-        this.colorMap.add(PrismColor.ANNOTATION, Color(0xFFbbb438))
-        this.colorMap.add(PrismColor.ATTR_VALUE, Color(0xFFa5c261))
-        this.colorMap.add(PrismColor.URL, Color(0xFF287bde))
-        this.colorMap.add(PrismColor.FUNCTION, Color(0xFFffc66d))
-        this.colorMap.add(PrismColor.CLASS_NAME, Color(0xFFffc66d))
-        this.colorMap.add(PrismColor.REGEX, Color(0xFF364135))
-        this.colorMap.add(PrismColor.INSERTED, Color(0xFF294436))
-        this.colorMap.add(PrismColor.DELETED, Color(0xFF484a4a))
-        this.colorMap.add(PrismColor.ESCAPE_SEQ, Color(0xFFe8bf6a))
-        this.colorMap.add(PrismColor.GENERIC_METHOD, Color(0xFF6897bb))
-        this.colorMap.add(PrismColor.PSEUDO_ELEMENT, Color(0xFF6897bb))
-        this.colorMap.add(PrismColor.PSEUDO_CLASS, Color(0xFF6897bb))
-        this.colorMap.add(PrismColor.CLASS, Color(0xFF9876aa))
-        this.colorMap.add(PrismColor.ID, Color(0xFF9876aa))
-        this.colorMap.add(PrismColor.ATTRIBUTE, Color(0xFF9876aa))
-        this.colorMap.add(PrismColor.HEXCODE, Color(0xFF6a8759))
-        this.colorMap.add(PrismColor.COMMAND, Color(0xFF6a8759))
-        this.colorMap.add(PrismColor.PARAMETER, Color(0xFFbbb438))
-        this.colorMap.add(PrismColor.COORD, Color(0xFFa5c261))
-        this.colorMap.add(PrismColor.COMMIT_SHA1, Color(0xFF287bde))
-        this.colorMap.add(PrismColor.SPOCK_BLOCK, Color(0xFFffc66d))
-        this.colorMap.add(PrismColor.NULL, Color(0xFF364135))
-        this.colorMap.add(PrismColor.NAMESPACE, Color(0xFF294436))
-        this.colorMap.add(PrismColor.SHEBANG, Color(0xFF484a4a))
+    func initDarkulaColor(): HashMap<String, UInt32> {
+        this.colorMap = HashMap<String, UInt32>()
+        this.colorMap.add("comment", 0xFF808080)
+        this.colorMap.add("prolog", 0xFF808080)
+        this.colorMap.add("cdata", 0xFF808080)
+        this.colorMap.add("delimiter", 0xFFcc7832)
+        this.colorMap.add("boolean", 0xFFcc7832)
+        this.colorMap.add("keyword", 0xFFcc7832)
+        this.colorMap.add("selector", 0xFFcc7832)
+        this.colorMap.add("important", 0xFFcc7832)
+        this.colorMap.add("atrule", 0xFFcc7832)
+        this.colorMap.add("operator", 0xFFa9b7c6)
+        this.colorMap.add("punctuation", 0xFFa9b7c6)
+        this.colorMap.add("attr-name", 0xFFa9b7c6)
+        this.colorMap.add("tag", 0xFFe8bf6a)
+        this.colorMap.add("doctype", 0xFFe8bf6a)
+        this.colorMap.add("builtin", 0xFFe8bf6a)
+        this.colorMap.add("entity", 0xFF6897bb)
+        this.colorMap.add("number", 0xFF6897bb)
+        this.colorMap.add("symbol", 0xFF6897bb)
+        this.colorMap.add("property", 0xFF9876aa)
+        this.colorMap.add("constant", 0xFF9876aa)
+        this.colorMap.add("variable", 0xFF9876aa)
+        this.colorMap.add("string", 0xFF6a8759)
+        this.colorMap.add("char", 0xFF6a8759)
+        this.colorMap.add("annotation", 0xFFbbb438)
+        this.colorMap.add("attr-value", 0xFFa5c261)
+        this.colorMap.add("url", 0xFF287bde)
+        this.colorMap.add("function", 0xFFffc66d)
+        this.colorMap.add("class-name", 0xFFffc66d)
+        this.colorMap.add("regex", 0xFF364135)
+        this.colorMap.add("inserted", 0xFF294436)
+        this.colorMap.add("deleted", 0xFF484a4a)
+        this.colorMap.add("escape_seq", 0xFFe8bf6a)
+        this.colorMap.add("generic-method", 0xFF6897bb)
+        this.colorMap.add("pseudo-element", 0xFF6897bb)
+        this.colorMap.add("pseudo-class", 0xFF6897bb)
+        this.colorMap.add("class", 0xFF9876aa)
+        this.colorMap.add("id", 0xFF9876aa)
+        this.colorMap.add("attribute", 0xFF9876aa)
+        this.colorMap.add("hexcode", 0xFF6a8759)
+        this.colorMap.add("command", 0xFF6a8759)
+        this.colorMap.add("parameter", 0xFFbbb438)
+        this.colorMap.add("coord", 0xFFa5c261)
+        this.colorMap.add("commit_sha1", 0xFF287bde)
+        this.colorMap.add("spock-block", 0xFFffc66d)
+        this.colorMap.add("null", 0xFF364135)
+        this.colorMap.add("namespace", 0xFF294436)
+        this.colorMap.add("shebang", 0xFF484a4a)
         return this.colorMap
     }
 
     init() {
-        this.colorMap = HashMap<PrismColor, Color>()
+        this.colorMap = HashMap<String, UInt32>()
     }
 
     /**
@@ -388,14 +386,14 @@ public class ColorHashMap {
      *
      * @param map 默认或是自定义的 colorMap
      */
-    public init(map: HashMap<PrismColor, Color>) {
+    public init(map: HashMap<String, UInt32>) {
         this.colorMap = map
     }
 
     /**
      * 获取 colormap 属性
      */
-    public func getColorMap(): HashMap<PrismColor, Color> {
+    public func getColorMap(): HashMap<String, UInt32> {
         return this.colorMap
     }
 }

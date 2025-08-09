@@ -3,7 +3,9 @@
  */
 package prism4cj
 
-import ohos.base.Color
+let prismThemeDarkula: PrismTheme = PrismThemeDarkula.create()
+let prismThemeDefault: PrismTheme = PrismThemeDefault.create()
+let prismDef: Prism = Prism(GrammarLocatorGrammarUtils())
 
 /**
  * 将代码转换成带有颜色的列表
@@ -16,19 +18,18 @@ import ohos.base.Color
 func codeStringToColorString(code: String, info: ?String, isDarkula: Bool): PrismNodesParseResColor {
     var prismNodesParseResList: ArrayList<PrismNodesParseRes> = ArrayList<PrismNodesParseRes>()
     let prismTheme: PrismTheme = if (isDarkula) {
-        PrismThemeDarkula.create()
+        prismThemeDarkula
     } else {
-        PrismThemeDefault.create()
+        prismThemeDefault
     }
     try {
-        var prism: Prism = Prism(GrammarLocatorGrammarUtils())
-        var psh: PrismSyntaxHighlight = PrismSyntaxHighlight.create(prism, prismTheme)
+        var psh: PrismSyntaxHighlight = PrismSyntaxHighlight.create(prismDef, prismTheme)
         prismNodesParseResList = psh.highlight(info, code)
     } catch (e: Exception) {
-        let prismNodesParseRes: PrismNodesParseRes = PrismNodesParseRes("", code, Option<String>.None, Option<Color>.None)
+        let prismNodesParseRes: PrismNodesParseRes = PrismNodesParseRes("", code, Option<String>.None, Option<UInt32>.None)
         prismNodesParseResList.add(prismNodesParseRes)
     }
-    return PrismNodesParseResColor(prismNodesParseResList, prismTheme.background().toUInt32(), prismTheme.textColor().toUInt32())
+    return PrismNodesParseResColor(prismNodesParseResList, prismTheme.background(), prismTheme.textColor())
 }
 
 /**
@@ -41,18 +42,18 @@ func codeStringToColorString(code: String, info: ?String, isDarkula: Bool): Pris
  * @param colorMap 颜色map
  * @return 高亮颜色列表
  */
-func codeStringToColorStringCustomize(code: String, info: ?String, background: UInt32, text: UInt32, colorMap: HashMap<PrismColor, Color>): PrismNodesParseResColor {
+func codeStringToColorStringCustomize(code: String, info: ?String, background: UInt32, text: UInt32, colorMap: HashMap<String, UInt32>): PrismNodesParseResColor {
     var prismNodesParseResList: ArrayList<PrismNodesParseRes> = ArrayList<PrismNodesParseRes>()
-    let prismTheme: PrismTheme = MyPrismTheme.create(Color(background), colorMap, Color(text))
+    let prismTheme: PrismTheme = MyPrismTheme.create(background, colorMap, text)
     try {
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var psh: PrismSyntaxHighlight = PrismSyntaxHighlight.create(prism, prismTheme)
         prismNodesParseResList = psh.highlight(info, code)
     } catch (e: Exception) {
-        let prismNodesParseRes: PrismNodesParseRes = PrismNodesParseRes("", code, Option<String>.None, Option<Color>.None)
+        let prismNodesParseRes: PrismNodesParseRes = PrismNodesParseRes("", code, Option<String>.None, Option<UInt32>.None)
         prismNodesParseResList.add(prismNodesParseRes)
     }
-    return PrismNodesParseResColor(prismNodesParseResList, prismTheme.background().toUInt32(), prismTheme.textColor().toUInt32())
+    return PrismNodesParseResColor(prismNodesParseResList, prismTheme.background(), prismTheme.textColor())
 }
 
 class PrismNodesParseResColor {

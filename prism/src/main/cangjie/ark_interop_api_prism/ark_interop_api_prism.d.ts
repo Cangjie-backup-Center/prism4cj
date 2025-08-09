@@ -14,8 +14,6 @@ export declare class PrismNodesParseResArkts {
 export declare interface CustomLib {
     PrismNodesParseResArkts: {new (types: string, text: string, alias: string | undefined, color: number | undefined): PrismNodesParseResArkts}
     PrismNodesParseResColorArkts: {new (list: Array<PrismNodesParseResArkts>, background: number, defaultFontColor: number): PrismNodesParseResColorArkts}
-    codeStringToColorStringArkts(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColorArkts>
-    codeStringToColorStringCustomizeArkts(code: string, info: string | undefined, background: number, text: number, colorMap: Map<string, number>): PrismNodesParseResColorArkts
 
   /**
    * parse result into js object
@@ -26,11 +24,7 @@ export declare interface CustomLib {
    * @param resFactory: (types: string,text: string,alias: string | undefined,color: number | undefined)=>PrismNodesParseRes
    * @returns Promise<PrismNodesParseResColor>
    */
-  parseIntoJs(
-    code: string,
-    info: string | undefined,
-    isDarkula: boolean,
-    resColorFactory: (background: number, defaultFontColor: number) => object,
-    resFactory: (types: string, text: string, alias: string | undefined, color: number | undefined) => object
-  ): Promise<object>
+    arktsCodeStringToColorString(code: string, info: string | undefined, isDarkula: boolean, resColorFactory: (background: number, defaultFontColor: number) => object, resFactory: (types: string, text: string, alias: string | undefined, color: number | undefined) => object): Promise<object>
+
+    arktsCodeStringToColorStringCustomize(code: string, info: string | undefined, background: number, text: number, colorMap: Map<string, number>): PrismNodesParseResColorArkts
 }

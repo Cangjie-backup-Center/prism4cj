@@ -13,7 +13,7 @@ public class PrismClojure {
                 Prism.token("string", Prism.pattern(Regex("\"(?:\\\\.|[^\\\\\"\\r\\n])*\""))),
                 Prism.token(
                     "operator",
-                    Prism.pattern(Regex("(?:::|[:|'])\\b[a-z][\\w*+!?-]*\\b", RegexOption().ignoreCase()))
+                    Prism.pattern(Regex("(?:::|[:|'])\\b[a-z][\\w*+!?-]*\\b", RegexFlag.IgnoreCase))
                 ),
                 Prism.token(
                     "keyword",

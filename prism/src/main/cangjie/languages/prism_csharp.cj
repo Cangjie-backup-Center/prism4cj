@@ -58,7 +58,7 @@ public class PrismCsharp {
                 Prism.token(
                     "number",
                     Prism.pattern(
-                        Regex("\\b0x[\\da-f]+\\b|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)f?", RegexOption().ignoreCase()))
+                        Regex("\\b0x[\\da-f]+\\b|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)f?", RegexFlag.IgnoreCase))
                 )
             ])
         )
@@ -92,7 +92,7 @@ public class PrismCsharp {
                 Prism.token(
                     "preprocessor",
                     Prism.pattern(
-                        Regex("(^\\s*)#${wildcard}*", RegexOption().multiLine()),
+                        Regex("(^\\s*)#${wildcard}*", RegexFlag.MultiLine),
                         true,
                         false,
                         "property",

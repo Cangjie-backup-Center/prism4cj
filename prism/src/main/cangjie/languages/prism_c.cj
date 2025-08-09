@@ -20,8 +20,7 @@ public class PrismC {
                     Prism.pattern(Regex("-[>-]?|\\+\\+?|!=?|<<?=?|>>?=?|==?|&&?|\\|\\|?|[~^%?*\\/]"))),
                 Prism.token("number",
                     Prism.pattern(
-                    Regex("(?:\\b0x[\\da-f]+|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e[+-]?\\d+)?)[ful]*",
-                    RegexOption().ignoreCase())))
+                    Regex("(?:\\b0x[\\da-f]+|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e[+-]?\\d+)?)[ful]*",RegexFlag.IgnoreCase)))
             ])
         )
         GrammarUtils.insertBeforeToken(
@@ -31,7 +30,7 @@ public class PrismC {
                 Prism.token(
                     "macro",
                     Prism.pattern(
-                        Regex("(^\\s*)#\\s*[a-z]+(?:[^\\r\\n\\\\]|\\\\(?:\\r\\n|[\\s\\S]))*", RegexOption().multiLine()),
+                        Regex("(^\\s*)#\\s*[a-z]+(?:[^\\r\\n\\\\]|\\\\(?:\\r\\n|[\\s\\S]))*", RegexFlag.MultiLine),
                         true,
                         false,
                         "property",

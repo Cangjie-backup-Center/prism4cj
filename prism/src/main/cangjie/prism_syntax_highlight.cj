@@ -8,7 +8,6 @@ import prism4cj.prism.*
 import prism4cj.prism.Text as PrismText
 import prism4cj.prism.Node as PrismNode
 import prism4cj.prism.Grammar as PrismGrammar
-import ohos.base.Color
 
 /**
  * prism 句法高亮类
@@ -48,7 +47,7 @@ public class PrismSyntaxHighlight {
     }
 
     func highlightNoLanguageInfo(code: String): ArrayList<PrismNodesParseRes> {
-        return ArrayList<PrismNodesParseRes>([PrismNodesParseRes("", code, Option<String>.None, Option<Color>.None)])
+        return ArrayList<PrismNodesParseRes>([PrismNodesParseRes("", code, Option<String>.None, Option<UInt32>.None)])
     }
 
     func highlightWithLanguageInfo(prism: Prism, theme: PrismTheme, info: String, code: String): ArrayList<PrismNodesParseRes> {
@@ -71,7 +70,7 @@ public class PrismNodesParseRes <: ToString {
     var types: String = ""
     var text: String = ""
     var alias: ?String = None
-    var color: ?Color = None
+    var color: ?UInt32 = None
 
     /**
      * PrismNodesParseRes 构造函数
@@ -86,7 +85,7 @@ public class PrismNodesParseRes <: ToString {
      * @param text  别名
      * @param text  文本对应的颜色
      */
-    public init(types: String, text: String, alias: ?String, color: ?Color) {
+    public init(types: String, text: String, alias: ?String, color: ?UInt32) {
         this.types = types
         this.text = text
         this.alias = alias
@@ -125,7 +124,7 @@ public class PrismNodesParseRes <: ToString {
      *
      * @return 返回结果对象文本对应的颜色
      */
-    func getColor(): ?Color {
+    func getColor(): ?UInt32 {
         return color
     }
 
@@ -152,9 +151,9 @@ public class PrismNodesParseRes <: ToString {
 class PrismNodeParse {
     static let glg: GrammarLocatorGrammarUtils = GrammarLocatorGrammarUtils()
 
-    static func textToArrayList(prism: Prism, colorMap: HashMap<PrismColor, Color>, info: ?String, literal: String): ArrayList<PrismNodesParseRes> {
+    static func textToArrayList(prism: Prism, colorMap: HashMap<String, UInt32>, info: ?String, literal: String): ArrayList<PrismNodesParseRes> {
         if (let None <- info) {
-            return ArrayList<PrismNodesParseRes>([PrismNodesParseRes("", literal, Option<String>.None, Option<Color>.None)])
+            return ArrayList<PrismNodesParseRes>([PrismNodesParseRes("", literal, Option<String>.None, Option<UInt32>.None)])
         }
         let realInfo: String = info.getOrThrow().toAsciiLower()
         var grammar: ?PrismGrammar = None
@@ -162,7 +161,7 @@ class PrismNodeParse {
         var list: ArrayList<PrismNode> = try {
             prism.tokenize(literal, grammar.getOrThrow())
         } catch (e: NoneValueException) {
-            return ArrayList<PrismNodesParseRes>([PrismNodesParseRes("", literal, Option<String>.None, Option<Color>.None)])
+            return ArrayList<PrismNodesParseRes>([PrismNodesParseRes("", literal, Option<String>.None, Option<UInt32>.None)])
         }
         let listPrismNodesParseRes: ArrayList<PrismNodesParseRes> = ArrayList<PrismNodesParseRes>()
         for (i in 0..list.size) {
@@ -189,12 +188,12 @@ class PrismNodeParse {
         }
     }
 
-    static func renderColor(map: HashMap<PrismColor, Color>, obj: PrismNodesParseRes): ?Color {
+    static func renderColor(map: HashMap<String, UInt32>, obj: PrismNodesParseRes): ?UInt32 {
         let types: String = obj.getType()
         let alias: ?String = obj.getAlias()
-        var color: ?Color = map.get(PrismColor.fromString(types.toAsciiLower()))
+        var color: ?UInt32 = map.get(types.toAsciiLower())
         if (color.isNone() && alias.isSome()) {
-            color = map.get(PrismColor.fromString(alias.getOrThrow().toAsciiLower()))
+            color = map.get(alias.getOrThrow().toAsciiLower())
         }
         if (color.isSome()) {
             return color
