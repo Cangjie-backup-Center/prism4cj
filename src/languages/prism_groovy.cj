@@ -22,7 +22,7 @@ public class PrismGroovy {
                     Prism.pattern(
                     Regex(
                     "\\b(?:0b[01_]+|0x[\\da-f_]+(?:\\.[\\da-f_p\\-]+)?|[\\d_]+(?:\\.[\\d_]+)?(?:e[+-]?[\\d]+)?)[glidf]?\\b",
-                    RegexOption().ignoreCase()))),
+                    RegexFlag.IgnoreCase))),
                 Prism.token("operator",
                     Prism.pattern(
                     Regex(

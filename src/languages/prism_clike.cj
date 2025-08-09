@@ -7,6 +7,7 @@ package prism4cj.languages
 internal import std.collection.ArrayList
 internal import std.regex.Regex
 internal import std.regex.RegexOption
+internal import std.regex.RegexFlag
 internal import prism4cj.prism.Grammar
 internal import prism4cj.prism.GrammarImpl
 internal import prism4cj.prism.Prism
@@ -46,8 +47,8 @@ public abstract class PrismClike {
                     ))
                 ),
                 Prism.token("boolean", Prism.pattern(Regex("\\b(?:true|false)\\b"))),
-                Prism.token("function", Prism.pattern(Regex("[a-z0-9_]+(?=\\()", RegexOption().ignoreCase()))),
-                Prism.token("number", Prism.pattern(Regex("\\b0x[\\da-f]+\\b|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e[+-]?\\d+)?",RegexOption().ignoreCase()))),
+                Prism.token("function", Prism.pattern(Regex("[a-z0-9_]+(?=\\()", RegexFlag.IgnoreCase))),
+                Prism.token("number", Prism.pattern(Regex("\\b0x[\\da-f]+\\b|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e[+-]?\\d+)?", RegexFlag.IgnoreCase))),
                 Prism.token(
                     "operator",
                     Prism.pattern(Regex("--?|\\+\\+?|!=?=?|<=?|>=?|==?=?|&&?|\\|\\|?|\\?|\\*|\\/|~|\\^|%"))

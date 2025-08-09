@@ -37,8 +37,8 @@ public class PrismCssExtras {
                 v,
                 "function",
                 ArrayList<Token>([
-                    Prism.token("hexcode", Prism.pattern(Regex("#[\\da-f]{3,8}", RegexOption().ignoreCase()))),
-                    Prism.token("entity", Prism.pattern(Regex("\\\\[\\da-f]{1,8}", RegexOption().ignoreCase()))),
+                    Prism.token("hexcode", Prism.pattern(Regex("#[\\da-f]{3,8}", RegexFlag.IgnoreCase))),
+                    Prism.token("entity", Prism.pattern(Regex("\\\\[\\da-f]{1,8}", RegexFlag.IgnoreCase))),
                     Prism.token("number", Prism.pattern(Regex("[\\d%.]+")))
                 ])
             )

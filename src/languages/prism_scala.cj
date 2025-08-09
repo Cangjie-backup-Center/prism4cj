@@ -28,7 +28,7 @@ public class PrismScala {
                     Prism.pattern(
                         Regex(
                             "\\b0x[\\da-f]*\\.?[\\da-f]+|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e\\d+)?[dfl]?",
-                            RegexOption().ignoreCase()
+                            RegexFlag.IgnoreCase
                         )
                     )
                 )

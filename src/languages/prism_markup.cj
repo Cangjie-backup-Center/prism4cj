@@ -6,20 +6,20 @@ package prism4cj.languages
 
 public abstract class PrismMarkup {
     public static func create(): Grammar {
-        let entity: Token = Prism.token("entity", Prism.pattern(Regex("&#?[\\da-z]{1,8};", RegexOption().ignoreCase())));
+        let entity: Token = Prism.token("entity", Prism.pattern(Regex("&#?[\\da-z]{1,8};", RegexFlag.IgnoreCase)));
         return GrammarImpl(
             "markup",
             ArrayList<Token>([
                 Prism.token("comment", Prism.pattern(Regex("<!--[\\s\\S]*?-->"))),
                 Prism.token("prolog", Prism.pattern(Regex("<\\?[\\s\\S]+?\\?>"))),
-                Prism.token("doctype", Prism.pattern(Regex("<!DOCTYPE[\\s\\S]+?>", RegexOption().ignoreCase()))),
-                Prism.token("cdata", Prism.pattern(Regex("<!\\[CDATA\\[[\\s\\S]*?]]>", RegexOption().ignoreCase()))),
+                Prism.token("doctype", Prism.pattern(Regex("<!DOCTYPE[\\s\\S]+?>", RegexFlag.IgnoreCase))),
+                Prism.token("cdata", Prism.pattern(Regex("<!\\[CDATA\\[[\\s\\S]*?]]>", RegexFlag.IgnoreCase))),
                 Prism.token(
                     "tag",
                     Prism.pattern(
                         Regex(
                             "<\\/?(?!\\d)[^\\s>\\/=$<%]+(?:\\s+[^\\s>\\/=]+(?:=(?:(\"|')(?:\\\\[\\s\\S]|(?!\\1)[^\\\\])*\\1|[^\\s'\">=]+))?)*\\s*\\/?>",
-                            RegexOption().ignoreCase()
+                            RegexFlag.IgnoreCase
                         ),
                         false,
                         true,
@@ -30,7 +30,7 @@ public abstract class PrismMarkup {
                                 Prism.token(
                                     "tag",
                                     Prism.pattern(
-                                        Regex("^<\\/?[^\\s>\\/]+", RegexOption().ignoreCase()),
+                                        Regex("^<\\/?[^\\s>\\/]+", RegexFlag.IgnoreCase),
                                         false,
                                         false,
                                         None,
@@ -48,7 +48,7 @@ public abstract class PrismMarkup {
                                     Prism.pattern(
                                         Regex(
                                             "=(?:(\"|')(?:\\\\[\\s\\S]|(?!\\1)[^\\\\])*\\1|[^\\s'\">=]+)",
-                                            RegexOption().ignoreCase()
+                                            RegexFlag.IgnoreCase
                                         ),
                                         false,
                                         false,

@@ -59,7 +59,7 @@ public class PrismSwift {
                     Prism.pattern(
                         Regex(
                             "\\b(?:[\\d_]+(?:\\.[\\de_]+)?|0x[a-f0-9_]+(?:\\.[a-f0-9p_]+)?|0b[01_]+|0o[0-7_]+)\\b",
-                            RegexOption().ignoreCase()
+                            RegexFlag.IgnoreCase
                         )
                     )
                 )
