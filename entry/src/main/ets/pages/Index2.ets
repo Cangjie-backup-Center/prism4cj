@@ -1,4 +1,4 @@
-import { codeStringToColorString, PrismNodesParseRes, PrismNodesParseResColor } from '@cangjie-tpc/prism';
+import { codeStringToColorString, PrismBlock, PrismRes, PrismNode } from '@cangjie-tpc/prism';
 
 @Entry
 @Component
@@ -24,25 +24,17 @@ struct Index2 {
     '    }\n' +
     '}';
   @State
-  list: Array<PrismNodesParseRes> = new Array<PrismNodesParseRes>()
+  list: Array<PrismBlock> = new Array<PrismBlock>()
   @State
   txtBackground: number = undefined!
   @State
   defaultFontColor: number = undefined!
 
   async aboutToAppear(): Promise<void> {
-    let a: PrismNodesParseResColor= await codeStringToColorString(this.message, "java", false)
-    this.txtBackground = a.getBackground()
-    this.defaultFontColor = a.getDefaultFontColor()
-    let b :IterableIterator<PrismNodesParseRes> = a.getListColor().values()
-    let ret =  b.next()
-    this.list.push(ret.value as PrismNodesParseRes)
-    while (!ret.done){
-      ret = b.next()
-      if(!ret.done){
-        this.list.push(ret.value as PrismNodesParseRes)
-      }
-    }
+    let prismRes: PrismRes= await codeStringToColorString(this.message, "java", false)
+    this.txtBackground = prismRes.getBackground()
+    this.defaultFontColor = prismRes.getDefaultFontColor()
+    this.list = Array.from(prismRes.getListColor())
   }
 
   isColor(getColor: number | undefined): number {
@@ -59,14 +51,23 @@ struct Index2 {
         Column() {
           Scroll() {
             Column() {
-              Text() {
-                ForEach(this.list, (item: PrismNodesParseRes, index: number) => {
-                  Span(item.getText())
-                    .fontColor(this.isColor(item.getColor()))
+              List() {
+                ForEach(this.list, (prismBlock: PrismBlock, index: number) => {
+                  ListItem() {
+                    Column() {
+                      // Text(prismBlock.getText())
+                      Text() {
+                        ForEach(Array.from(prismBlock.getList()), (prismNode: PrismNode, index: number) => {
+                          Span(prismNode.text)
+                            .fontColor(this.isColor(prismNode.color))
+                        })
+                      }
+                      .fontSize(14)
+                      .textAlign(TextAlign.Start)
+                    }
+                  }
                 })
               }
-              .fontSize(14)
-              .textAlign(TextAlign.Start)
             }
             .justifyContent(FlexAlign.Start)
             .alignItems(HorizontalAlign.Start)
@@ -91,6 +92,6 @@ struct Index2 {
     }
     .width(`100%`)
     .height(`100%`)
-    .backgroundColor(Color.Black)
+    .backgroundColor(Color.White)
   }
 }

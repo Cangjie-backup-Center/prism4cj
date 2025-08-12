@@ -209,7 +209,7 @@ struct Index {
         Row() {
           Text("")// 宽度
             .width(10)
-          Button("11. 深色，java语言,自定义")
+          Button("11. 深色，Html语言")
             .height(50)// 高度
             .layoutWeight(1)// 容器尺寸确定时，元素与兄弟节点主轴布局尺寸按照权重进行分配，忽略本身尺寸设置仅在Row/Column/Flex布局中生效
             .fontColor(0xFFFFFFFF)// 文本颜色
@@ -229,7 +229,7 @@ struct Index {
         Row() {
           Text("")// 宽度
             .width(10)
-          Button("12. 浅色，java语言,自定义")
+          Button("12. 浅色，Html语言")
             .height(50)// 高度
             .layoutWeight(1)// 容器尺寸确定时，元素与兄弟节点主轴布局尺寸按照权重进行分配，忽略本身尺寸设置仅在Row/Column/Flex布局中生效
             .fontColor(0xFFFFFFFF)// 文本颜色
@@ -409,7 +409,7 @@ struct Index {
         Row() {
           Text("")// 宽度
             .width(10)
-          Button("21. 深色，html 语法")
+          Button("21. 深色，仓颉，自定义")
             .height(50)// 高度
             .layoutWeight(1)// 容器尺寸确定时，元素与兄弟节点主轴布局尺寸按照权重进行分配，忽略本身尺寸设置仅在Row/Column/Flex布局中生效
             .fontColor(0xFFFFFFFF)// 文本颜色
@@ -429,7 +429,7 @@ struct Index {
         Row() {
           Text("")// 宽度
             .width(10)
-          Button("22. 浅色，html 语法")
+          Button("22. 浅色，仓颉，自定义")
             .height(50)// 高度
             .layoutWeight(1)// 容器尺寸确定时，元素与兄弟节点主轴布局尺寸按照权重进行分配，忽略本身尺寸设置仅在Row/Column/Flex布局中生效
             .fontColor(0xFFFFFFFF)// 文本颜色
@@ -440,26 +440,6 @@ struct Index {
             .onClick(e => {
               // 点击动作触发该方法调用
               router.pushUrl({ url: 'pages/Index22' })
-            })
-          Text("")// 宽度
-            .width(10)
-        }
-        .width('100%')
-
-        Row() {
-          Text("")// 宽度
-            .width(10)
-          Button("23. 浅色，html 语法 parse into js")
-            .height(50)// 高度
-            .layoutWeight(1)// 容器尺寸确定时，元素与兄弟节点主轴布局尺寸按照权重进行分配，忽略本身尺寸设置仅在Row/Column/Flex布局中生效
-            .fontColor(0xFFFFFFFF)// 文本颜色
-            .backgroundColor(0xFFFF0000)// 背景颜色
-            .margin({ top: 5, bottom: 5 })// 外边距
-            .align(Alignment.Center)// 内容对齐方式
-            .fontSize(12)// 字体大小
-            .onClick(e => {
-              // 点击动作触发该方法调用
-              router.pushUrl({ url: 'pages/Index23' })
             })
           Text("")// 宽度
             .width(10)

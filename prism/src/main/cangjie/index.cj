@@ -4,6 +4,20 @@ import ohos.base.Color
 import ohos.ark_interop.*
 import ohos.ark_interop_macro.*
 
+func getStackTrace(thrown: ?Exception): String {
+    var res: String = ""
+    match (thrown) {
+        case None => return res
+        case Some(v) =>
+            res = "\n${v.toString()}\n"
+            var arr = v.getStackTrace()
+            for (line in arr) {
+                res += "      at ${line.declaringClass}.${line.methodName}(${line.fileName}:${line.lineNumber})\n"
+            }
+            return res
+    }
+}
+
 public func arktsCodeStringToColorString(context: JSContext, callInfo: JSCallInfo): JSValue {
     let code = callInfo[0].toString(context)
     let info: ?String = if (callInfo[1].isNull()) {
@@ -20,21 +34,24 @@ public func arktsCodeStringToColorString(context: JSContext, callInfo: JSCallInf
         context.postJSTask {
             =>
             let resColor: JSObject = PrismNodesParseResColor_factory
-                .call(prismNodesParseResColor.background.toJSValue(context),prismNodesParseResColor.defaultFontColor.toJSValue(context))
+                .call(
+                    prismNodesParseResColor.background.toJSValue(context),
+                    prismNodesParseResColor.defaultFontColor.toJSValue(context)
+                )
                 .asObject()
-            var jsArr: ArrayList<JSValue> = ArrayList<JSValue>()
-            for (cjcolor in prismNodesParseResColor.getListColor()) {
-                jsArr.add(cjcolor.types.toJSValue(context))
-                jsArr.add(cjcolor.text.toJSValue(context))
-                jsArr.add(cjcolor.alias?.toJSValue(context) ?? context.undefined().toJSValue())
-                jsArr.add(cjcolor.color?.toJSValue(context) ?? context.undefined().toJSValue())
-                if (jsArr.size >= 63 * 4) {
-                    resColor.callMethod("addAll", jsArr.toArray())
-                    jsArr = ArrayList<JSValue>()
+            for (i in 0..prismNodesParseResColor.getListColor().size) {
+                let cjcolor = prismNodesParseResColor.getListColor()[i]
+                if (cjcolor.text == "\n") {
+                    resColor.callMethod("addBlock")
+                } else {
+                    let jscolor: JSValue = PrismNodesParseRes_factory.call(
+                        cjcolor.types.toJSValue(context),
+                        cjcolor.text.toJSValue(context),
+                        (cjcolor.alias?.toJSValue(context)) ?? context.undefined().toJSValue(),
+                        (cjcolor.color?.toJSValue(context)) ?? context.undefined().toJSValue()
+                    )
+                    resColor.callMethod('addNode', jscolor)
                 }
-            }
-            if (jsArr.size > 0) {
-                resColor.callMethod("addAll", jsArr.toArray())
             }
             let ret = resColor.toJSValue()
             promise.resolve(ret)
@@ -43,120 +60,115 @@ public func arktsCodeStringToColorString(context: JSContext, callInfo: JSCallInf
     return promise.toJSValue()
 }
 
-@Interop[ArkTS]
-public func arktsCodeStringToColorStringCustomize(code: String, info: Option<String>, background: UInt32, text: UInt32, colorMap: JSHashMapEx<String, UInt32>): PrismNodesParseResColorArkts {
-    let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorStringCustomize(code, info, background, text, colorMap.toHashMap())
-    let listArkts: ArrayList<PrismNodesParseResArkts> = ArrayList<PrismNodesParseResArkts>()
-    for (i in 0..prismNodesParseResColor.getListColor().size) {
-        listArkts.add(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
-    }
-    let jsList: JSArrayEx<PrismNodesParseResArkts> = JSArrayEx<PrismNodesParseResArkts>(listArkts.toArray())
-    return PrismNodesParseResColorArkts(jsList, prismNodesParseResColor.getBackground(), prismNodesParseResColor.getDefaultFontColor())
-}
-
 let EXPORT_MODULE1 = JSModule.registerModule {
     runtime, exports => exports["arktsCodeStringToColorString"] = runtime.function(arktsCodeStringToColorString).toJSValue()
 }
 
 @Interop[ArkTS]
-public class PrismNodesParseResColorArkts {
-    @Interop[ArkTS, Invisible]
-    var prismNodesParseResColor: PrismNodesParseResColor
-
-    @Interop[ArkTS, Invisible]
-    init(prismNodesParseResColor: PrismNodesParseResColor) {
-        this.prismNodesParseResColor = prismNodesParseResColor
-    }
-
-    public init(list: JSArrayEx<PrismNodesParseResArkts>, background: UInt32, defaultFontColor: UInt32) {
-        let a = ArrayList<PrismNodesParseRes>()
-        for (i in 0..list.size) {
-            a.add(list[i].prismNodesParseRes)
+public func arktsCodeStringToColorStringCustomize(code: String, info: Option<String>, background: UInt32, text: UInt32, colorMap: JSHashMapEx<String, UInt32>): PrismResCJ {
+    let prismNodesParseResColor: PrismNodesParseResColor = codeStringToColorStringCustomize(code, info, background, text, colorMap.toHashMap())
+    var prismBlockCJs: ArrayList<PrismBlockCJ> = ArrayList<PrismBlockCJ>()
+    var prismNodeCJs: ArrayList<PrismNodeCJ> = ArrayList<PrismNodeCJ>()
+    var str: String = ""
+    for (i in 0..prismNodesParseResColor.getListColor().size) {
+        if (prismNodesParseResColor.getListColor()[i].text == "\n") {
+            var prismBlockCJ: PrismBlockCJ = PrismBlockCJ(str, JSArrayEx<PrismNodeCJ>(prismNodeCJs.toArray()))
+            prismBlockCJs.add(prismBlockCJ)
+            str = ""
+            prismNodeCJs.clear()
+        } else {
+            prismNodeCJs.add(
+                PrismNodeCJ(
+                    prismNodesParseResColor.getListColor()[i].types,
+                    prismNodesParseResColor.getListColor()[i].text,
+                    prismNodesParseResColor.getListColor()[i].alias,
+                    prismNodesParseResColor.getListColor()[i].color
+                )
+            )
+            str += prismNodesParseResColor.getListColor()[i].text
         }
-        this.prismNodesParseResColor = PrismNodesParseResColor(a, background, defaultFontColor)
+    }
+    if (str != "") {
+        var prismBlockCJ: PrismBlockCJ = PrismBlockCJ(str, JSArrayEx<PrismNodeCJ>(prismNodeCJs.toArray()))
+        prismBlockCJs.add(prismBlockCJ)
+        str = ""
+        prismNodeCJs.clear()
+    }
+    let jsList: JSArrayEx<PrismBlockCJ> = JSArrayEx<PrismBlockCJ>(prismBlockCJs.toArray())
+    return PrismResCJ(jsList, prismNodesParseResColor.getBackground(), prismNodesParseResColor.getDefaultFontColor())
+}
+
+@Interop[ArkTS]
+public class PrismResCJ {
+    var list: JSArrayEx<PrismBlockCJ>
+    var background: UInt32
+    var defaultFontColor: UInt32
+
+    public init(list: JSArrayEx<PrismBlockCJ>, background: UInt32, defaultFontColor: UInt32) {
+        this.list = list
+        this.background = background
+        this.defaultFontColor = defaultFontColor
     }
 
     public func getBackground(): UInt32 {
-        return prismNodesParseResColor.getBackground()
+        return this.background
     }
 
     public func getDefaultFontColor(): UInt32 {
-        return prismNodesParseResColor.getDefaultFontColor()
+        return this.defaultFontColor
     }
 
-    public func getListColor(): JSArrayEx<PrismNodesParseResArkts> {
-        let a = ArrayList<PrismNodesParseResArkts>()
-        for (i in 0..prismNodesParseResColor.getListColor().size) {
-            a.add(PrismNodesParseResArkts(prismNodesParseResColor.getListColor()[i]))
-        }
-        return JSArrayEx<PrismNodesParseResArkts>(a.toArray())
+    public func getListColor(): JSArrayEx<PrismBlockCJ> {
+        return this.list
     }
 }
 
 @Interop[ArkTS]
-public class PrismNodesParseResArkts {
-    @Interop[ArkTS, Invisible]
-    var prismNodesParseRes: PrismNodesParseRes
+public class PrismBlockCJ {
+    var text: String
+    var list: JSArrayEx<PrismNodeCJ>
 
-    @Interop[ArkTS, Invisible]
-    init(prismNodesParseRes: PrismNodesParseRes) {
-        this.prismNodesParseRes = prismNodesParseRes
+    public init(text: String, list: JSArrayEx<PrismNodeCJ>) {
+        this.text = text
+        this.list = list
     }
 
-    /**
-     * PrismNodesParseRes 构造函数
-     *
-     * @param types 类型
-     * @param text  文本
-     * @param text  别名
-     * @param text  文本对应的颜色
-     */
-    public init(types: String, text: String, alias: Option<String>, color: Option<UInt32>) {
-        let c: ?UInt32 = if (let Some(v) <- color) {
-            v
-        } else {
-            Option<UInt32>.None
-        }
-        this.prismNodesParseRes = PrismNodesParseRes(types, text, alias, c)
-    }
-
-    /**
-     * 获取结果对象类型
-     *
-     * @return 返回结果对象的类型
-     */
-    public func getType(): String {
-        return this.prismNodesParseRes.getType()
-    }
-
-    /**
-     * 获取结果对象文本
-     *
-     * @return 返回结果对象的文本信息
-     */
     public func getText(): String {
-        return this.prismNodesParseRes.getText()
+        return this.text
     }
 
-    /**
-     * 获取结果对象别名
-     *
-     * @return 返回结果对象的别名
-     */
+    public func getList(): JSArrayEx<PrismNodeCJ> {
+        return this.list
+    }
+}
+
+@Interop[ArkTS]
+public class PrismNodeCJ {
+    var types: String
+    var text: String
+    var alias: Option<String>
+    var color: Option<UInt32>
+
+    public init(types: String, text: String, alias: Option<String>, color: Option<UInt32>) {
+        this.types = types
+        this.text = text
+        this.alias = alias
+        this.color = color
+    }
+
+    public func getType(): String {
+        return this.types
+    }
+
+    public func getText(): String {
+        return this.text
+    }
+
     public func getAlias(): Option<String> {
-        return this.prismNodesParseRes.getAlias()
+        return this.alias
     }
 
-    /**
-     * 获取结果对象文本对应的颜色
-     *
-     * @return 返回结果对象文本对应的颜色
-     */
     public func getColor(): Option<UInt32> {
-        return if (let Some(v) <- this.prismNodesParseRes.getColor()) {
-            v
-        } else {
-            Option<UInt32>.None
-        }
+        return this.color
     }
 }

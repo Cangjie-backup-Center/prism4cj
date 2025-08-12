@@ -1,101 +1,106 @@
-import { PrismNodesParseResColor, PrismNodesParseRes, codeStringToColorStringCustomize,
-  PrismColor} from '@cangjie-tpc/prism';
+import { codeStringToColorString, PrismBlock, PrismNode, PrismRes } from '@cangjie-tpc/prism';
 
 @Entry
 @Component
-struct Index12 {
-  @State message: string = 'public class FibonacciSequence {\n' +
-    '    public static void main(String[] args) {\n' +
-    '        int n = 10; // 要计算的斐波那契数列的项数\n' +
-    '        \n' +
-    '        System.out.println("斐波那契数列的前" + n + "项：");\n' +
-    '        \n' +
-    '        for (int i = 0; i < n; i++) {\n' +
-    '            System.out.print(fibonacci(i) + " ");\n' +
+struct Index22 {
+  @State message: string = '<!DOCTYPE html>\n' +
+    '<html>\n' +
+    '<head>\n' +
+    '    <title>Markdown快速参考</title>\n' +
+    '    <style>\n' +
+    '        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }\n' +
+    '        h1 { text-align: center; color: #2c3e50; }\n' +
+    '        .card { \n' +
+    '            background: #f8f9fa; \n' +
+    '            border-radius: 8px; \n' +
+    '            padding: 15px; \n' +
+    '            margin-bottom: 20px;\n' +
+    '            box-shadow: 0 2px 5px rgba(0,0,0,0.1);\n' +
     '        }\n' +
-    '    }\n' +
-    '    \n' +
-    '    // 递归方法计算斐波那契数列的第n项\n' +
-    '    public static int fibonacci(int n) {\n' +
-    '        if (n <= 1) {\n' +
-    '            return n;\n' +
-    '        } else {\n' +
-    '            return fibonacci(n-1) + fibonacci(n-2);\n' +
+    '        .example { \n' +
+    '            background: white; \n' +
+    '            padding: 15px;\n' +
+    '            border-left: 3px solid #3498db;\n' +
+    '            font-family: monospace;\n' +
+    '            margin: 10px 0;\n' +
     '        }\n' +
-    '    }\n' +
-    '}';
+    '        .result { margin-top: 15px; padding: 10px; background: white; }\n' +
+    '    </style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '    <h1>Markdown语法速查</h1>\n' +
+    '\n' +
+    '    <div class="card">\n' +
+    '        <h2>标题</h2>\n' +
+    '        <div class="example"># 一级标题\n' +
+    '## 二级标题\n' +
+    '### 三级标题</div>\n' +
+    '        <div class="result">\n' +
+    '            <h1>一级标题</h1>\n' +
+    '            <h2>二级标题</h2>\n' +
+    '            <h3>三级标题</h3>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '\n' +
+    '    <div class="card">\n' +
+    '        <h2>文本格式</h2>\n' +
+    '        <div class="example">**粗体文本**\n' +
+    '*斜体文本*\n' +
+    '~~删除线~~\n' +
+    '`行内代码`</div>\n' +
+    '        <div class="result">\n' +
+    '            <p><strong>粗体文本</strong><br>\n' +
+    '            <em>斜体文本</em><br>\n' +
+    '            <del>删除线</del><br>\n' +
+    '            <code>行内代码</code></p>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '\n' +
+    '    <div class="card">\n' +
+    '        <h2>列表</h2>\n' +
+    '        <div class="example">- 无序列表项\n' +
+    '1. 有序列表项\n' +
+    '- [x] 已完成\n' +
+    '- [ ] 未完成</div>\n' +
+    '        <div class="result">\n' +
+    '            <ul><li>无序列表项</li></ul>\n' +
+    '            <ol><li>有序列表项</li></ol>\n' +
+    '            <ul>\n' +
+    '                <li><input type="checkbox" checked disabled> 已完成</li>\n' +
+    '                <li><input type="checkbox" disabled> 未完成</li>\n' +
+    '            </ul>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '\n' +
+    '    <div class="card">\n' +
+    '        <h2>链接与代码</h2>\n' +
+    '        <div class="example">[GitCode](https://gitcode.com)\n' +
+    '```python\n' +
+    'print("代码块")\n' +
+    '```</div>\n' +
+    '        <div class="result">\n' +
+    '            <p><a href="https://gitcode.com">GitCode</a></p>\n' +
+    '            <pre style="background:#f0f0f0;padding:10px;">print("代码块")</pre>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '\n' +
+    '    <div style="text-align:center; margin-top:30px; color:#7f8c8d;">\n' +
+    '        <small>TianQi AI 提供 | 最后更新: 2025/07/22</small>\n' +
+    '    </div>\n' +
+    '</body>\n' +
+    '</html>';
   @State
-  list: Array<PrismNodesParseRes> = new Array<PrismNodesParseRes>()
+  list: Array<PrismBlock> = new Array<PrismBlock>()
   @State
   txtBackground: number = undefined!
   @State
   defaultFontColor: number = undefined!
 
   async aboutToAppear(): Promise<void> {
-    let map: Map<PrismColor, number> = new Map(
-      [
-        [PrismColor.COMMENT, 0xFFD3D3D3], // 注释
-        [PrismColor.PROLOG, 0xFF000000],
-        [PrismColor.DOCTYPE, 0xFF000000],
-        [PrismColor.CDATA, 0xFF000000],
-        [PrismColor.PUNCTUATION, 0xFF00FF00], // 符号
-        [PrismColor.PROPERTY, 0xFF000000],
-        [PrismColor.TAG, 0xFF000000],
-        [PrismColor.BOOLEAN, 0xFF000000],
-        [PrismColor.NUMBER, 0xFF0000FF], // 数字
-        [PrismColor.CONSTANT, 0xFF000000],
-        [PrismColor.SYMBOL, 0xFF000000],
-        [PrismColor.DELETED, 0xFF000000],
-        [PrismColor.SELECTOR, 0xFF000000],
-        [PrismColor.ATTR_NAME, 0xFF000000],
-        [PrismColor.STRING, 0xFFFFFF00], // 字符串
-        [PrismColor.CHAR, 0xFF000000],
-        [PrismColor.BUILTIN, 0xFF000000],
-        [PrismColor.INSERTED, 0xFF000000],
-        [PrismColor.OPERATOR, 0xFF696969], // 符号
-        [PrismColor.URL, 0xFF000000],
-        [PrismColor.ENTITY, 0xFF000000],
-        [PrismColor.ATRULE, 0xFF000000],
-        [PrismColor.ATTR_VALUE, 0xFF000000],
-        [PrismColor.KEYWORD, 0xFFFF0000], // 关键字
-        [PrismColor.FUNCTION, 0xFF87CEEB], // 方法
-        [PrismColor.CLASS_NAME, 0xFF808000], // 类名
-        [PrismColor.REGEX, 0xFF000000],
-        [PrismColor.IMPORTANT, 0xFF000000],
-        [PrismColor.VARIABLE, 0xFF000000],
-        [PrismColor.DELIMITER, 0xFF000000],
-        [PrismColor.ANNOTATION, 0xFF000000],
-        [PrismColor.ESCAPE_SEQ, 0xFF000000],
-        [PrismColor.GENERIC_METHOD, 0xFF000000],
-        [PrismColor.PSEUDO_ELEMENT, 0xFF000000],
-        [PrismColor.PSEUDO_CLASS, 0xFF000000],
-        [PrismColor.CLASS, 0xFF000000],
-        [PrismColor.ID, 0xFF000000],
-        [PrismColor.ATTRIBUTE, 0xFF000000],
-        [PrismColor.HEXCODE, 0xFF000000],
-        [PrismColor.COMMAND, 0xFF000000],
-        [PrismColor.PARAMETER, 0xFF000000],
-        [PrismColor.COORD, 0xFF000000],
-        [PrismColor.COMMIT_SHA1, 0xFF000000],
-        [PrismColor.SPOCK_BLOCK, 0xFF000000],
-        [PrismColor.NULL, 0xFF000000],
-        [PrismColor.NAMESPACE, 0xFF000000],
-        [PrismColor.SHEBANG, 0xFF000000],
-        [PrismColor.DEFAULT, 0xFF000000]
-      ]
-    );
-    let a: PrismNodesParseResColor= await codeStringToColorStringCustomize(this.message, "java", 0xFFFFFFFF, 0XFF000000, map)
-    this.txtBackground = a.getBackground()
-    this.defaultFontColor = a.getDefaultFontColor()
-    let b :IterableIterator<PrismNodesParseRes> = a.getListColor().values()
-    let ret =  b.next()
-    this.list.push(ret.value as PrismNodesParseRes)
-    while (!ret.done){
-      ret = b.next()
-      if(!ret.done){
-        this.list.push(ret.value as PrismNodesParseRes)
-      }
-    }
+    let prismRes: PrismRes = await codeStringToColorString(this.message, "html", false)
+    this.txtBackground = prismRes.getBackground()
+    this.defaultFontColor = prismRes.getDefaultFontColor()
+    this.list = Array.from(prismRes.getListColor())
   }
 
   isColor(getColor: number | undefined): number {
@@ -112,14 +117,23 @@ struct Index12 {
         Column() {
           Scroll() {
             Column() {
-              Text() {
-                ForEach(this.list, (item: PrismNodesParseRes, index: number) => {
-                  Span(item.getText())
-                    .fontColor(this.isColor(item.getColor()))
+              List() {
+                ForEach(this.list, (prismBlock: PrismBlock, index: number) => {
+                  ListItem() {
+                    Column() {
+                      // Text(prismBlock.getText())
+                      Text() {
+                        ForEach(Array.from(prismBlock.getList()), (prismNode: PrismNode, index: number) => {
+                          Span(prismNode.text)
+                            .fontColor(this.isColor(prismNode.color))
+                        })
+                      }
+                      .fontSize(14)
+                      .textAlign(TextAlign.Start)
+                    }
+                  }
                 })
               }
-              .fontSize(14)
-              .textAlign(TextAlign.Start)
             }
             .justifyContent(FlexAlign.Start)
             .alignItems(HorizontalAlign.Start)
@@ -144,6 +158,6 @@ struct Index12 {
     }
     .width(`100%`)
     .height(`100%`)
-    .backgroundColor(Color.Black)
+    .backgroundColor(Color.White)
   }
 }

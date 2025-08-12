@@ -1,55 +1,125 @@
-import { CustomLib, PrismNodesParseResColorArkts } from "libark_interop_api_prism.so";
+import { CustomLib, PrismResCJ } from "libark_interop_api_prism.so";
 import { requireCJLib } from "libark_interop_loader.so";
 import { collections } from "@kit.ArkTS";
 
 let lib = requireCJLib("libprism4cj.so") as CustomLib
 
+const resFactory = (background: number, defaultFontColor: number) => new PrismRes(new collections.Array(), background, defaultFontColor)
+
+const nodeFactory = (types: string, text: string, alias: string | undefined, color: number | undefined) => new PrismNode(types, text, alias, color)
+
+export async function codeStringToColorString(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismRes> {
+  let res = await lib.arktsCodeStringToColorString(code, info, isDarkula, resFactory, nodeFactory) as PrismRes
+  return res
+}
+
+export function codeStringToColorStringCustomize(code: string, info: string | undefined, background: number, text: number, colorMap: Map<PrismColor, number>): PrismRes {
+  let res: PrismResCJ = lib.arktsCodeStringToColorStringCustomize(code, info, background, text, colorMap)
+  let prismBlocks: collections.Array<PrismBlock> = new collections.Array<PrismBlock>()
+  for (let i = 0; i < res.getListColor().length; i++) {
+    let prismNodes: collections.Array<PrismNode> = new collections.Array<PrismNode>()
+    for (let j = 0; j < res.getListColor()[i].getList().length; j++) {
+      prismNodes.push(new PrismNode(
+        res.getListColor()[i].getList()[j].getType(),
+        res.getListColor()[i].getList()[j].getText(),
+        res.getListColor()[i].getList()[j].getAlias(),
+        res.getListColor()[i].getList()[j].getColor()
+      ))
+    }
+    let prismBlock = new PrismBlock()
+    prismBlock.text = res.getListColor()[i].getText()
+    prismBlock.list = prismNodes
+    prismBlocks.push(prismBlock)
+  }
+  let prismRes: PrismRes = new PrismRes(prismBlocks, res.getBackground(), res.getDefaultFontColor())
+  return prismRes
+}
+
 @Sendable
-export class PrismNodesParseResColor {
-  list: collections.Array<PrismNodesParseRes> = new collections.Array<PrismNodesParseRes>()
+export class PrismRes {
+  list: collections.Array<PrismBlock> = new collections.Array<PrismBlock>()
   background: number = 0
   defaultFontColor: number = 0
 
-  constructor(list: collections.Array<PrismNodesParseRes>, background: number,defaultFontColor: number ) {
+  constructor(list: collections.Array<PrismBlock>, background: number, defaultFontColor: number) {
     this.list = list
     this.background = background
     this.defaultFontColor = defaultFontColor
   }
 
+  /**
+   * 获取代码块整体背景色
+   *
+   * @return 返回代码块整体背景色
+   */
   getBackground(): number {
     return this.background
   }
 
+  /**
+   * 获取代码块默认文本颜色
+   *
+   * @return 返回代码块默认文本颜色
+   */
   getDefaultFontColor(): number {
     return this.defaultFontColor
   }
 
-  getListColor(): collections.Array<PrismNodesParseRes> {
+  /**
+   * 获取块文本内容
+   *
+   * @return 返回块文本内容
+   */
+  getListColor(): collections.Array<PrismBlock> {
     return this.list
   }
 
-  addRes(res:PrismNodesParseRes):void{
-    this.list.push(res)
+  addNode(res: PrismNode): void {
+    if (this.list.length <= 0) {
+      this.list.push(new PrismBlock())
+    }
+    let prismBlock: PrismBlock = this.list[this.list.length -1]
+    prismBlock.list.push(res)
+    prismBlock.text += res.text
   }
 
-  addAll(...ress: Array<string | number>): void {
-    let i = 0
-    while (i < ress.length) {
-      let res = new PrismNodesParseRes(ress[i] as string, ress[++i] as string, ress[++i] as string, ress[++i] as number)
-      this.list.push(res)
-      i++
-    }
+  addBlock(): void {
+    this.list.push(new PrismBlock())
   }
 }
 
 @Sendable
-export class PrismNodesParseRes {
+export class PrismBlock {
+  text: string = ''
+  list: collections.Array<PrismNode> = new collections.Array<PrismNode>()
+
+  /**
+   * 获取块文本内容
+   *
+   * @return 返回块文本内容
+   */
+  getText(): string {
+    return this.text
+  }
+
+  /**
+   * 获取块的子节点列表信息
+   *
+   * @return 返回块的子节点列表信息
+   */
+  getList(): collections.Array<PrismNode> {
+    return this.list
+  }
+}
+
+@Sendable
+export class PrismNode {
   types: string = ""
   text: string = ""
   alias: string | undefined = undefined
   color: number | undefined = undefined
 
-  constructor(types: string,text: string,alias: string | undefined,color: number | undefined) {
+  constructor(types: string, text: string, alias: string | undefined, color: number | undefined) {
     this.types = types
     this.text = text
     this.alias = alias
@@ -92,7 +162,6 @@ export class PrismNodesParseRes {
     return this.color
   }
 }
-
 
 export enum PrismColor {
   COMMENT = "comment", // 注释内容
@@ -143,25 +212,4 @@ export enum PrismColor {
   NAMESPACE = "namespace", // 命名空间
   SHEBANG = "shebang", // 脚本文件开头的 #! 行
   DEFAULT = "default" // 其它值
-}
-
-
-const resColorFactory = (background: number,defaultFontColor: number)=>new PrismNodesParseResColor(new collections.Array(),background,defaultFontColor)
-const resFactory = (types: string,text: string,alias: string | undefined,color: number | undefined)=>new PrismNodesParseRes(types,text,alias,color)
-
-export async function codeStringToColorString(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismNodesParseResColor>  {
-  let res = await lib.arktsCodeStringToColorString(code, info, isDarkula, resColorFactory, resFactory) as PrismNodesParseResColor
-  return res
-}
-
-export function codeStringToColorStringCustomize(code: string, info: string | undefined, background: number, text: number, colorMap: Map<PrismColor, number>): PrismNodesParseResColor {
-  let prismNodesParseResColorArkts:PrismNodesParseResColorArkts =lib.arktsCodeStringToColorStringCustomize(code, info, background, text, colorMap)
-  let list = prismNodesParseResColorArkts.getListColor()
-  let cList = new collections.Array<PrismNodesParseRes>()
-  for (let index = 0; index < list.length; index++) {
-    let prismNodesParseRes = new PrismNodesParseRes(list[index].getType(),list[index].getText(),list[index].getAlias(),list[index].getColor())
-    cList.push(prismNodesParseRes)
-  }
-  let prismNodesParseResColor:PrismNodesParseResColor = new PrismNodesParseResColor(cList,prismNodesParseResColorArkts.getBackground(),prismNodesParseResColorArkts.getDefaultFontColor())
-  return prismNodesParseResColor
 }

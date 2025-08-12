@@ -1,5 +1,10 @@
-import { PrismNodesParseResColor, PrismNodesParseRes, codeStringToColorStringCustomize,
-  PrismColor} from '@cangjie-tpc/prism';
+import {
+  codeStringToColorStringCustomize,
+  PrismColor,
+  PrismRes,
+  PrismBlock,
+  PrismNode
+} from '@cangjie-tpc/prism';
 
 @Entry
 @Component
@@ -19,13 +24,13 @@ struct Index13 {
     '    println(res) // 0\n' +
     '}\n';
   @State
-  list: Array<PrismNodesParseRes> = new Array<PrismNodesParseRes>()
+  list: Array<PrismBlock> = new Array<PrismBlock>()
   @State
   txtBackground: number = undefined!
   @State
   defaultFontColor: number = undefined!
 
-  async aboutToAppear(): Promise<void> {
+  aboutToAppear(): void {
     let map: Map<PrismColor, number> = new Map(
       [
         [PrismColor.COMMENT, 0xFFD3D3D3], // 注释
@@ -78,18 +83,10 @@ struct Index13 {
         [PrismColor.DEFAULT, 0XFFFFFFFF]
       ]
     );
-    let a: PrismNodesParseResColor= await codeStringToColorStringCustomize(this.message, "cangjie", 0xFF000000, 0XFFFFFFFF, map)
-    this.txtBackground = a.getBackground()
-    this.defaultFontColor = a.getDefaultFontColor()
-    let b :IterableIterator<PrismNodesParseRes> = a.getListColor().values()
-    let ret =  b.next()
-    this.list.push(ret.value as PrismNodesParseRes)
-    while (!ret.done){
-      ret = b.next()
-      if(!ret.done){
-        this.list.push(ret.value as PrismNodesParseRes)
-      }
-    }
+    let prismRes: PrismRes = codeStringToColorStringCustomize(this.message, "cangjie", 0xFF000000, 0XFFFFFFFF, map)
+    this.txtBackground = prismRes.getBackground()
+    this.defaultFontColor = prismRes.getDefaultFontColor()
+    this.list = Array.from(prismRes.getListColor())
   }
 
   isColor(getColor: number | undefined): number {
@@ -106,14 +103,23 @@ struct Index13 {
         Column() {
           Scroll() {
             Column() {
-              Text() {
-                ForEach(this.list, (item: PrismNodesParseRes, index: number) => {
-                  Span(item.getText())
-                    .fontColor(this.isColor(item.getColor()))
+              List() {
+                ForEach(this.list, (prismBlock: PrismBlock, index: number) => {
+                  ListItem() {
+                    Column() {
+                      // Text(prismBlock.getText())
+                      Text() {
+                        ForEach(Array.from(prismBlock.getList()), (prismNode: PrismNode, index: number) => {
+                          Span(prismNode.text)
+                            .fontColor(this.isColor(prismNode.color))
+                        })
+                      }
+                      .fontSize(14)
+                      .textAlign(TextAlign.Start)
+                    }
+                  }
                 })
               }
-              .fontSize(14)
-              .textAlign(TextAlign.Start)
             }
             .justifyContent(FlexAlign.Start)
             .alignItems(HorizontalAlign.Start)
