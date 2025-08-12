@@ -31,6 +31,15 @@ export class PrismNodesParseResColor {
   addRes(res:PrismNodesParseRes):void{
     this.list.push(res)
   }
+
+  addAll(...ress: Array<string | number>): void {
+    let i = 0
+    while (i < ress.length) {
+      let res = new PrismNodesParseRes(ress[i] as string, ress[++i] as string, ress[++i] as string, ress[++i] as number)
+      this.list.push(res)
+      i++
+    }
+  }
 }
 
 @Sendable

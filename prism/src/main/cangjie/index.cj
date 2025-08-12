@@ -22,15 +22,19 @@ public func arktsCodeStringToColorString(context: JSContext, callInfo: JSCallInf
             let resColor: JSObject = PrismNodesParseResColor_factory
                 .call(prismNodesParseResColor.background.toJSValue(context),prismNodesParseResColor.defaultFontColor.toJSValue(context))
                 .asObject()
-            for (i in 0..prismNodesParseResColor.getListColor().size) {
-                let cjcolor = prismNodesParseResColor.getListColor()[i]
-                let jscolor: JSValue = PrismNodesParseRes_factory.call(
-                    cjcolor.types.toJSValue(context),
-                    cjcolor.text.toJSValue(context),
-                    (cjcolor.alias?.toJSValue(context)) ?? context.undefined().toJSValue(),
-                    (cjcolor.color?.toJSValue(context)) ?? context.undefined().toJSValue()
-                )
-                resColor.callMethod('addRes', jscolor)
+            var jsArr: ArrayList<JSValue> = ArrayList<JSValue>()
+            for (cjcolor in prismNodesParseResColor.getListColor()) {
+                jsArr.add(cjcolor.types.toJSValue(context))
+                jsArr.add(cjcolor.text.toJSValue(context))
+                jsArr.add(cjcolor.alias?.toJSValue(context) ?? context.undefined().toJSValue())
+                jsArr.add(cjcolor.color?.toJSValue(context) ?? context.undefined().toJSValue())
+                if (jsArr.size >= 63 * 4) {
+                    resColor.callMethod("addAll", jsArr.toArray())
+                    jsArr = ArrayList<JSValue>()
+                }
+            }
+            if (jsArr.size > 0) {
+                resColor.callMethod("addAll", jsArr.toArray())
             }
             let ret = resColor.toJSValue()
             promise.resolve(ret)
