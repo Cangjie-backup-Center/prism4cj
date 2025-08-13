@@ -1,6 +1,5 @@
 package prism4cj
 
-import ohos.base.Color
 import ohos.ark_interop.*
 import ohos.ark_interop_macro.*
 

@@ -1,5 +1,4 @@
 import { codeStringToColorString, PrismBlock, PrismRes, PrismNode } from '@cangjie-tpc/prism';
-import hilog from '@ohos.hilog';
 
 @Entry
 @Component

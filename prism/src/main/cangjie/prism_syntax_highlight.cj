@@ -3,7 +3,6 @@
  */
 package prism4cj
 
-import prism4cj.languages.*
 import prism4cj.prism.*
 import prism4cj.prism.Text as PrismText
 import prism4cj.prism.Node as PrismNode

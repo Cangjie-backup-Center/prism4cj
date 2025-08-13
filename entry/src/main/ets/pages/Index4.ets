@@ -86,6 +86,6 @@ struct Index4 {
     }
     .width(`100%`)
     .height(`100%`)
-    .backgroundColor(Color.White)
+    .backgroundColor(Color.Black)
   }
 }

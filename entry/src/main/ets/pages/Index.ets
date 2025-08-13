@@ -409,7 +409,7 @@ struct Index {
         Row() {
           Text("")// 宽度
             .width(10)
-          Button("21. 深色，仓颉，自定义")
+          Button("21. 深色，java，自定义")
             .height(50)// 高度
             .layoutWeight(1)// 容器尺寸确定时，元素与兄弟节点主轴布局尺寸按照权重进行分配，忽略本身尺寸设置仅在Row/Column/Flex布局中生效
             .fontColor(0xFFFFFFFF)// 文本颜色
@@ -429,7 +429,7 @@ struct Index {
         Row() {
           Text("")// 宽度
             .width(10)
-          Button("22. 浅色，仓颉，自定义")
+          Button("22. 浅色，java，自定义")
             .height(50)// 高度
             .layoutWeight(1)// 容器尺寸确定时，元素与兄弟节点主轴布局尺寸按照权重进行分配，忽略本身尺寸设置仅在Row/Column/Flex布局中生效
             .fontColor(0xFFFFFFFF)// 文本颜色
