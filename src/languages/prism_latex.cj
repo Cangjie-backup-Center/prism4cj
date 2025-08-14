@@ -6,13 +6,13 @@ package prism4cj.languages
 
 public class PrismLatex {
     public static func create(): Grammar {
-        let funcPattern: Regex = Regex("\\\\(?:[^a-z()\\[\\]]|[a-z*]+)", RegexOption().ignoreCase())
+        let funcPattern: Regex = Regex("\\\\(?:[^a-z()\\[\\]]|[a-z*]+)", RegexFlag.IgnoreCase)
         let insideEqu: Grammar = GrammarImpl("inside",
             ArrayList<Token>([Prism.token("equation-command", Prism.pattern(funcPattern, false, false, "regex"))]))
         return GrammarImpl(
             "latex",
             ArrayList<Token>([
-                Prism.token("comment", Prism.pattern(Regex("%${wildcard}*", RegexOption().multiLine()))),
+                Prism.token("comment", Prism.pattern(Regex("%${wildcard}*", RegexFlag.MultiLine))),
                 Prism.token("cdata",
                     Prism.pattern(Regex("(\\\\begin\\{((?:verbatim|lstlisting)\\*?)\\})[\\s\\S]*?(?=\\\\end\\{\\2\\})"),
                     true)),

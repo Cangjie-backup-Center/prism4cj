@@ -43,7 +43,7 @@ public class PrismPython {
                 Prism.token(
                     "class-name",
                     Prism.pattern(
-                        Regex("(\\bclass\\s+)\\w+", RegexOption().ignoreCase()),
+                        Regex("(\\bclass\\s+)\\w+", RegexFlag.IgnoreCase),
                         true
                     )
                 ),
@@ -67,7 +67,7 @@ public class PrismPython {
                     Prism.pattern(
                         Regex(
                             "(?:\\b(?=\\d)|\\B(?=\\.))(?:0[bo])?(?:(?:\\d|0x[\\da-f])[\\da-f]*\\.?\\d*|\\.\\d+)(?:e[+-]?\\d+)?j?\\b",
-                            RegexOption().ignoreCase()
+                            RegexFlag.IgnoreCase
                         )
                     )
                 ),

@@ -28,7 +28,7 @@ public class PrismGo {
                 Prism.token("number",
                     Prism.pattern(
                     Regex("(?:\\b0x[a-f\\d]+|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e[-+]?\\d+)?)i?",
-                    RegexOption().ignoreCase()))),
+                    RegexFlag.IgnoreCase))),
                 Prism.token("string",Prism.pattern(Regex("([\"'`])(\\\\[\\s\\S]|(?!\\1)[^\\\\])*\\1"),false,true))
             ])
         )

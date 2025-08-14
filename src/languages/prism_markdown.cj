@@ -58,10 +58,10 @@ public class PrismMarkdown {
             markdown,
             "prolog",
             ArrayList<Token>([
-                Prism.token("blockquote", Prism.pattern(Regex("^>(?:[\\t ]*>)*", RegexOption().multiLine()))),
+                Prism.token("blockquote", Prism.pattern(Regex("^>(?:[\\t ]*>)*", RegexFlag.MultiLine))),
                 Prism.token(
                     "code",
-                    Prism.pattern(Regex("^(?: {4}|\\t)${wildcard}+", RegexOption().multiLine()), false, false, "keyword"),
+                    Prism.pattern(Regex("^(?: {4}|\\t)${wildcard}+", RegexFlag.MultiLine), false, false, "keyword"),
                     Prism.pattern(Regex("``.+?``|`[^`\\n]+`"), false, false, "keyword")
                 ),
                 Prism.token(
@@ -77,7 +77,7 @@ public class PrismMarkdown {
                         )
                     ),
                     Prism.pattern(
-                        Regex("(^\\s*)#+${wildcard}+", RegexOption().multiLine()),
+                        Regex("(^\\s*)#+${wildcard}+", RegexFlag.MultiLine),
                         true,
                         false,
                         "important",
@@ -90,7 +90,7 @@ public class PrismMarkdown {
                 Prism.token(
                     "hr",
                     Prism.pattern(
-                        Regex("(^\\s*)([*-])(?:[\\t ]*\\2){2,}(?=\\s*$)", RegexOption().multiLine()),
+                        Regex("(^\\s*)([*-])(?:[\\t ]*\\2){2,}(?=\\s*$)", RegexFlag.MultiLine),
                         true,
                         false,
                         "punctuation"
@@ -99,7 +99,7 @@ public class PrismMarkdown {
                 Prism.token(
                     "list",
                     Prism.pattern(
-                        Regex("(^\\s*)(?:[*+-]|\\d+\\.)(?=[\\t ].)", RegexOption().multiLine()),
+                        Regex("(^\\s*)(?:[*+-]|\\d+\\.)(?=[\\t ].)", RegexFlag.MultiLine),
                         true,
                         false,
                         "punctuation"

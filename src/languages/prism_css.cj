@@ -16,7 +16,7 @@ public abstract class PrismCss {
                 Prism.token(
                     "atrule",
                     Prism.pattern(
-                        Regex("@[\\w-]+?.*?(?:;|(?=\\s*\\{))", RegexOption().ignoreCase()),
+                        Regex("@[\\w-]+?.*?(?:;|(?=\\s*\\{))", RegexFlag.IgnoreCase),
                         false,
                         false,
                         None,
@@ -31,7 +31,7 @@ public abstract class PrismCss {
                     Prism.pattern(
                         Regex(
                             "url\\((?:([\"'])(?:\\\\(?:\\r\\n|[\\s\\S])|(?!\\1)[^\\\\\\r\\n])*\\1|.*?)\\)",
-                            RegexOption().ignoreCase()
+                            RegexFlag.IgnoreCase
                         )
                     )
                 ),
@@ -42,10 +42,10 @@ public abstract class PrismCss {
                 ),
                 Prism.token(
                     "property",
-                    Prism.pattern(Regex("[-_a-z\\xA0-\\xFF][-\\w\\xA0-\\xFF]*(?=\\s*:)", RegexOption().ignoreCase()))
+                    Prism.pattern(Regex("[-_a-z\\xA0-\\xFF][-\\w\\xA0-\\xFF]*(?=\\s*:)", RegexFlag.IgnoreCase))
                 ),
-                Prism.token("important", Prism.pattern(Regex("\\B!important\\b", RegexOption().ignoreCase()))),
-                Prism.token("function", Prism.pattern(Regex("[-a-z0-9]+(?=\\()", RegexOption().ignoreCase()))),
+                Prism.token("important", Prism.pattern(Regex("\\B!important\\b", RegexFlag.IgnoreCase))),
+                Prism.token("function", Prism.pattern(Regex("[-a-z0-9]+(?=\\()", RegexFlag.IgnoreCase))),
                 Prism.token("punctuation", Prism.pattern(Regex("[(){};:]")))
             ])
         )
@@ -70,7 +70,7 @@ public abstract class PrismCss {
                         "style",
                         ArrayList<Pattern>([
                             Prism.pattern(
-                                Regex("(<style[\\s\\S]*?>)[\\s\\S]*?(?=<\\/style>)", RegexOption().ignoreCase()),
+                                Regex("(<style[\\s\\S]*?>)[\\s\\S]*?(?=<\\/style>)", RegexFlag.IgnoreCase),
                                 true,
                                 true,
                                 "language-css",
@@ -102,7 +102,7 @@ public abstract class PrismCss {
                     Prism.token(
                         "style-attr",
                         Prism.pattern(
-                            Regex("\\s*style=(\"|')(?:\\\\[\\s\\S]|(?!\\1)[^\\\\])*\\1", RegexOption().ignoreCase()),
+                            Regex("\\s*style=(\"|')(?:\\\\[\\s\\S]|(?!\\1)[^\\\\])*\\1", RegexFlag.IgnoreCase),
                             false,
                             false,
                             "language-css",
@@ -111,14 +111,14 @@ public abstract class PrismCss {
                                 ArrayList<Token>([
                                     Prism.token(
                                         "attr-name",
-                                        Prism.pattern(Regex("^\\s*style", RegexOption().ignoreCase()), false, false,
+                                        Prism.pattern(Regex("^\\s*style", RegexFlag.IgnoreCase), false, false,
                                             None, markupTagInside)
                                     ),
                                     Prism.token("punctuation", Prism.pattern(Regex("^\\s*=\\s*['\"]|['\"]\\s*$"))),
                                     Prism.token(
                                         "attr-value",
                                         Prism.pattern(
-                                            Regex(".+", RegexOption().ignoreCase()),
+                                            Regex(".+", RegexFlag.IgnoreCase),
                                             false,
                                             false,
                                             None,

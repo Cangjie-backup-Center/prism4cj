@@ -37,7 +37,7 @@ public class PrismCpp {
             ArrayList<Token>([
                 Prism.token(
                     "class-name",
-                    Prism.pattern(Regex("(class\\s+)\\w+", RegexOption().ignoreCase()), true)
+                    Prism.pattern(Regex("(class\\s+)\\w+", RegexFlag.IgnoreCase), true)
                 )
             ])
         )

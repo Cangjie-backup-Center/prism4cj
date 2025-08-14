@@ -26,7 +26,7 @@ public class PrismJavascript {
                 ),
                 Prism.token(
                     "function",
-                    Prism.pattern(Regex("[_$a-z\\xA0-\\xFF][$\\w\\xA0-\\xFF]*(?=\\s*\\()", RegexOption().ignoreCase()))
+                    Prism.pattern(Regex("[_$a-z\\xA0-\\xFF][$\\w\\xA0-\\xFF]*(?=\\s*\\()", RegexFlag.IgnoreCase))
                 ),
                 Prism.token(
                     "operator",
@@ -57,7 +57,7 @@ public class PrismJavascript {
                     Prism.pattern(
                         Regex(
                             "[_$a-z\\xA0-\\xFF][$\\w\\xA0-\\xFF]*(?=\\s*=\\s*(?:function\\b|(?:\\([^()]*\\)|[_$a-z\\xA0-\\xFF][$\\w\\xA0-\\xFF]*)\\s*=>))",
-                            RegexOption().ignoreCase()
+                            RegexFlag.IgnoreCase
                         ),
                         false,
                         false,
@@ -123,7 +123,7 @@ public class PrismJavascript {
                     Prism.token(
                         "script",
                         Prism.pattern(
-                            Regex("(<script[\\s\\S]*?>)[\\s\\S]*?(?=<\\/script>)", RegexOption().ignoreCase()),
+                            Regex("(<script[\\s\\S]*?>)[\\s\\S]*?(?=<\\/script>)", RegexFlag.IgnoreCase),
                             true,
                             true,
                             "language-javascript",
