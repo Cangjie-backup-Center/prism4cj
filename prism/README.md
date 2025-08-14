@@ -213,7 +213,7 @@ export enum PrismColor {
 ### ohpm安装使用
 
 ```cmd
-ohpm install @cangjie-tpc/prism
+ohpm install @cangjie-tpc/prism_hybrid
 ```
 
 ### 功能示例
@@ -221,7 +221,7 @@ ohpm install @cangjie-tpc/prism
 #### java语言高亮显示
 
 ```ets
-import { codeStringToColorString, PrismBlock, PrismRes, PrismNode } from '@cangjie-tpc/prism';
+import { codeStringToColorString, PrismBlock, PrismRes, PrismNode } from '@cangjie-tpc/prism_hybrid';
 
 @Entry
 @Component

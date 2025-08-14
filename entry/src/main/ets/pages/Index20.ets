@@ -4,7 +4,7 @@ import {
   PrismRes,
   PrismBlock,
   PrismNode
-} from '@cangjie-tpc/prism';
+} from '@cangjie-tpc/prism_hybrid';
 
 @Entry
 @Component
