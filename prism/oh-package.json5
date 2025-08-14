@@ -7,7 +7,6 @@
   "license": "Apache-2.0",
   "repository": "https://gitcode.com/Cangjie-TPC/prism4cj.git",
   "dependencies": {
-    "libprism4cj.so": "file:./src/main/cangjie/types/libprism4cj",
     "libark_interop_loader.so": "file:./src/main/cangjie/loader",
     "cjhyapiregister": "file:./har/CJHyAPIRegister-v1.0.1.har",
     "libark_interop_api_prism.so": "file:./src/main/cangjie/ark_interop_api_prism"
