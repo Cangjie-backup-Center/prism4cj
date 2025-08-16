@@ -1,4 +1,4 @@
-import { codeStringToColorString, PrismBlock, PrismNode, PrismRes } from '@cangjie-tpc/prism_hybrid';
+import { codeStringToColorString, PrismBlock, PrismNode, PrismRes } from '@cangjie-tpc/prism';
 
 @Entry
 @Component

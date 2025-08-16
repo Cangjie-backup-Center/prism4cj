@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v1.2.0-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.1.6-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjc-v1.0.1-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-94.4%25-brightgreen" style="display: inline-block;" />
@@ -213,7 +213,7 @@ export enum PrismColor {
 ### ohpm安装使用
 
 ```cmd
-ohpm install @cangjie-tpc/prism_hybrid
+ohpm install @cangjie-tpc/prism
 ```
 
 ### 功能示例
@@ -221,7 +221,7 @@ ohpm install @cangjie-tpc/prism_hybrid
 #### java语言高亮显示
 
 ```ets
-import { codeStringToColorString, PrismBlock, PrismRes, PrismNode } from '@cangjie-tpc/prism_hybrid';
+import { codeStringToColorString, PrismBlock, PrismRes, PrismNode } from '@cangjie-tpc/prism';
 
 @Entry
 @Component

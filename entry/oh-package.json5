@@ -6,7 +6,7 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "@cangjie-tpc/prism_hybrid": "file:../prism"
+    "@cangjie-tpc/prism": "file:../prism"
   }
 }
 
