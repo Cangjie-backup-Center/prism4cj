@@ -1,7 +1,8 @@
-## 1.1.6
+## 1.2.0
 - 接口性能优化，类名优化
 - 接口结构修改
 - 兼容5.0和5.1deveco
+- @cangjie-tpc/prism 包名修改成 @cangjie-tpc/prism_hybrid
 
 ## 1.1.5
 - 适配升级5.1.1.821
