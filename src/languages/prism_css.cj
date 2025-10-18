@@ -42,7 +42,7 @@ public abstract class PrismCss {
                 ),
                 Prism.token(
                     "property",
-                    Prism.pattern(Regex("[-_a-z\\xA0-\\xFF][-\\w\\xA0-\\xFF]*(?=\\s*:)", RegexFlag.IgnoreCase))
+                    Prism.pattern(Regex("[-_a-z\\p{L}][-\\w\\p{L}]*(?=\\s*:)", [RegexFlag.IgnoreCase, RegexFlag.Unicode]))
                 ),
                 Prism.token("important", Prism.pattern(Regex("\\B!important\\b", RegexFlag.IgnoreCase))),
                 Prism.token("function", Prism.pattern(Regex("[-a-z0-9]+(?=\\()", RegexFlag.IgnoreCase))),
