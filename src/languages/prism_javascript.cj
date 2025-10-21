@@ -26,7 +26,7 @@ public class PrismJavascript {
                 ),
                 Prism.token(
                     "function",
-                    Prism.pattern(Regex("[_$a-z\\xA0-\\xFF][$\\w\\xA0-\\xFF]*(?=\\s*\\()", RegexFlag.IgnoreCase))
+                    Prism.pattern(Regex("[_$a-z\\p{L}][$\\w\\p{L}]*(?=\\s*\\()", [RegexFlag.Unicode, RegexFlag.IgnoreCase]))
                 ),
                 Prism.token(
                     "operator",
@@ -46,7 +46,7 @@ public class PrismJavascript {
                     "regex",
                     Prism.pattern(
                         Regex(
-                            "((?:^|[^$\\w\\xA0-\\xFF.\"'\\])\\s])\\s*)\\/(\\[[^\\]\\r\\n]+]|\\\\.|[^/\\\\\\[\\r\\n])+\\/[gimyu]{0,5}(?=\\s*($|[\\r\\n,.;})\\]]))"
+                            "((?:^|[^$\\w\\p{L}.\"'\\])\\s])\\s*)\\/(\\[[^\\]\\r\\n]+]|\\\\.|[^/\\\\\\[\\r\\n])+\\/[gimyu]{0,5}(?=\\s*($|[\\r\\n,.;})\\]]))"
                         ),
                         true,
                         true
@@ -56,8 +56,8 @@ public class PrismJavascript {
                     "function-variable",
                     Prism.pattern(
                         Regex(
-                            "[_$a-z\\xA0-\\xFF][$\\w\\xA0-\\xFF]*(?=\\s*=\\s*(?:function\\b|(?:\\([^()]*\\)|[_$a-z\\xA0-\\xFF][$\\w\\xA0-\\xFF]*)\\s*=>))",
-                            RegexFlag.IgnoreCase
+                            "[_$a-z\\p{L}][$\\w\\p{L}]*(?=\\s*=\\s*(?:function\\b|(?:\\([^()]*\\)|[_$a-z\\p{L}][$\\w\\p{L}]*?)\\s*=>))",
+                            [RegexFlag.Unicode, RegexFlag.IgnoreCase]
                         ),
                         false,
                         false,
