@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v1.2.2-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.2.3-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjc-v1.0.3-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-94.4%25-brightgreen" style="display: inline-block;" />
@@ -324,9 +324,11 @@ struct Index1 {
 
 ![img2](https://raw.gitcode.com/Cangjie-TPC/prism4cj/blobs/4313510d64db757c4f048fdd454570eae96248bd/img2.PNG)
 
+
 ## 约束与限制
 
-当前基于 DevEco Studio for Windows 5.1.1.823 版本实现的
+    在下述版本验证通过：    
+        IDE: DevEco Studio 5.1.1 Release(Build Version:5.1.1.840)
 
 ## 开源协议
 
