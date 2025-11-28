@@ -10,3 +10,4 @@ BuildProfile.ets
 **/build-script-cache
 ark_interop_api
 /src/main/cangjie/types
+/src/main/cangjie/IDL_Custom_Type_Whitelist~

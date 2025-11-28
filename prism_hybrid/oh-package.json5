@@ -1,11 +1,11 @@
 {
   "name": "@cangjie-tpc/prism_hybrid",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "对代码块内容进行高亮",
   "main": "Index.ets",
   "author": "cangjie-tpc",
   "license": "Apache-2.0",
-  "repository": "https://gitcode.com/Cangjie-TPC/prism4cj.git",
+  "repository": "https://gitcode.com/Cangjie-TPC/prism4cj/tree/prism4cj_hybrid_cangjie-plugin_5.1.1.823",
   "homepage": "https://gitcode.com/Cangjie-TPC",
   "keywords": [
     "prism",

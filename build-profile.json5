@@ -39,8 +39,8 @@
       ]
     },
     {
-      "name": "prism",
-      "srcPath": "./prism",
+      "name": "prism_hybrid",
+      "srcPath": "./prism_hybrid"
     }
   ]
 }

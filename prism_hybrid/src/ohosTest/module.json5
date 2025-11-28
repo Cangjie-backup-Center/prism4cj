@@ -1,6 +1,6 @@
 {
   "module": {
-    "name": "prism_test",
+    "name": "prism_hybrid_test",
     "type": "feature",
     "deviceTypes": [
       "default"

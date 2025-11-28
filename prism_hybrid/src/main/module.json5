@@ -1,6 +1,6 @@
 {
   "module": {
-    "name": "prism",
+    "name": "prism_hybrid",
     "type": "har",
     "deviceTypes": [
       "default"
