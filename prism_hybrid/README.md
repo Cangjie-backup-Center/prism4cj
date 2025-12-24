@@ -3,9 +3,9 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v1.2.6-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.3.0-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v1.0.3-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v1.1.0-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-94.4%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -322,16 +322,16 @@ struct Index1 {
 
 #### 执行结果如下
 
-![img2](https://raw.gitcode.com/Cangjie-TPC/prism4cj/raw/prism4cj_hybrid_cangjie-plugin_5.1.1/doc%2Fassets%2Fimg2.PNG)
+![img2](https://raw.gitcode.com/Cangjie-TPC/prism4cj/raw/prism4cj_hybrid_cangjie-plugin_6.0.0/doc%2Fassets%2Fimg2.PNG)
 
 ## 约束与限制
 
     在下述版本验证通过：    
-        IDE: DevEco Studio 5.1.1 Release(Build Version:5.1.1.851)
+        IDE: DevEco Studio 6.0.0 Release
 
 ## 开源协议
 
-本项目基于 [Apache License 2.0](https://gitcode.com/Cangjie-TPC/prism4cj/blob/prism4cj_hybrid_cangjie-plugin_5.1.1/LICENSE) ，请自由的享受和参与开源。
+本项目基于 [Apache License 2.0](https://gitcode.com/Cangjie-TPC/prism4cj/blob/prism4cj_hybrid_cangjie-plugin_6.0.0/LICENSE) ，请自由的享受和参与开源。
 
 ## 参与贡献
 
