@@ -322,7 +322,7 @@ struct Index1 {
 
 #### 执行结果如下
 
-![img2](https://raw.gitcode.com/Cangjie-TPC/prism4cj/raw/prism4cj_hybrid_cangjie-plugin_5.1.1.823/doc%2Fassets%2Fimg2.PNG)
+![img2](https://raw.gitcode.com/Cangjie-TPC/prism4cj/raw/prism4cj_hybrid_cangjie-plugin_5.1.1/doc%2Fassets%2Fimg2.PNG)
 
 
 ## 约束与限制
@@ -332,7 +332,7 @@ struct Index1 {
 
 ## 开源协议
 
-本项目基于 [Apache License 2.0](https://gitcode.com/Cangjie-TPC/prism4cj/blob/prism4cj_hybrid_cangjie-plugin_5.1.1.823/LICENSE) ，请自由的享受和参与开源。
+本项目基于 [Apache License 2.0](https://gitcode.com/Cangjie-TPC/prism4cj/blob/prism4cj_hybrid_cangjie-plugin_5.1.1/LICENSE) ，请自由的享受和参与开源。
 
 ## 参与贡献
 
