@@ -1,20 +1,17 @@
-import { CustomLib, PrismResCJ } from "libark_interop_api_prism.so";
-import { requireCJLib } from "libark_interop_loader.so";
+import { arktsCodeStringToColorString, arktsCodeStringToColorStringCustomize, PrismResCJ } from "libprism4cj.so";
 import { collections } from "@kit.ArkTS";
-
-let lib = requireCJLib("libprism4cj.so") as CustomLib
 
 const resFactory = (background: number, defaultFontColor: number) => new PrismRes(new collections.Array(), background, defaultFontColor)
 
 const nodeFactory = (types: string, text: string, alias: string | undefined, color: number | undefined) => new PrismNode(types, text, alias, color)
 
 export async function codeStringToColorString(code: string, info: string | undefined, isDarkula: boolean): Promise<PrismRes> {
-  let res = await lib.arktsCodeStringToColorString(code, info, isDarkula, resFactory, nodeFactory) as PrismRes
+  let res = await arktsCodeStringToColorString(code, info, isDarkula, resFactory, nodeFactory) as PrismRes
   return res
 }
 
 export function codeStringToColorStringCustomize(code: string, info: string | undefined, background: number, text: number, colorMap: Map<PrismColor, number>): PrismRes {
-  let res: PrismResCJ = lib.arktsCodeStringToColorStringCustomize(code, info, background, text, colorMap)
+  let res: PrismResCJ = arktsCodeStringToColorStringCustomize(code, info, background, text, colorMap)
   let prismBlocks: collections.Array<PrismBlock> = new collections.Array<PrismBlock>()
   for (let i = 0; i < res.getListColor().length; i++) {
     let prismNodes: collections.Array<PrismNode> = new collections.Array<PrismNode>()

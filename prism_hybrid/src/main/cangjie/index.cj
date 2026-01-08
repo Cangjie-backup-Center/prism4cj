@@ -18,7 +18,7 @@ func getStackTrace(thrown: ?Exception): String {
 }
 
 public func arktsCodeStringToColorString(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let code = callInfo[0].toString(context)
+    let code = callInfo[0].toString()
     let info: ?String = if (callInfo[1].isNull()) {
         None
     } else {
