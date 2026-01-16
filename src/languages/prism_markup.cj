@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism4cj.languages
+package cangjie_tpc::prism4cj.languages
 
 public abstract class PrismMarkup {
     public static func create(): Grammar {
@@ -18,7 +18,7 @@ public abstract class PrismMarkup {
                     "tag",
                     Prism.pattern(
                         Regex(
-                            "<\\/?(?!\\d)[^\\s>\\/=$<%]+(?:\\s+[^\\s>\\/=]+(?:=(?:(\"|')(?:\\\\[\\s\\S]|(?!\\1)[^\\\\])*\\1|[^\\s'\">=]+))?)*\\s*\\/?>",
+                            "<\\/?(?!\\d)[^\\s>\\/=$<%]+(?:\\s+[^\\s>\\/=]+(?:=(?:(\"|')(?:\\\\[\\s\\S]|(?!\\1)[^\\\\])*\\1|[^\\s'\">=]+))?)*\\s*\\/?>",/*cjlint-ignore !G.CHK.04 */
                             RegexFlag.IgnoreCase
                         ),
                         false,

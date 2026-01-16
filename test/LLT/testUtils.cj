@@ -5,7 +5,7 @@ import std.collection.*
 import stdx.encoding.json.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import prism4cj.prism.*
+import cangjie_tpc::prism4cj.prism.*
 
 public abstract class TestUtils {
     private static let DELIMITER: String = "----------------------------------------------------"

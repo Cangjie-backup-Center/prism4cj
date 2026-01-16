@@ -2,10 +2,10 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism4cj
+package cangjie_tpc::prism4cj
 
-internal import prism4cj.languages.*
-internal import prism4cj.prism.*
+internal import cangjie_tpc::prism4cj.languages.*
+internal import cangjie_tpc::prism4cj.prism.*
 internal import std.collection.ArrayList
 internal import std.collection.HashMap
 internal import std.collection.HashSet

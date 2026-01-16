@@ -3,9 +3,9 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v1.0.4-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.0.5-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v1.0.0-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v1.1.0-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-94.4%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -169,8 +169,8 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import std.fs.*
 import std.collection.*
-import prism4cj.prism.*
-import prism4cj.prism4cj.GrammarLocatorGrammarUtils
+import cangjie_tpc::prism4cj.prism.*
+import cangjie_tpc::prism4cj.prism4cj.GrammarLocatorGrammarUtils
 
 main(): Int64 {
     var test = TestCReadme()
@@ -212,7 +212,7 @@ public class TestCReadme {
 
 在下述版本验证通过：
 ```shell
-Cangjie Version: 1.0.0
+Cangjie Version: 1.1.0
 ```
 
 ## 开源协议

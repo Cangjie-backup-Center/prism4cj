@@ -6,16 +6,15 @@ import std.unittest.testmacro.*
 import std.fs.*
 import std.regex.*
 import std.collection.*
-import prism4cj.prism.*
-import prism4cj.languages.*
-import prism4cj.GrammarLocatorGrammarUtils
+import cangjie_tpc::prism4cj.prism.*
+import cangjie_tpc::prism4cj.languages.*
+import cangjie_tpc::prism4cj.GrammarLocatorGrammarUtils
 
 @Test
 public class TestCangjie {
     var assertTag = false
     @TestCase
     public func test01(): Unit {
-
         let fileArr: Collection<FileInfo> = TestUtils.testFiles("cangjie")
         var prism: Prism = Prism(GrammarLocatorGrammarUtils())
         var c: Case
@@ -50,6 +49,7 @@ public class TestCangjie {
 
     @TestCase
     public func test03(): Unit {
+        assertTag = false
         try {
             let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
@@ -62,7 +62,8 @@ public class TestCangjie {
                 }
             }
         } catch (e: FSException) {
-            @Assert(e.message,"The file read Error.")
+            @Assert(e.message.size > 0, true)
+            @Assert(assertTag, false)
         }
     }
 

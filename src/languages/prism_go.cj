@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism4cj.languages
+package cangjie_tpc::prism4cj.languages
 
 public class PrismGo {
     public static func create(prism: Prism): Grammar {
@@ -29,7 +29,7 @@ public class PrismGo {
                     Prism.pattern(
                     Regex("(?:\\b0x[a-f\\d]+|(?:\\b\\d+\\.?\\d*|\\B\\.\\d+)(?:e[-+]?\\d+)?)i?",
                     RegexFlag.IgnoreCase))),
-                Prism.token("string",Prism.pattern(Regex("([\"'`])(\\\\[\\s\\S]|(?!\\1)[^\\\\])*\\1"),false,true))
+                Prism.token("string",Prism.pattern(Regex("([\"'`])(\\\\[\\s\\S]|(?!\\1)[^\\\\])*\\1"),false,true))/*cjlint-ignore !G.CHK.04 */
             ])
         )
 

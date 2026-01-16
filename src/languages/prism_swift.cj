@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism4cj.languages
+package cangjie_tpc::prism4cj.languages
 
 public class PrismSwift {
     public static func create(prism: Prism): Grammar {
@@ -13,7 +13,7 @@ public class PrismSwift {
                 Prism.token(
                     "string",
                     Prism.pattern(
-                        Regex("(\"|')(\\\\(?:\\((?:[^()]|\\([^)]+\\))+\\)|\\r\\n|[\\s\\S])|(?!\\1)[^\\\\\\r\\n])*\\1"),
+                        Regex("(\"|')(\\\\(?:\\((?:[^()]|\\([^)]+\\))+\\)|\\r\\n|[\\s\\S])|(?!\\1)[^\\\\\\r\\n])*\\1"),/*cjlint-ignore !G.CHK.04 */
                         false,
                         true,
                         None,
@@ -23,7 +23,7 @@ public class PrismSwift {
                                 Prism.token(
                                     "interpolation",
                                     Prism.pattern(
-                                        Regex("\\\\\\((?:[^()]|\\([^)]+\\))+\\)"),
+                                        Regex("\\\\\\((?:[^()]|\\([^)]+\\))+\\)"),/*cjlint-ignore !G.CHK.04 */
                                         false,
                                         false,
                                         None,
@@ -33,7 +33,7 @@ public class PrismSwift {
                                                 Prism.token(
                                                     "delimiter",
                                                     Prism.pattern(
-                                                        Regex("^\\\\\\(|\\)$"),
+                                                        Regex("^\\\\\\(|\\)$"),/*cjlint-ignore !G.CHK.04 */
                                                         false,
                                                         false,
                                                         "variable"
@@ -51,14 +51,14 @@ public class PrismSwift {
                     "keyword",
                     Prism.pattern(
                         Regex(
-                        "\\b(?:as|associativity|break|case|catch|class|continue|convenience|default|defer|deinit|didSet|do|dynamic(?:Type)?|else|enum|extension|fallthrough|final|for|func|get|guard|if|import|in|infix|init|inout|internal|is|lazy|left|let|mutating|new|none|nonmutating|operator|optional|override|postfix|precedence|prefix|private|protocol|public|repeat|required|rethrows|return|right|safe|self|Self|set|static|struct|subscript|super|switch|throws?|try|Type|typealias|unowned|unsafe|var|weak|where|while|willSet|__(?:COLUMN__|FILE__|FUNCTION__|LINE__))\\b"
+                        "\\b(?:as|associativity|break|case|catch|class|continue|convenience|default|defer|deinit|didSet|do|dynamic(?:Type)?|else|enum|extension|fallthrough|final|for|func|get|guard|if|import|in|infix|init|inout|internal|is|lazy|left|let|mutating|new|none|nonmutating|operator|optional|override|postfix|precedence|prefix|private|protocol|public|repeat|required|rethrows|return|right|safe|self|Self|set|static|struct|subscript|super|switch|throws?|try|Type|typealias|unowned|unsafe|var|weak|where|while|willSet|__(?:COLUMN__|FILE__|FUNCTION__|LINE__))\\b"/*cjlint-ignore !G.CHK.04 */
                     ))
                 ),
                 Prism.token(
                     "number",
                     Prism.pattern(
                         Regex(
-                            "\\b(?:[\\d_]+(?:\\.[\\de_]+)?|0x[a-f0-9_]+(?:\\.[a-f0-9p_]+)?|0b[01_]+|0o[0-7_]+)\\b",
+                            "\\b(?:[\\d_]+(?:\\.[\\de_]+)?|0x[a-f0-9_]+(?:\\.[a-f0-9p_]+)?|0b[01_]+|0o[0-7_]+)\\b",/*cjlint-ignore !G.CHK.04 */
                             RegexFlag.IgnoreCase
                         )
                     )
@@ -68,13 +68,13 @@ public class PrismSwift {
 
         let tokens: ArrayList<Token> = swift.tokens()
 
-        tokens.add(Prism.token("constant", Prism.pattern(Regex("\\b(?:nil|[A-Z_]{2,}|k[A-Z][A-Za-z_]+)\\b"))))
+        tokens.add(Prism.token("constant", Prism.pattern(Regex("\\b(?:nil|[A-Z_]{2,}|k[A-Z][A-Za-z_]+)\\b"))))/*cjlint-ignore !G.CHK.04 */
         tokens.add(
             Prism.token(
                 "atrule",
                 Prism.pattern(
                     Regex(
-                    "@\\b(?:IB(?:Outlet|Designable|Action|Inspectable)|class_protocol|exported|noreturn|NS(?:Copying|Managed)|objc|UIApplicationMain|auto_closure)\\b"
+                    "@\\b(?:IB(?:Outlet|Designable|Action|Inspectable)|class_protocol|exported|noreturn|NS(?:Copying|Managed)|objc|UIApplicationMain|auto_closure)\\b"/*cjlint-ignore !G.CHK.04 */
                 ))
             )
         )
@@ -83,7 +83,7 @@ public class PrismSwift {
                 "builtin",
                 Prism.pattern(
                     Regex(
-                    "\\b(?:[A-Z]\\S+|abs|advance|alignof(?:Value)?|assert|contains|count(?:Elements)?|debugPrint(?:ln)?|distance|drop(?:First|Last)|dump|enumerate|equal|filter|find|first|getVaList|indices|isEmpty|join|last|lexicographicalCompare|map|max(?:Element)?|min(?:Element)?|numericCast|overlaps|partition|print(?:ln)?|reduce|reflect|reverse|sizeof(?:Value)?|sort(?:ed)?|split|startsWith|stride(?:of(?:Value)?)?|suffix|swap|toDebugString|toString|transcode|underestimateCount|unsafeBitCast|with(?:ExtendedLifetime|Unsafe(?:MutablePointers?|Pointers?)|VaList))\\b"
+                    "\\b(?:[A-Z]\\S+|abs|advance|alignof(?:Value)?|assert|contains|count(?:Elements)?|debugPrint(?:ln)?|distance|drop(?:First|Last)|dump|enumerate|equal|filter|find|first|getVaList|indices|isEmpty|join|last|lexicographicalCompare|map|max(?:Element)?|min(?:Element)?|numericCast|overlaps|partition|print(?:ln)?|reduce|reflect|reverse|sizeof(?:Value)?|sort(?:ed)?|split|startsWith|stride(?:of(?:Value)?)?|suffix|swap|toDebugString|toString|transcode|underestimateCount|unsafeBitCast|with(?:ExtendedLifetime|Unsafe(?:MutablePointers?|Pointers?)|VaList))\\b"/*cjlint-ignore !G.CHK.04 */
                 ))
             )
         )

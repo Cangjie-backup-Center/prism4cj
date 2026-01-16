@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism4cj.languages
+package cangjie_tpc::prism4cj.languages
 
 public class PrismJavascript {
     public static func create(prism: Prism): Grammar {
@@ -46,7 +46,7 @@ public class PrismJavascript {
                     "regex",
                     Prism.pattern(
                         Regex(
-                            "((?:^|[^$\\w\\p{L}.\"'\\])\\s])\\s*)\\/(\\[[^\\]\\r\\n]+]|\\\\.|[^/\\\\\\[\\r\\n])+\\/[gimyu]{0,5}(?=\\s*($|[\\r\\n,.;})\\]]))"
+                            "((?:^|[^$\\w\\p{L}.\"'\\])\\s])\\s*)\\/(\\[[^\\]\\r\\n]+]|\\\\.|[^/\\\\\\[\\r\\n])+\\/[gimyu]{0,5}(?=\\s*($|[\\r\\n,.;})\\]]))"/*cjlint-ignore !G.CHK.04 */
                         ),
                         true,
                         true
@@ -77,7 +77,7 @@ public class PrismJavascript {
                 Prism.token(
                     "template-string",
                     Prism.pattern(
-                        Regex("`(?:\\\\[\\s\\S]|\\$\\{[^}]+\\}|[^\\\\`])*`"),
+                        Regex("`(?:\\\\[\\s\\S]|\\$\\{[^}]+\\}|[^\\\\`])*`"),/*cjlint-ignore !G.CHK.04 */
                         false,
                         true,
                         None,

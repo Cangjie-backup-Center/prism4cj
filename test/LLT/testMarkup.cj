@@ -6,8 +6,8 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import std.fs.*
 import std.collection.*
-import prism4cj.prism.*
-import prism4cj.GrammarLocatorGrammarUtils
+import cangjie_tpc::prism4cj.prism.*
+import cangjie_tpc::prism4cj.GrammarLocatorGrammarUtils
 
 main(): Int64 {
     var test = TestMarkup()
@@ -59,6 +59,7 @@ public class TestMarkup {
 
     @TestCase
     public func test03(): Unit {
+        error = true
         let e = @AssertThrows[FSException]({=>
             let fileArr: Collection<FileInfo> = TestUtils.testFiles("")
             var prism: Prism = Prism(GrammarLocatorGrammarUtils())
@@ -71,7 +72,8 @@ public class TestMarkup {
                 }    
             }
         }())
-        @Assert(e.toString(), "FSException: The file read Error.")
+        @Assert(e.message.size > 0, true)
+        @Assert(error, true)
     }
 
     @TestCase

@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism4cj.languages
+package cangjie_tpc::prism4cj.languages
 
 public class PrismMarkdown {
     public static func create(prism: Prism): Grammar {
@@ -29,7 +29,7 @@ public class PrismMarkdown {
         let italic: Token = Prism.token(
             "italic",
             Prism.pattern(
-                Regex("(^|[^\\\\])([*_])(?:(?:\\r?\\n|\\r)(?!\\r?\\n|\\r)|.)+?\\2"),
+                Regex("(^|[^\\\\])([*_])(?:(?:\\r?\\n|\\r)(?!\\r?\\n|\\r)|.)+?\\2"),/*cjlint-ignore !G.CHK.04 */
                 true,
                 false,
                 None,
@@ -58,7 +58,7 @@ public class PrismMarkdown {
             markdown,
             "prolog",
             ArrayList<Token>([
-                Prism.token("blockquote", Prism.pattern(Regex("^>(?:[\\t ]*>)*", RegexFlag.MultiLine))),
+                Prism.token("blockquote", Prism.pattern(Regex("^>(?:[\\t ]*>)*", RegexFlag.MultiLine))),/*cjlint-ignore !G.CHK.04 */
                 Prism.token(
                     "code",
                     Prism.pattern(Regex("^(?: {4}|\\t)${wildcard}+", RegexFlag.MultiLine), false, false, "keyword"),
@@ -90,7 +90,7 @@ public class PrismMarkdown {
                 Prism.token(
                     "hr",
                     Prism.pattern(
-                        Regex("(^\\s*)([*-])(?:[\\t ]*\\2){2,}(?=\\s*$)", RegexFlag.MultiLine),
+                        Regex("(^\\s*)([*-])(?:[\\t ]*\\2){2,}(?=\\s*$)", RegexFlag.MultiLine),/*cjlint-ignore !G.CHK.04 */
                         true,
                         false,
                         "punctuation"

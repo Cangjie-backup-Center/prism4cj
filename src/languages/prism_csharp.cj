@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism4cj.languages
+package cangjie_tpc::prism4cj.languages
 
 public class PrismCsharp {
     public static func create(prism: Prism): Grammar {
@@ -35,20 +35,20 @@ public class PrismCsharp {
                 Prism.token(
                     "class-name",
                     Prism.pattern(
-                        Regex("\\b[A-Z]\\w*(?:\\.\\w+)*\\b(?=\\s*[^\\s()])"),
+                        Regex("\\b[A-Z]\\w*(?:\\.\\w+)*\\b(?=\\s*[^\\s()])"),/*cjlint-ignore !G.CHK.04 */
                         false,
                         false,
                         None
                     ),
                     Prism.pattern(
-                        Regex("(\\[)[A-Z]\\w*(?:\\.\\w+)*\\b"),
+                        Regex("(\\[)[A-Z]\\w*(?:\\.\\w+)*\\b"),/*cjlint-ignore !G.CHK.04 */
                         true,
                         false,
                         None,
                         classNameInsidePunctuation
                     ),
                     Prism.pattern(
-                        Regex("((?:\\b(?:class|interface|new)\\s+)|(?:catch\\s+\\())[A-Z]\\w*(?:\\.\\w+)*\\b"),
+                        Regex("((?:\\b(?:class|interface|new)\\s+)|(?:catch\\s+\\())[A-Z]\\w*(?:\\.\\w+)*\\b"),/*cjlint-ignore !G.CHK.04 */
                         true,
                         false,
                         None,
@@ -80,7 +80,7 @@ public class PrismCsharp {
                                 Prism.token("function", Prism.pattern(Regex("^\\w+"))),
                                 Prism.token(
                                     "class-name",
-                                    Prism.pattern(Regex("\\b[A-Z]\\w*(?:\\.\\w+)*\\b"), false, false, None,
+                                    Prism.pattern(Regex("\\b[A-Z]\\w*(?:\\.\\w+)*\\b"), false, false, None,/*cjlint-ignore !G.CHK.04 */
                                         classNameInsidePunctuation)
                                 ),
                                 Prism.token("punctuation", Prism.pattern(Regex("[<>(),.:]"))),

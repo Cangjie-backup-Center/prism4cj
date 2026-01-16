@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism4cj.languages
+package cangjie_tpc::prism4cj.languages
 
 public abstract class PrismCss {
 
@@ -30,7 +30,7 @@ public abstract class PrismCss {
                     "url",
                     Prism.pattern(
                         Regex(
-                            "url\\((?:([\"'])(?:\\\\(?:\\r\\n|[\\s\\S])|(?!\\1)[^\\\\\\r\\n])*\\1|.*?)\\)",
+                            "url\\((?:([\"'])(?:\\\\(?:\\r\\n|[\\s\\S])|(?!\\1)[^\\\\\\r\\n])*\\1|.*?)\\)",/*cjlint-ignore !G.CHK.04 */
                             RegexFlag.IgnoreCase
                         )
                     )

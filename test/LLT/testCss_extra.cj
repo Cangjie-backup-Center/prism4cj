@@ -6,8 +6,8 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import std.fs.*
 import std.collection.*
-import prism4cj.prism.*
-import prism4cj.GrammarLocatorGrammarUtils
+import cangjie_tpc::prism4cj.prism.*
+import cangjie_tpc::prism4cj.GrammarLocatorGrammarUtils
 
 main(): Int64 {
     var test = TestCss()

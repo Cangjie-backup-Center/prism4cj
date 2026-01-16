@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 
-package prism4cj.languages
+package cangjie_tpc::prism4cj.languages
 
 // 将 . 替换成 [^\\r\\n]
 let wildcard: String = "[^\\r\\n]"
@@ -22,7 +22,7 @@ public class PrismCangjie {
                 Prism.token("number",
                     Prism.pattern(
                     Regex(
-                    "\\b(?:0[xX][\\da-fA-F]+(?:_[\\da-fA-F]+)*|0[bB][01]+(?:_[01]+)*|\\d+(?:_\\d+)*(?:\\.\\d+(?:_\\d+)*)?(?:[eE][+-]?\\d+(?:_\\d+)*)?[fFL]?)\\b"
+                    "\\b(?:0[xX][\\da-fA-F]+(?:_[\\da-fA-F]+)*|0[bB][01]+(?:_[01]+)*|\\d+(?:_\\d+)*(?:\\.\\d+(?:_\\d+)*)?(?:[eE][+-]?\\d+(?:_\\d+)*)?[fFL]?)\\b"/*cjlint-ignore !G.CHK.04 */
                 ))),
                 Prism.token("class-name",
                     Prism.pattern(Regex("\\b(?:Bool|Char|Int8|Int16|Int32|Int64|UInt8|UInt16|UInt32|UInt64|Float16|Float32|Float64|String|IntNative|UIntNative|Nothing|Unit|Varray|InOut|true|false)\\b")),
@@ -32,7 +32,7 @@ public class PrismCangjie {
                 ),
                 Prism.token(
                     "string",
-                    Prism.pattern(Regex("(?<!#)#+\"([^\"]*(\\\\.[^\"]*)*)\"#+(?!#)|(?<!#)#+\"{3}([^\"]*(\\\\.[^\"]*)*)\"{3}#+(?!#)|\\\"([^\\\"\\\\]*(\\\\.[^\\\"\\\\]*)*)\\\"|\\\"{3}([^\\\"\\\\]*(\\\\.[^\\\"\\\\]*)*)\\\"{3}")),
+                    Prism.pattern(Regex("(?<!#)#+\"([^\"]*(\\\\.[^\"]*)*)\"#+(?!#)|(?<!#)#+\"{3}([^\"]*(\\\\.[^\"]*)*)\"{3}#+(?!#)|\\\"([^\\\"\\\\]*(\\\\.[^\\\"\\\\]*)*)\\\"|\\\"{3}([^\\\"\\\\]*(\\\\.[^\\\"\\\\]*)*)\\\"{3}")),/*cjlint-ignore !G.CHK.04 */
                 ),
                 Prism.token("operator",
                     Prism.pattern(
